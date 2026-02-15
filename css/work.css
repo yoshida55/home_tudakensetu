@@ -20,35 +20,98 @@
 
 .header_area {
   width: 100%;
-}
-.header_inner {
-}
-.header_logo { /* 変更不要: div用として使用 */
-}
-.header_logo_link {
-}
-.header_logo_img {
-}
-.header_nav {
-}
-.header_nav_list {
-  display: flex; /* 追加: div化したリストコンテナのフレックス表示 */
-  flex-direction: column; /* 追加: 縦並び（コメント通り） */
-}
-/* .header_nav_item { */ /* 削除: li要素が存在しないため不要 */
-/* } */
-.header_nav_link {
-  /* 元々liに指定していたスタイル（padding, margin等）があればここに統合 */
-}
-.header_title {
-}
-.header_description {
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
 }
 
-**reset.css / style.cssでの対応**
-/* 削除推奨（不要なリセット） */
-/* ul { list-style: none; } */ /* 削除: リストタグを使わないため不要 */
-/* li { ... } */ /* 削除: li要素が存在しないため不要 */
+/* position: relative;で画面配置 */
+.header_inner {
+  background-image: url(../img/hero/hero01.jpg);
+  background-size: cover; /*縦横比を保ったまま、要素全体を覆う */
+  background-position: center; /* 画像の中央を基準に配置 */
+  position: relative;
+  height: 100svh; /* アドレスバーが出ててもコンテンツがはみ出さない安全な高さ */
+}
+
+/* 左上のロゴ */
+.header_logo {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+
+  opacity: 0; /* delay中は非表示 */
+  animation: dropDown 1.5s ease-out 1.5s forwards; /* 1.5s delay = リビール後 */
+}
+
+.header_logo_img {
+  height: 1.9rem;
+  width: 24rem;
+}
+
+/* フレックスでグローバルナビゲーションを配置【横flex 2列】 */
+.header_nav {
+  position: absolute;
+  top: 2rem;
+  right: 20rem;
+
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+
+  opacity: 0; /* delay中は非表示 */
+  animation: dropDown 1.5s ease-out 2s forwards; /* 2s delay = ロゴの少し後 */
+}
+
+/* 縦フレックスで配置【縦flex 3行】 */
+/* ul→div: 横並び2列のレイアウト用コンテナ */
+.header_nav_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.header_nav_link {
+  color: #fff;
+  text-decoration: none;
+}
+
+@keyframes dropDown {
+  from {
+    opacity: 0;
+    transform: translateY(-3rem); /* 上から */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* リビールで横から、左からゆっくり表示させる */
+.header_title {
+  position: absolute;
+  bottom: 15rem;
+  left: 4rem;
+  color: #fff;
+  font-size: 4.5rem;
+
+  animation: revealLeftToRight 1.5s ease-out forwards;
+}
+.header_description {
+  position: absolute;
+  bottom: 10rem;
+  left: 4rem;
+  color: #fff;
+  font-size: 1.2rem;
+  animation: revealLeftToRight 2.5s ease-out forwards;
+}
+
+@keyframes revealLeftToRight {
+  from {
+    clip-path: inset(0 100% 0 0); /* 左を100%隠す = 右から表示開始 */
+  }
+  to {
+    clip-path: inset(0 0 0 0); /* 全て表示 = 左から右へ進む */
+  }
+}
+
 /* ┌─────────────────────────────────────────┐
    │ メインビジュアル                        │
    │ - 3枚の写真をスライドショーで見せる     │
