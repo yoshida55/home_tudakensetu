@@ -21,13 +21,11 @@
 .header_area {
   width: 100%;
   font-family: "Noto Serif JP", "Yu Mincho", serif;
+  position: relative; /* ← 追加：基準 */
+  height: 100svh; /* ← 追加：全画面 */
 }
-
 /* position: relative;で画面配置 */
 .header_inner {
-  background-image: url(../img/hero/hero01.jpg);
-  background-size: cover; /*縦横比を保ったまま、要素全体を覆う */
-  background-position: center; /* 画像の中央を基準に配置 */
   position: relative;
   height: 100svh; /* アドレスバーが出ててもコンテンツがはみ出さない安全な高さ */
 }
@@ -109,6 +107,69 @@
   }
   to {
     clip-path: inset(0 0 0 0); /* 全て表示 = 左から右へ進む */
+  }
+}
+
+/* スライドショーのスタイル */
+
+/* 背景 */
+.bg_image {
+  position: absolute; /* ← relative → absolute */
+  top: 0; /* ← 追加 */
+  left: 0; /* ← 追加 */
+  height: 100%; /* ← 100vh → 100% */
+  width: 100%;
+  overflow: hidden;
+}
+
+/* スライドショーアニメーション */
+.slide {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+}
+
+.slide1 {
+  animation: slideshow 20s infinite;
+  background-image: url("../img/hero/hero01.jpg");
+  background-size: cover;
+  background-position: center;
+  animation-delay: 0s;
+}
+
+.slide2 {
+  animation: slideshow 20s infinite;
+  background-image: url("../img/hero/hero02.jpg");
+  background-size: cover;
+  background-position: center;
+  animation-delay: 5s;
+}
+
+.slide3 {
+  animation: slideshow 20s infinite;
+  background-image: url("../img/hero/hero03.jpg");
+  background-size: cover;
+  background-position: center;
+  animation-delay: 10s;
+}
+
+@keyframes slideshow {
+  0% {
+    opacity: 1;
+    transform: translateX(2%); /* 最初は少し大きく */
+  }
+  25% {
+    opacity: 1;
+    transform: translateX(1.5%); /* 少し縮小 */
+  }
+  29% {
+    opacity: 0;
+    transform: translateX(-1.5%); /* 元のサイズで消える */
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-2%); /* 少し小さくなった状態で待機 */
   }
 }
 
