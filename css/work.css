@@ -254,24 +254,45 @@
    └─────────────────────────────────────────┘ */
 
 .concept_area {
+  position: relative;
+  background-color: darkolivegreen;
 }
 
 /* 装飾写真 共通 */
-.concept_image {
+.concept_img {
+  position: absolute;
 }
 
 /* 装飾写真 個別 */
 .concept_plant {
+  top: 8rem;
+  left: 11rem;
+  width: 12rem;
 }
 .concept_flower {
+  top: 0;
+  right: 0;
+  width: 30rem;
 }
 .concept_interior {
+  top: 0;
+  right: 30rem;
+  width: 13rem;
 }
 .concept_entrance {
+  top: 21rem;
+  left: 0;
+  width: 23rem;
 }
 .concept_tea {
+  top: 30rem;
+  right: 0;
+  width: 13rem;
 }
 .concept_warm {
+  bottom: 0;
+  right: 0;
+  width: 15rem;
 }
 
 /* 中央テキスト */
