@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="868" viewBox="0 0 560 434" font-family="monospace" font-size="10">
+
+  <!-- 凡例 -->
+  <rect x="0" y="0" width="560" height="28" fill="#111"/>
+  <rect x="8" y="8" width="12" height="12" fill="none" stroke="#ff8800" stroke-width="2"/>
+  <text x="24" y="19" fill="#ff8800" font-weight="bold">relative（基点）</text>
+  <rect x="140" y="8" width="12" height="12" fill="none" stroke="#0055ff" stroke-width="2"/>
+  <text x="156" y="19" fill="#0055ff" font-weight="bold">absolute</text>
+  <rect x="240" y="8" width="12" height="12" fill="none" stroke="#007722" stroke-width="2"/>
+  <text x="256" y="19" fill="#007722" font-weight="bold">flex / grid</text>
+  <rect x="350" y="8" width="12" height="12" fill="none" stroke="#cc7700" stroke-dasharray="3" stroke-width="2"/>
+  <text x="366" y="19" fill="#cc7700" font-weight="bold">overflow: hidden</text>
+
+  <!-- セクション全体 -->
+  <rect x="10" y="38" width="540" height="390" fill="#f5ede0" stroke="#ff8800" stroke-width="2" rx="2"/>
+  <text x="16" y="52" fill="#ff8800" font-size="9" font-weight="bold">section  [position: relative]</text>
+
+  <!-- ヘッダー行（flex space-between） -->
+  <rect x="18" y="56" width="524" height="68" fill="none" stroke="#007722" stroke-width="2" stroke-dasharray="4"/>
+  <text x="24" y="69" fill="#007722" font-size="9" font-weight="bold">flex  justify-content: space-between  align-items: flex-end</text>
+
+  <!-- 左：ラベル + 見出し -->
+  <rect x="26" y="74" width="120" height="44" fill="none" stroke="#777" stroke-dasharray="2"/>
+  <text x="32" y="88" fill="#9a7a5a" font-size="9">Case  ← p</text>
+  <text x="32" y="108" fill="#4a3a2a" font-size="13" font-weight="bold">施工事例  ← h2</text>
+
+  <!-- 右：矢印ボタン -->
+  <rect x="440" y="74" width="96" height="44" fill="none" stroke="#007722" stroke-width="1" stroke-dasharray="3"/>
+  <text x="446" y="86" fill="#007722" font-size="8">flex  gap</text>
+  <circle cx="467" cy="101" r="16" fill="none" stroke="#a08060" stroke-width="1.5"/>
+  <text x="467" y="106" text-anchor="middle" fill="#a08060" font-size="14">&lt;</text>
+  <circle cx="521" cy="101" r="16" fill="none" stroke="#a08060" stroke-width="1.5"/>
+  <text x="521" y="106" text-anchor="middle" fill="#a08060" font-size="14">&gt;</text>
+  <text x="446" y="116" fill="#0055ff" font-size="7">button  [absolute]</text>
+  <text x="446" y="125" fill="#0055ff" font-size="7">top: 38  right: 18</text>
+
+  <!-- overflow: hidden 枠 -->
+  <rect x="18" y="132" width="524" height="268" fill="none" stroke="#cc7700" stroke-width="2" stroke-dasharray="5"/>
+  <text x="24" y="144" fill="#cc7700" font-size="9" font-weight="bold">overflow: hidden  ← はみ出しカードを隠す</text>
+
+  <!-- カードコンテナ（flex） -->
+  <rect x="18" y="150" width="640" height="242" fill="none" stroke="#007722" stroke-width="2" stroke-dasharray="4"/>
+  <text x="24" y="162" fill="#007722" font-size="8" font-weight="bold">display: flex  gap  ← JSでtranslateXしてスライド</text>
+
+  <!-- カード1（詳細注釈付き） -->
+  <rect x="26" y="168" width="118" height="218" fill="#fff" rx="4" stroke="#bbb" stroke-width="1"/>
+  <rect x="26" y="168" width="118" height="128" fill="#c8b89a" rx="4"/>
+  <text x="85" y="236" text-anchor="middle" fill="#666" font-size="8">施工写真</text>
+  <text x="85" y="178" text-anchor="middle" fill="#0055ff" font-size="7">[absolute]  left=0 top=0</text>
+  <text x="85" y="187" text-anchor="middle" fill="#0055ff" font-size="7">img  object-fit: cover</text>
+
+  <text x="32" y="308" fill="#888" font-size="7">No.014  ← span</text>
+  <text x="32" y="320" fill="#333" font-size="8">空へひらく本棚と</text>
+  <text x="32" y="330" fill="#333" font-size="8">暮らす家</text>
+
+  <!-- タグ群（flex-wrap） -->
+  <rect x="32" y="336" width="106" height="44" fill="none" stroke="#007722" stroke-width="1" stroke-dasharray="2"/>
+  <text x="85" y="348" text-anchor="middle" fill="#007722" font-size="7">flex  flex-wrap: wrap  gap: 4px</text>
+  <rect x="34" y="352" width="36" height="12" rx="6" fill="none" stroke="#a08060" stroke-width="1"/>
+  <text x="52" y="361" text-anchor="middle" fill="#a08060" font-size="6">2階建て</text>
+  <rect x="74" y="352" width="40" height="12" rx="6" fill="none" stroke="#a08060" stroke-width="1"/>
+  <text x="94" y="361" text-anchor="middle" fill="#a08060" font-size="6">子育て世代</text>
+  <rect x="34" y="368" width="56" height="12" rx="6" fill="none" stroke="#a08060" stroke-width="1"/>
+  <text x="62" y="377" text-anchor="middle" fill="#a08060" font-size="6">オープンな間取り</text>
+
+  <!-- カード1の外枠注釈 -->
+  <rect x="26" y="168" width="118" height="218" fill="none" stroke="#0055ff" stroke-width="1.5" stroke-dasharray="3" rx="4"/>
+  <text x="85" y="382" text-anchor="middle" fill="#0055ff" font-size="7">article  [flex-item]</text>
+
+  <!-- カード2 -->
+  <rect x="152" y="168" width="118" height="218" fill="#fff" rx="4" stroke="#bbb" stroke-width="1"/>
+  <rect x="152" y="168" width="118" height="128" fill="#b8a888" rx="4"/>
+  <text x="211" y="236" text-anchor="middle" fill="#666" font-size="8">施工写真</text>
+  <text x="158" y="310" fill="#888" font-size="7">No.013</text>
+  <text x="158" y="322" fill="#333" font-size="8">憧れを丁寧に</text>
+  <text x="158" y="332" fill="#333" font-size="8">かたちにした家</text>
+  <rect x="158" y="338" width="30" height="12" rx="6" fill="none" stroke="#a08060" stroke-width="1"/>
+  <text x="173" y="347" text-anchor="middle" fill="#a08060" font-size="6">平屋</text>
+
+  <!-- カード3 -->
+  <rect x="278" y="168" width="118" height="218" fill="#fff" rx="4" stroke="#bbb" stroke-width="1"/>
+  <rect x="278" y="168" width="118" height="128" fill="#c0a87a" rx="4"/>
+  <text x="337" y="236" text-anchor="middle" fill="#666" font-size="8">施工写真</text>
+  <text x="284" y="310" fill="#888" font-size="7">No.012</text>
+  <text x="284" y="322" fill="#333" font-size="7">懐かしさと今らしさを…</text>
+
+  <!-- カード4 -->
+  <rect x="404" y="168" width="118" height="218" fill="#fff" rx="4" stroke="#bbb" stroke-width="1"/>
+  <rect x="404" y="168" width="118" height="128" fill="#d0c0a0" rx="4"/>
+  <text x="463" y="236" text-anchor="middle" fill="#666" font-size="8">施工写真</text>
+  <text x="410" y="310" fill="#888" font-size="7">No.011</text>
+  <text x="410" y="322" fill="#333" font-size="7">小さなときめきが…</text>
+
+  <!-- カード5（はみ出し・薄く） -->
+  <rect x="530" y="168" width="118" height="218" fill="#fff" rx="4" stroke="#bbb" stroke-width="0.5" opacity="0.3"/>
+  <rect x="530" y="168" width="118" height="128" fill="#c8b49a" rx="4" opacity="0.3"/>
+  <text x="578" y="262" text-anchor="middle" fill="#888" font-size="6" opacity="0.5">隠れる</text>
+
+  <!-- 一覧を見る -->
+  <rect x="18" y="408" width="524" height="16" fill="none" stroke="#777" stroke-dasharray="2"/>
+  <text x="24" y="420" fill="#aaa" font-size="8">text-align: right  または  flex justify-content: flex-end</text>
+  <circle cx="484" cy="415" r="7" fill="none" stroke="#a08060" stroke-width="1"/>
+  <text x="484" y="419" text-anchor="middle" fill="#a08060" font-size="8">→</text>
+  <text x="496" y="420" fill="#4a3a2a" font-size="9">一覧を見る</text>
+
+
+</svg>

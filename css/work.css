@@ -21,13 +21,14 @@
 .header_area {
   width: 100%;
   font-family: "Noto Serif JP", "Yu Mincho", serif;
-  position: relative; /* ← 追加：基準 */
-  height: 100svh; /* ← 追加：全画面 */
+  position: relative;
+  height: 100svh;
+  /* overflow: hidden; */
 }
-/* position: relative;で画面配置 */
+
 .header_inner {
   position: relative;
-  height: 100svh; /* アドレスバーが出ててもコンテンツがはみ出さない安全な高さ */
+  height: 100svh;
 }
 
 /* 左上のロゴ */
@@ -35,9 +36,8 @@
   position: absolute;
   top: 2rem;
   left: 2rem;
-
-  opacity: 0; /* delay中は非表示 */
-  animation: dropDown 1.5s ease-out 1.5s forwards; /* 1.5s delay = リビール後 */
+  opacity: 0;
+  animation: dropDown 1.5s ease-out 1.5s forwards;
 }
 
 .header_logo_img {
@@ -45,28 +45,45 @@
   width: 24rem;
 }
 
-/* フレックスでグローバルナビゲーションを配置【横flex 2列】 */
+/* グローバルナビゲーション【グリッド 2列】 */
 .header_nav {
   position: absolute;
   top: 2rem;
-  right: 20rem;
+  right: 30rem;
 
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.5rem 2rem;
   align-items: center;
 
-  opacity: 0; /* delay中は非表示 */
-  animation: dropDown 1.5s ease-out 2s forwards; /* 2s delay = ロゴの少し後 */
+  opacity: 0;
+  animation: dropDown 1.5s ease-out 2s forwards;
 }
 
-/* 縦フレックスで配置【縦flex 3行】 */
-/* ul→div: 横並び2列のレイアウト用コンテナ */
-.header_nav_list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
 .header_nav_link {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* お問い合わせ */
+.header_inquiry {
+  position: fixed;
+  top: 1.6rem;
+  right: 12rem;
+  opacity: 0;
+  animation: dropDown 1.5s ease-out 2s forwards;
+}
+
+.inquiry_link {
+  /* 文字を中央に配置するため */
+  display: flex;
+  align-items: center; /* 縦中央 */
+  justify-content: center; /* 横中央 */
+
+  height: 4rem;
+  width: 12rem;
+  border: 0.1rem solid #fff;
+  border-radius: 2rem;
   color: #fff;
   text-decoration: none;
 }
@@ -114,78 +131,158 @@
 
 /* 背景 */
 .bg_image {
-  position: absolute; /* ← relative → absolute */
-  top: 0; /* ← 追加 */
-  left: 0; /* ← 追加 */
-  height: 100%; /* ← 100vh → 100% */
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
 /* スライドショーアニメーション */
 .slide {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
   position: absolute;
+  width: 108%;
+  left: -4%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
 }
 
 .slide1 {
-  animation: slideshow 20s infinite;
   background-image: url("../img/hero/hero01.jpg");
-  background-size: cover;
-  background-position: center;
-  animation-delay: 0s;
+  animation: slideshow 15s infinite;
 }
 
 .slide2 {
-  animation: slideshow 20s infinite;
   background-image: url("../img/hero/hero02.jpg");
-  background-size: cover;
-  background-position: center;
+  animation: slideshow 15s infinite;
   animation-delay: 5s;
 }
 
 .slide3 {
-  animation: slideshow 20s infinite;
   background-image: url("../img/hero/hero03.jpg");
-  background-size: cover;
-  background-position: center;
+  animation: slideshow 15s infinite;
   animation-delay: 10s;
 }
 
 @keyframes slideshow {
   0% {
     opacity: 1;
-    transform: translateX(2%); /* 最初は少し大きく */
+    transform: translateX(2%); /* 移動量を小さく */
   }
-  25% {
+  33% {
     opacity: 1;
-    transform: translateX(1.5%); /* 少し縮小 */
+    transform: translateX(0%); /* 5秒目=次のスライドが始まる直前 */
   }
-  29% {
+  38% {
     opacity: 0;
-    transform: translateX(-1.5%); /* 元のサイズで消える */
+    transform: translateX(-1%); /* フェードアウト完了 */
   }
   100% {
     opacity: 0;
-    transform: translateX(-2%); /* 少し小さくなった状態で待機 */
+    transform: translateX(-2%); /* 待機 */
   }
 }
 
+/* ハンバーガーメニュー */
+.hamburger_menu {
+  position: fixed;
+  top: 1.5rem;
+  right: 5rem;
+  z-index: 1000;
+
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0;
+
+  background-color: transparent;
+  border: 0.1rem solid #fff;
+  border-radius: 50%;
+  font: inherit;
+
+  opacity: 0;
+  animation: dropDown 1.5s ease-out 2s forwards;
+
+  cursor: pointer;
+}
+
+/* ハンバーガーメニューのバー */
+.bar {
+  position: absolute;
+  transition: 0.3s;
+  left: 1.2rem;
+  height: 0.2rem;
+  width: 1.9rem;
+  background: white;
+}
+
+.bar:nth-child(1) {
+  top: 1.2rem;
+}
+.bar:nth-child(2) {
+  top: 2rem;
+}
+.bar:nth-child(3) {
+  top: 2.8rem;
+}
+
 /* ┌─────────────────────────────────────────┐
-   │ メインビジュアル                        │
-   │ - 3枚の写真をスライドショーで見せる     │
-   │ - 全幅で大きく表示                      │
-   │ - JSで自動スクロール                    │
+   │ ハンバーガーメニュークリック時の動作       │
    └─────────────────────────────────────────┘ */
+
+/* ハンバーガーメニューがおされたら、「×」にする */
+.hamburger_menu.open .bar:nth-child(1) {
+  transform: rotate(45deg);
+  top: 2rem;
+  border: 0.5rem solid rgb(0, 47, 255);
+}
+.hamburger_menu.open .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger_menu.open .bar:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 2rem;
+}
 
 /* ┌─────────────────────────────────────────┐
    │ コンセプト                              │
-   │ - 大きなテキストブロックで理念を見せる  │
-   │ - 下に5枚の施工写真を並べる             │
-   │ - キーワード（断熱性能とか省エネ）を配置│
+   │ - 全写真 position: absolute             │
+   │ - 中央テキストは通常フロー              │
    └─────────────────────────────────────────┘ */
+
+.concept_area {
+}
+
+/* 装飾写真 共通 */
+.concept_image {
+}
+
+/* 装飾写真 個別 */
+.concept_plant {
+}
+.concept_flower {
+}
+.concept_interior {
+}
+.concept_entrance {
+}
+.concept_tea {
+}
+.concept_warm {
+}
+
+/* 中央テキスト */
+.concept_label {
+}
+.concept_heading {
+}
+.concept_description {
+}
+.concept_link {
+}
 
 /* ┌─────────────────────────────────────────┐
    │ 施工事例                                │

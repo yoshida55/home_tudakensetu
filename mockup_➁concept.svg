@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1500" viewBox="0 0 560 750" font-family="monospace" font-size="10">
+
+  <!-- 凡例 -->
+  <rect x="0" y="0" width="560" height="28" fill="#111"/>
+  <rect x="8" y="8" width="12" height="12" fill="none" stroke="#ff8800" stroke-width="2"/>
+  <text x="24" y="19" fill="#ff8800" font-weight="bold">relative</text>
+  <rect x="110" y="8" width="12" height="12" fill="none" stroke="#0055ff" stroke-width="2"/>
+  <text x="126" y="19" fill="#0055ff" font-weight="bold">absolute</text>
+  <rect x="220" y="8" width="12" height="12" fill="none" stroke="#007722" stroke-width="2"/>
+  <text x="236" y="19" fill="#007722" font-weight="bold">flex / grid</text>
+  <rect x="330" y="8" width="12" height="12" fill="none" stroke="#888" stroke-dasharray="2" stroke-width="1.5"/>
+  <text x="346" y="19" fill="#888">通常フロー</text>
+
+  <!-- セクション全体 -->
+  <rect x="10" y="38" width="540" height="700" fill="#7a6a5a" stroke="#ff8800" stroke-width="2" rx="2"/>
+  <text x="16" y="52" fill="#ff8800" font-size="9" font-weight="bold">section  [position: relative]  ← 全写真の基点</text>
+
+  <!-- 写真1: 左上 植物（絶対配置・はみ出し） -->
+  <rect x="10" y="58" width="155" height="150" fill="#5a4a3a" stroke="#0055ff" stroke-width="2" stroke-dasharray="4"/>
+  <text x="16" y="71" fill="#0055ff" font-size="8" font-weight="bold">img [absolute]</text>
+  <text x="16" y="82" fill="#0055ff" font-size="8">top: 0  left: -Xpx</text>
+  <rect x="20" y="88" width="135" height="112" fill="#4a3a2a" rx="2"/>
+  <text x="87" y="149" text-anchor="middle" fill="#aaa" font-size="8">植物写真</text>
+
+  <!-- 写真2: 右上 花（絶対配置・はみ出し） -->
+  <rect x="395" y="38" width="155" height="88" fill="#5a4a3a" stroke="#0055ff" stroke-width="2" stroke-dasharray="4"/>
+  <text x="400" y="51" fill="#0055ff" font-size="8" font-weight="bold">img [absolute]</text>
+  <text x="400" y="62" fill="#0055ff" font-size="8">top: 0  right: -Xpx</text>
+  <rect x="403" y="66" width="143" height="54" fill="#4a3a2a" rx="2"/>
+  <text x="474" y="97" text-anchor="middle" fill="#aaa" font-size="8">花の写真</text>
+
+  <!-- 写真3: 右上 インテリア（絶対配置） -->
+  <rect x="395" y="132" width="155" height="95" fill="#5a4a3a" stroke="#0055ff" stroke-width="2" stroke-dasharray="4"/>
+  <text x="400" y="145" fill="#0055ff" font-size="8" font-weight="bold">img [absolute]</text>
+  <text x="400" y="156" fill="#0055ff" font-size="8">top: Xpx  right: -Ypx</text>
+  <rect x="403" y="160" width="143" height="60" fill="#4a3a2a" rx="2"/>
+  <text x="474" y="194" text-anchor="middle" fill="#aaa" font-size="8">インテリア写真</text>
+
+  <!-- 写真4: 左側 玄関（絶対配置） -->
+  <rect x="10" y="295" width="162" height="435" fill="#4a3a2a" stroke="#0055ff" stroke-width="2" stroke-dasharray="4" rx="2"/>
+  <text x="16" y="310" fill="#0055ff" font-size="8" font-weight="bold">img [absolute]</text>
+  <text x="16" y="321" fill="#0055ff" font-size="8">top: Xpx  left: 0</text>
+  <text x="91" y="515" text-anchor="middle" fill="#888" font-size="8">玄関・植物写真</text>
+
+  <!-- 写真5: 右下 ティー（絶対配置） -->
+  <rect x="378" y="535" width="163" height="112" fill="#4a3a2a" stroke="#0055ff" stroke-width="2" stroke-dasharray="4" rx="2"/>
+  <text x="384" y="549" fill="#0055ff" font-size="8" font-weight="bold">img [absolute]</text>
+  <text x="384" y="560" fill="#0055ff" font-size="8">bottom: Xpx  right: 0</text>
+  <text x="460" y="600" text-anchor="middle" fill="#888" font-size="8">ティー写真</text>
+
+  <!-- 写真6: 右下端 暖色インテリア（絶対配置） -->
+  <rect x="378" y="653" width="163" height="75" fill="#4a3a2a" stroke="#0055ff" stroke-width="2" stroke-dasharray="4" rx="2"/>
+  <text x="384" y="666" fill="#0055ff" font-size="8" font-weight="bold">img [absolute]</text>
+  <text x="384" y="677" fill="#0055ff" font-size="8">bottom: 0  right: 0</text>
+  <text x="460" y="700" text-anchor="middle" fill="#888" font-size="8">暖色インテリア写真</text>
+
+  <!-- 通常フロー: 中央テキスト群 -->
+  <rect x="180" y="58" width="205" height="670" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="2"/>
+  <text x="282" y="70" text-anchor="middle" fill="#888" font-size="7">通常フロー（中央）</text>
+  <text x="282" y="80" text-anchor="middle" fill="#888" font-size="7">padding で写真に被らないよう調整</text>
+
+  <!-- Concept ラベル -->
+  <text x="282" y="115" text-anchor="middle" fill="#ddd" font-size="9">Concept  ← p or span</text>
+  <line x1="282" y1="122" x2="282" y2="148" stroke="#ddd" stroke-width="1"/>
+
+  <!-- h2 見出し -->
+  <rect x="185" y="200" width="195" height="72" fill="none" stroke="#888" stroke-dasharray="2"/>
+  <text x="282" y="213" text-anchor="middle" fill="#888" font-size="7">h2  通常フロー</text>
+  <text x="282" y="228" text-anchor="middle" fill="#fff" font-size="11">時を越えて</text>
+  <text x="282" y="242" text-anchor="middle" fill="#fff" font-size="11">心地よさが続く家。</text>
+  <text x="282" y="258" text-anchor="middle" fill="#fff" font-size="11">誰もがのぞむ性能を</text>
+  <text x="282" y="272" text-anchor="middle" fill="#fff" font-size="9">手の届く価格で。</text>
+
+  <!-- 本文テキスト -->
+  <rect x="185" y="295" width="185" height="250" fill="none" stroke="#888" stroke-dasharray="2"/>
+  <text x="191" y="308" fill="#888" font-size="7">p  通常フロー</text>
+  <text x="191" y="322" fill="#ddd" font-size="8">自分にとって快適な…</text>
+  <text x="191" y="337" fill="#ddd" font-size="8">最高レベルの断熱性能に…</text>
+  <text x="191" y="352" fill="#ddd" font-size="8">省エネなのに、冬は暖かく…</text>
+  <text x="191" y="367" fill="#ddd" font-size="8">家族にも、環境にも…</text>
+  <text x="191" y="382" fill="#ddd" font-size="8">さらに、費用を抑える…</text>
+
+  <!-- 注釈 -->
+  <text x="185" y="570" fill="#cc7700" font-size="8">⚠ 写真がテキストに重なる場合は</text>
+  <text x="185" y="582" fill="#cc7700" font-size="8">　 sectionに  padding を設定して回避</text>
+
+</svg>

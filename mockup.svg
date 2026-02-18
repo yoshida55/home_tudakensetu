@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="980" font-family="sans-serif" font-size="11">
+
+  <!-- ========== ヘッダー ========== -->
+  <rect x="0" y="0" width="420" height="220" fill="#3a3a3a"/>
+  <text x="210" y="14" text-anchor="middle" fill="#888" font-size="9">スライドショー背景（100svh）</text>
+
+  <!-- ロゴ -->
+  <rect x="10" y="18" width="90" height="22" fill="none" stroke="#aaa" stroke-dasharray="3"/>
+  <text x="55" y="33" text-anchor="middle" fill="#ddd" font-size="9">ロゴ</text>
+
+  <!-- ナビ 2列グリッド -->
+  <rect x="145" y="18" width="120" height="38" fill="none" stroke="#aaa" stroke-dasharray="3"/>
+  <text x="205" y="31" text-anchor="middle" fill="#ddd" font-size="9">ナビ</text>
+  <text x="205" y="44" text-anchor="middle" fill="#888" font-size="8">grid 2列×3行</text>
+
+  <!-- お問い合わせ（fixed） -->
+  <rect x="278" y="18" width="76" height="22" rx="11" fill="none" stroke="#fff"/>
+  <text x="316" y="33" text-anchor="middle" fill="#fff" font-size="8">お問い合わせ</text>
+
+  <!-- ハンバーガー（fixed） -->
+  <circle cx="400" cy="29" r="14" fill="none" stroke="#fff"/>
+  <text x="400" y="33" text-anchor="middle" fill="#fff" font-size="14">≡</text>
+
+  <!-- タイトル -->
+  <text x="18" y="165" fill="#fff" font-size="16" font-weight="bold">わたしたちに</text>
+  <text x="18" y="185" fill="#fff" font-size="16" font-weight="bold">ちょうどいい家</text>
+  <text x="18" y="202" fill="#bbb" font-size="9">数十年先も続く、家族にも環境にも心地いい住まい。</text>
+
+  <!-- ========== メインビジュアル ========== -->
+  <rect x="0" y="225" width="420" height="90" fill="#e8e8e8" stroke="#ccc"/>
+  <text x="210" y="265" text-anchor="middle" fill="#666" font-size="13">メインビジュアル</text>
+  <text x="210" y="282" text-anchor="middle" fill="#999" font-size="9">（現在: .aaa placeholder）</text>
+
+  <!-- ========== コンセプト ========== -->
+  <rect x="0" y="320" width="420" height="110" fill="#fff" stroke="#ddd"/>
+  <text x="210" y="358" text-anchor="middle" fill="#555" font-size="13">コンセプト</text>
+  <text x="210" y="374" text-anchor="middle" fill="#aaa" font-size="8">大きなテキスト + 施工写真5枚 + キーワード</text>
+  <!-- 写真5枚イメージ -->
+  <rect x="18" y="385" width="68" height="35" fill="#ddd" rx="2"/>
+  <rect x="94" y="385" width="68" height="35" fill="#ddd" rx="2"/>
+  <rect x="170" y="385" width="68" height="35" fill="#ddd" rx="2"/>
+  <rect x="246" y="385" width="68" height="35" fill="#ddd" rx="2"/>
+  <rect x="322" y="385" width="80" height="35" fill="#ddd" rx="2"/>
+
+  <!-- ========== 施工事例 ========== -->
+  <rect x="0" y="435" width="420" height="110" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="210" y="473" text-anchor="middle" fill="#555" font-size="13">施工事例</text>
+  <text x="210" y="489" text-anchor="middle" fill="#aaa" font-size="8">カード横並び・矢印で横スクロール</text>
+  <!-- カードイメージ -->
+  <rect x="18" y="498" width="80" height="38" fill="#ddd" rx="3"/>
+  <rect x="108" y="498" width="80" height="38" fill="#ddd" rx="3"/>
+  <rect x="198" y="498" width="80" height="38" fill="#ddd" rx="3"/>
+  <text x="390" y="522" text-anchor="middle" fill="#888" font-size="18">›</text>
+
+  <!-- ========== お知らせ ========== -->
+  <rect x="0" y="550" width="420" height="95" fill="#fff" stroke="#ddd"/>
+  <text x="210" y="580" text-anchor="middle" fill="#555" font-size="13">お知らせ</text>
+  <text x="210" y="595" text-anchor="middle" fill="#aaa" font-size="8">サムネイル・カテゴリ・日付・タイトル（flex横並び）</text>
+  <rect x="18" y="604" width="380" height="16" fill="#eee" rx="2"/>
+  <rect x="18" y="624" width="380" height="16" fill="#eee" rx="2"/>
+
+  <!-- ========== ブログ ========== -->
+  <rect x="0" y="650" width="420" height="95" fill="#f5f5f5" stroke="#ddd"/>
+  <text x="210" y="680" text-anchor="middle" fill="#555" font-size="13">ブログ</text>
+  <text x="210" y="695" text-anchor="middle" fill="#aaa" font-size="8">お知らせと同形式・最新3件</text>
+  <rect x="18" y="704" width="380" height="16" fill="#ddd" rx="2"/>
+  <rect x="18" y="724" width="380" height="16" fill="#ddd" rx="2"/>
+
+  <!-- ========== About / For sale ========== -->
+  <rect x="0" y="750" width="420" height="85" fill="#fff" stroke="#ddd"/>
+  <text x="210" y="782" text-anchor="middle" fill="#555" font-size="13">About / For sale</text>
+  <text x="210" y="797" text-anchor="middle" fill="#aaa" font-size="8">2カラム・大型背景画像付きカードボタン</text>
+  <rect x="18" y="806" width="188" height="22" fill="#ccc" rx="3"/>
+  <rect x="214" y="806" width="188" height="22" fill="#ccc" rx="3"/>
+
+  <!-- ========== お問い合わせ ========== -->
+  <rect x="0" y="840" width="420" height="75" fill="#f0f0f0" stroke="#ddd"/>
+  <text x="210" y="868" text-anchor="middle" fill="#555" font-size="13">お問い合わせ</text>
+  <text x="210" y="883" text-anchor="middle" fill="#aaa" font-size="8">フォームリンク + 電話番号・営業時間</text>
+  <rect x="70" y="892" width="120" height="16" fill="#ccc" rx="8"/>
+  <rect x="230" y="892" width="120" height="16" fill="#ccc" rx="8"/>
+
+  <!-- ========== フッター ========== -->
+  <rect x="0" y="920" width="420" height="60" fill="#333" stroke="#555"/>
+  <text x="210" y="950" text-anchor="middle" fill="#aaa" font-size="13">フッター</text>
+  <text x="210" y="967" text-anchor="middle" fill="#666" font-size="8">会社情報・メニュー再掲・ページトップ</text>
+
+</svg>

@@ -19,73 +19,87 @@
         <div class="slide slide2"></div>
         <div class="slide slide3"></div>
       </div>
-      <!-- position: relative;で画面配置 -->
+
       <div class="header_inner">
         <div class="header_logo">
           <a href="index.html" class="header_logo_link"><img src="img/common/logo.png" alt="溝田建築設計株式会社" class="header_logo_img" /></a>
         </div>
-        <!-- フレックスでグローバルナビゲーションを配置【横flex 2列】 -->
+
+        <!-- グローバルナビゲーション -->
         <nav class="header_nav">
-          <!-- 縦フレックスで配置【縦flex 3行】 -->
-          <div class="header_nav_list">
-            <!-- ul→div: 横並び2列のレイアウト用コンテナ -->
-            <a href="#" class="header_nav_link">私たちについて</a>
-            <a href="#" class="header_nav_link">家づくりのこだわり</a>
-            <a href="#" class="header_nav_link">施工事例</a>
-          </div>
-          <div class="header_nav_list">
-            <!-- ul→div: 横並び2列のレイアウト用コンテナ -->
-            <a href="#" class="header_nav_link">モデルハウス</a>
-            <a href="#" class="header_nav_link">土地・分譲情報</a>
-            <a href="#" class="header_nav_link">会社概要</a>
-          </div>
+          <a href="#" class="header_nav_link">私たちについて</a>
+          <a href="#" class="header_nav_link">家づくりのこだわり</a>
+          <a href="#" class="header_nav_link">施工事例</a>
+          <a href="#" class="header_nav_link">モデルハウス</a>
+          <a href="#" class="header_nav_link">土地・分譲情報</a>
+          <a href="#" class="header_nav_link">会社概要</a>
         </nav>
 
+        <!-- お問い合わせ -->
+        <a href="#" class="inquiry_link header_inquiry">お問い合わせ</a>
+
+        <!-- ハンバーガーメニュー -->
+        <button type="button" id="hamburger_btn" class="hamburger_menu" aria-label="メニューを開く">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
         <h1 class="header_title">わたしたちに<br />ちょうどいい家</h1>
-        <!-- h2→h1: サイトのメインタイトル -->
         <p class="header_description">数十年先も続く、家族にも環境にも心地いい住まい。</p>
       </div>
     </header>
 
     <!-- ===============================================
-     メインビジュアル
-     =============================================== -->
-    <section></section>
-
-    <!-- ===============================================
      コンセプト
      =============================================== -->
-    <section></section>
+    <section class="concept_area">
+      <!-- 装飾写真: position: absolute -->
+      <img src="" alt="植物写真" class="concept_image concept_plant" />
+      <img src="" alt="花の写真" class="concept_image concept_flower" />
+      <img src="" alt="インテリア写真" class="concept_image concept_interior" />
+      <img src="" alt="玄関・植物写真" class="concept_image concept_entrance" />
+      <img src="" alt="ティー写真" class="concept_image concept_tea" />
+      <img src="" alt="暖色インテリア写真" class="concept_image concept_warm" />
+
+      <!-- 中央テキスト: 通常フロー -->
+      <p class="concept_label">Concept</p>
+      <h2 class="concept_heading">時を越えて心地よさが続く家。<br />誰もがのぞむ性能を手の届く価格で。</h2>
+      <p class="concept_description">自分にとって快適な"ちょうどいい家"を、手軽に手に入れて欲しいと、溝田建築設計では考えています。</p>
+      <p class="concept_description">私たちは家の完成後50年経過した建物の状態を大切にしています。最高レベルの断熱性能に、自然エネルギーを活かした設計で、省エネなのに、冬は暖かく、夏は涼しい。家族にも、環境にも心地のいい家です。</p>
+      <p class="concept_description">さらに、費用を抑える工夫も忘れません。難しいご要望にも、それを上回る提案をすることが私たちの信条です。</p>
+      <a href="#" class="concept_link">家づくりのこだわり</a>
+    </section>
 
     <!-- ===============================================
      施工事例
      =============================================== -->
-    <section></section>
+    <section class="case_area"></section>
 
     <!-- ===============================================
      お知らせ
      =============================================== -->
-    <section></section>
+    <section class="news_area"></section>
 
     <!-- ===============================================
      ブログ
      =============================================== -->
-    <section></section>
+    <section class="blog_area"></section>
 
     <!-- ===============================================
      About/For sale
      =============================================== -->
-    <section></section>
+    <section class="about_area"></section>
 
     <!-- ===============================================
      お問い合わせ
      =============================================== -->
-    <section></section>
+    <section class="contact_area"></section>
 
     <!-- ===============================================
      フッター
      =============================================== -->
-    <footer></footer>
+    <footer class="footer_area"></footer>
 
     <script src="js/script.js"></script>
   </body>
