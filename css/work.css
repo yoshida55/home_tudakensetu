@@ -322,7 +322,7 @@ html {
   height: 200%;
   background: linear-gradient(to right, #5a5247 80%, /* 画像の右端(75%)より広く隠す */ rgba(160, 130, 95, 0.5) 89%, /* 温かい光 */ rgba(220, 195, 160, 0.1) 95%, transparent 100%);
   transform: translate(0%, 0%);
-  animation: curtainSlide 2.8s ease-out both;
+  animation: curtainSlide 3.3s ease-out both;
   z-index: 1;
 }
 
@@ -366,7 +366,7 @@ html {
 }
 
 .diagonal-reveal.is-visible {
-  animation: diagonalReveal 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: diagonalReveal 3.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* レイヤー画像の上に表示 */
@@ -537,6 +537,13 @@ html {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
+  overflow: hidden;
+}
+
+.case_track {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.5s ease-out;
 }
 
 /* 1枚のカード【flex 縦】 */
