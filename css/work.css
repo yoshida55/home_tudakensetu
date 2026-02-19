@@ -390,6 +390,114 @@ html {
    │ - 各カードに画像・タイトル・タグを表示  │
    └─────────────────────────────────────────┘ */
 
+/* 施工事例エリア */
+.case_area {
+  /* debug前提的に数値を設定 */
+  height: 70rem;
+  padding: 5rem 2rem;
+  width: 100%;
+  background-color: #f2ece4;
+}
+
+/* Case ラベル */
+.case_label {
+  color: #8b6914;
+  margin-bottom: 1rem;
+}
+
+/* タイトル+矢印の横並び【flex】 */
+.case_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+/* 施工事例 見出し */
+.case_title {
+  color: #8b6914;
+  font-size: 3.5rem;
+  margin-bottom: 3rem;
+}
+
+/* 矢印ボタン群 */
+.case_nav {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+/* ＜＞ ボタン */
+.case_nav_button {
+  width: 4.5rem;
+  height: 3rem;
+  border: 0.1rem solid #8b6914;
+  border-radius: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* カード横並びエリア【flex】overflow: hidden */
+.case_list {
+  height: 35rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* 1枚のカード【flex 縦】 */
+.case_item {
+  width: 25%;
+  background-color: #fff;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  color: #8b6914;
+}
+
+/* カード画像 */
+.case_img {
+  padding: 1rem 1rem;
+  height: 23rem;
+}
+
+/* No. 番号 */
+.case_number {
+  padding-left: 1rem;
+}
+
+/* 家の説明文 */
+.case_description {
+  padding-left: 1rem;
+}
+
+/* タグ群コンテナ【flex wrap】 */
+.case_tag_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.3rem 1rem;
+}
+
+/* 個別タグ */
+.case_tag {
+  padding: 0.3rem 1rem;
+  border: 0.1rem solid #8b6914;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+}
+
+/* 一覧を見るリンク */
+.case_link {
+  display: block;
+  margin-top: 4rem;
+  text-align: right;
+}
+
 /* ┌─────────────────────────────────────────┐
    │ お知らせ                                │
    │ - リスト形式で3件表示                   │

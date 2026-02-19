@@ -75,43 +75,84 @@
      施工事例
      =============================================== -->
     <section class="case_area">
-      <h2>
-        <p>施工事例</p>
-      </h2>
-
-      <div ></div>
-
-      <!-- 画像のカードを４枚、横に並べる。画像の下に。[flex 横に４列] -->
-
-      <div class="">
-        <!-- 施工事例カード -->
-        <a href="#" class="case_card">
-          <img src="img/case/case01.jpg" alt="施工事例写真" class="case_card_img" />
-          <p class="case_card_label">施工事例</p>
-          <h3 class="case_card_title">自然素材の家</h3>
-        </a>
-
-        <a href="#" class="case_card">
-          <img src="img/case/case02.jpg" alt="施工事例写真" class="case_card_img" />
-          <p class="case_card_label">施工事例</p>
-          <h3 class="case_card_title">自然素材の家</h3>
-        </a>
-
-        <a href="#" class="case_card">
-          <img src="img/case/case03.jpg" alt="施工事例写真" class="case_card_img" />
-          <p class="case_card_label">施工事例</p>
-          <h3 class="case_card_title">自然素材の家</h3>
-        </a>
-
-        <a href="#" class="case_card">
-          <img src="img/case/case04.jpg" alt="施工事例写真" class="case_card_img" />
-          <p class="case_card_label">施工事例</p>
-          <h3 class="case_card_title">自然素材の家</h3>
-        </a>
+      <p class="case_label">Case</p>
+      <!-- 施工事例と左右への遷移ボタンのコンテナ【flex 2列】 -->
+      <div class="case_header">
+        <h2 class="case_title">施工事例</h2>
+        <div class="case_nav">
+          <a href="#" class="case_nav_button">＜ </a>
+          <a href="#" class="case_nav_button">＞ </a>
+        </div>
       </div>
-
-      <!-- 一覧を見る -->
-      <a href="#" class="case_link">施工事例一覧を見る</a>
+      <!-- 4枚の画像が横に並ぶ。スクロールで次の４枚が表示される。【４列　flex】自動で動かないスライダー -->
+      <div class="case_list">
+        <!-- 縦に画像と、NO、、説明、ボタンがならぶ【flex 縦４行】 -->
+        <div class="case_item">
+          <!-- 画像 -->
+          <img src="img/works/IMG_9537.jpeg" alt="施工事例写真1" class="case_img" />
+          <!-- NO -->
+          <div class="case_number">NO.014</div>
+          <!-- 家の説明 -->
+          <div class="case_description">空へひらく本棚と暮らす家</div>
+          <!-- カードへのリンク  【flex 横　flex-wrap】-->
+          <div class="case_tag_list">
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+          </div>
+        </div>
+        <!-- 縦に画像と、NO、、説明、ボタンがならぶ【flex 縦４行】 -->
+        <div class="case_item">
+          <!-- 画像 -->
+          <img src="img/works/IMG_8104.jpeg" alt="施工事例写真1" class="case_img" />
+          <!-- NO -->
+          <div class="case_number">NO.015</div>
+          <!-- 家の説明 -->
+          <div class="case_description">空へひらく本棚と暮らす家</div>
+          <!-- カードへのリンク  【flex 横　flex-wrap】-->
+          <div class="case_tag_list">
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+          </div>
+        </div>
+        <!-- 縦に画像と、NO、、説明、ボタンがならぶ【flex 縦４行】 -->
+        <div class="case_item">
+          <!-- 画像 -->
+          <img src="img/works/IMG_8422.jpeg" alt="施工事例写真1" class="case_img" />
+          <!-- NO -->
+          <div class="case_number">NO.016</div>
+          <!-- 家の説明 -->
+          <div class="case_description">空へひらく本棚と暮らす家</div>
+          <!-- カードへのリンク  【flex 横　flex-wrap】-->
+          <div class="case_tag_list">
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+          </div>
+        </div>
+        <!-- 縦に画像と、NO、、説明、ボタンがならぶ【flex 縦４行】 -->
+        <div class="case_item">
+          <!-- 画像 -->
+          <img src="img/works/IMG_9070.jpeg" alt="施工事例写真1" class="case_img" />
+          <!-- NO -->
+          <div class="case_number">NO.017</div>
+          <!-- 家の説明 -->
+          <div class="case_description">空へひらく本棚と暮らす家</div>
+          <!-- カードへのリンク  【flex 横　flex-wrap】-->
+          <div class="case_tag_list">
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+            <a href="#" class="case_tag">2階建て</a>
+          </div>
+        </div>
+      </div>
+      <!-- 一覧を見る 　右端-->
+      <a href="#" class="case_link">一覧を見る</a>
     </section>
 
     <!-- ===============================================
