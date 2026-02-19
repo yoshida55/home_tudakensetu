@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="900" viewBox="0 0 560 450" font-family="sans-serif" font-size="10">
+
+  <!-- 凡例バー -->
+  <rect x="0" y="0" width="560" height="28" fill="#111"/>
+  <rect x="8" y="8" width="12" height="12" fill="none" stroke="#ff8800" stroke-width="2"/>
+  <text x="24" y="19" fill="#ff8800" font-weight="bold">relative</text>
+  <rect x="110" y="8" width="12" height="12" fill="none" stroke="#0055ff" stroke-width="2"/>
+  <text x="126" y="19" fill="#0055ff" font-weight="bold">absolute</text>
+  <rect x="220" y="8" width="12" height="12" fill="none" stroke="#007722" stroke-width="2"/>
+  <text x="236" y="19" fill="#007722" font-weight="bold">flex / grid</text>
+  <rect x="330" y="8" width="12" height="12" fill="none" stroke="#cc7700" stroke-dasharray="3" stroke-width="2"/>
+  <text x="346" y="19" fill="#cc7700" font-weight="bold">overflow: hidden</text>
+  <rect x="460" y="8" width="12" height="12" fill="none" stroke="#ff4444" stroke-width="2"/>
+  <text x="476" y="19" fill="#ff4444" font-weight="bold">fixed</text>
+
+  <!-- ======================================== -->
+  <!-- section 施工事例エリア全体 -->
+  <!-- ======================================== -->
+  <rect x="0" y="35" width="560" height="410" fill="#f2ece4" stroke="#ff8800" stroke-width="2"/>
+  <text x="8" y="50" fill="#ff8800" font-weight="bold">section [position: relative]</text>
+  <text x="8" y="62" fill="#555">background: #f2ece4</text>
+  <text x="8" y="74" fill="#555">padding: 上下左右</text>
+
+  <!-- Case ラベル -->
+  <rect x="30" y="82" width="40" height="14" fill="none" stroke="#888" stroke-dasharray="2"/>
+  <text x="35" y="93" fill="#886644" font-size="9">p "Case"</text>
+
+  <!-- 施工事例 見出し -->
+  <rect x="30" y="100" width="120" height="22" fill="none" stroke="#888" stroke-dasharray="2"/>
+  <text x="35" y="116" fill="#333" font-size="13" font-weight="bold">h2 "施工事例"</text>
+
+  <!-- 矢印ボタン（右上） -->
+  <circle cx="490" cy="108" r="14" fill="none" stroke="#cba882" stroke-width="1.5"/>
+  <text x="486" y="112" fill="#cba882" font-size="12">&lt;</text>
+  <circle cx="525" cy="108" r="14" fill="none" stroke="#cba882" stroke-width="1.5"/>
+  <text x="521" y="112" fill="#cba882" font-size="12">&gt;</text>
+  <text x="470" y="90" fill="#0055ff" font-weight="bold" font-size="8">button x2</text>
+
+  <!-- ======================================== -->
+  <!-- カードスクロールエリア（overflow: hidden） -->
+  <!-- ======================================== -->
+  <rect x="20" y="130" width="540" height="245" fill="none" stroke="#cc7700" stroke-width="2" stroke-dasharray="5"/>
+  <text x="25" y="143" fill="#cc7700" font-weight="bold">div [overflow: hidden]</text>
+
+  <!-- カード並び（flex） -->
+  <rect x="25" y="148" width="535" height="222" fill="none" stroke="#007722" stroke-width="1.5" stroke-dasharray="4"/>
+  <text x="30" y="160" fill="#007722" font-weight="bold">div [flex]  gap: あり  flex-wrap: nowrap</text>
+  <text x="30" y="172" fill="#555" font-size="8">横スクロール: translateX or scroll-snap</text>
+
+  <!-- カード1 -->
+  <rect x="30" y="178" width="120" height="185" fill="#fff" stroke="#ddd" stroke-width="1" rx="4"/>
+  <rect x="33" y="181" width="114" height="70" fill="#d4c8b8" rx="2"/>
+  <text x="38" y="215" fill="#fff" font-size="8">img</text>
+  <text x="33" y="262" fill="#886644" font-size="7">span "No.014"</text>
+  <text x="33" y="275" fill="#333" font-size="8" font-weight="bold">h3 タイトル</text>
+  <rect x="33" y="282" width="35" height="12" fill="none" stroke="#aaa" rx="6"/>
+  <text x="37" y="291" fill="#666" font-size="6">span タグ</text>
+  <rect x="72" y="282" width="35" height="12" fill="none" stroke="#aaa" rx="6"/>
+  <text x="76" y="291" fill="#666" font-size="6">span タグ</text>
+  <text x="33" y="310" fill="#007722" font-size="7">article [flex-shrink: 0]</text>
+  <text x="33" y="320" fill="#555" font-size="7">width: 固定幅</text>
+
+  <!-- カード2 -->
+  <rect x="158" y="178" width="120" height="185" fill="#fff" stroke="#ddd" stroke-width="1" rx="4"/>
+  <rect x="161" y="181" width="114" height="70" fill="#d4c8b8" rx="2"/>
+  <text x="166" y="215" fill="#fff" font-size="8">img</text>
+  <text x="161" y="262" fill="#886644" font-size="7">span "No.013"</text>
+  <text x="161" y="275" fill="#333" font-size="8" font-weight="bold">h3 タイトル</text>
+  <rect x="161" y="282" width="35" height="12" fill="none" stroke="#aaa" rx="6"/>
+  <rect x="200" y="282" width="35" height="12" fill="none" stroke="#aaa" rx="6"/>
+
+  <!-- カード3 -->
+  <rect x="286" y="178" width="120" height="185" fill="#fff" stroke="#ddd" stroke-width="1" rx="4"/>
+  <rect x="289" y="181" width="114" height="70" fill="#d4c8b8" rx="2"/>
+  <text x="294" y="215" fill="#fff" font-size="8">img</text>
+  <text x="289" y="262" fill="#886644" font-size="7">span "No.012"</text>
+  <text x="289" y="275" fill="#333" font-size="8" font-weight="bold">h3 タイトル</text>
+  <rect x="289" y="282" width="35" height="12" fill="none" stroke="#aaa" rx="6"/>
+  <rect x="328" y="282" width="45" height="12" fill="none" stroke="#aaa" rx="6"/>
+
+  <!-- カード4 -->
+  <rect x="414" y="178" width="120" height="185" fill="#fff" stroke="#ddd" stroke-width="1" rx="4"/>
+  <rect x="417" y="181" width="114" height="70" fill="#d4c8b8" rx="2"/>
+  <text x="422" y="215" fill="#fff" font-size="8">img</text>
+  <text x="417" y="262" fill="#886644" font-size="7">span "No.011"</text>
+  <text x="417" y="275" fill="#333" font-size="8" font-weight="bold">h3 タイトル</text>
+  <rect x="417" y="282" width="35" height="12" fill="none" stroke="#aaa" rx="6"/>
+  <rect x="456" y="282" width="45" height="12" fill="none" stroke="#aaa" rx="6"/>
+
+  <!-- 右端はみ出しカード（5枚目が少し見えている） -->
+  <rect x="542" y="178" width="30" height="185" fill="#fff" stroke="#ddd" stroke-width="1" rx="4" opacity="0.5"/>
+  <text x="545" y="215" fill="#999" font-size="7">次の</text>
+  <text x="545" y="225" fill="#999" font-size="7">カード</text>
+
+  <!-- タグ部分の注記 -->
+  <text x="33" y="340" fill="#007722" font-size="7">タグ群: span [flex flex-wrap]</text>
+  <text x="33" y="350" fill="#555" font-size="7">border-radius で丸角ボーダー</text>
+
+  <!-- ======================================== -->
+  <!-- 一覧を見るリンク（右下） -->
+  <!-- ======================================== -->
+  <circle cx="490" cy="410" r="12" fill="none" stroke="#cba882" stroke-width="1.5"/>
+  <text x="486" y="414" fill="#cba882" font-size="10">&gt;</text>
+  <text x="505" y="414" fill="#886644" font-size="9">a "一覧を見る"</text>
+  <text x="470" y="430" fill="#555" font-size="7">text-align: right / flex justify-end</text>
+
+  <!-- ======================================== -->
+  <!-- 構造メモ -->
+  <!-- ======================================== -->
+  <text x="10" y="448" fill="#333" font-size="8" font-weight="bold">構造: section &gt; (h2 + 矢印btn) + div[overflow:hidden] &gt; div[flex] &gt; article x N + 一覧リンク</text>
+
+</svg>
