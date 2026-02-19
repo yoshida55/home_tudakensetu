@@ -262,52 +262,145 @@ html {
   position: relative;
 
   background-color: #5a5247;
+
+  overflow: hidden; /* ← これがないとカーテンがはみ出して見える */
 }
 
 /* 装飾写真 共通 */
-.concept_img {
+.concept_common {
   position: absolute;
+  overflow: hidden;
 }
 
 /* 装飾写真 個別 */
-.concept_plant {
+.concept_img:nth-child(1) {
   top: 15rem;
   left: 11rem;
   width: 13rem;
 }
-.concept_flower2 {
+/* 装飾写真 個別 */
+.concept_img:nth-child(2) {
   top: 0;
   right: 0;
   width: 32rem;
   height: 25rem;
 }
-.concept_interior3 {
+
+.concept_img:nth-child(3) {
   top: 50rem;
   width: 20rem;
+  height: auto;
 }
 
-/* 一番右下 */
-.concept_entrance4 {
+.concept_img:nth-child(4) {
   top: 65rem;
   right: 10rem;
   width: 20rem;
-  height: 27rem;
+  height: auto;
 }
-.concept_tea {
+
+.concept_img:nth-child(5) {
   top: 30rem;
   right: 0;
   width: 13rem;
+  height: auto;
 }
-.concept_warm {
+
+.concept_img:nth-child(6) {
   bottom: 0;
   right: 0;
   width: 15rem;
+  height: auto;
+}
+
+.concept_img::before {
+  content: "";
+  position: absolute;
+  top: -50%; /* 大きく上にはみ出す */
+  left: -50%; /* 大きく左にはみ出す */
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to right, #5a5247 80%, /* 画像の右端(75%)より広く隠す */ rgba(160, 130, 95, 0.5) 89%, /* 温かい光 */ rgba(220, 195, 160, 0.1) 95%, transparent 100%);
+  transform: translate(0%, 0%);
+  animation: curtainSlide 2.8s ease-out both;
+  z-index: 1;
+}
+
+@keyframes curtainSlide {
+  from {
+    transform: translate(0%, 0%);
+  }
+  to {
+    transform: translate(100%, 100%);
+  } /* 右下へ斜め移動 */
+}
+
+/* ============================================
+   Diagonal Reveal: 左上から右下へのマスクアニメーション
+   ============================================ */
+@keyframes diagonalReveal {
+  from {
+    -webkit-mask-size: 0% 0%;
+    mask-size: 0% 0%;
+  }
+  to {
+    -webkit-mask-size: 250% 250%;
+    mask-size: 250% 250%;
+  }
+}
+
+.diagonal-reveal {
+  -webkit-mask-image: linear-gradient(135deg, black 50%, rgba(0, 0, 0, 0.3) 65%, transparent 80%);
+  -webkit-mask-size: 0% 0%;
+  -webkit-mask-position: 0% 0%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(135deg, black 50%, rgba(0, 0, 0, 0.3) 65%, transparent 80%);
+  mask-size: 0% 0%;
+  mask-position: 0% 0%;
+  mask-repeat: no-repeat;
+}
+
+/* ::before のカーテン演出と重複するので無効化 */
+.diagonal-reveal::before {
+  display: none;
+}
+
+.diagonal-reveal.is-visible {
+  animation: diagonalReveal 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* レイヤー画像の上に表示 */
 .layer {
   position: relative;
   z-index: 1;
+}
+
+/* ============================================
+   Scale In BR: 右下を起点に拡大して現れる
+   ============================================ */
+@keyframes scaleInBr {
+  from {
+    transform: scale(0);
+    transform-origin: 100% 100%;
+  }
+  to {
+    transform: scale(1);
+    transform-origin: 100% 100%;
+  }
+}
+
+.scale-in-br {
+  transform: scale(0);
+  transform-origin: 100% 100%;
+}
+
+/* ::before のカーテン演出と重複するので無効化 */
+.scale-in-br::before {
+  display: none;
+}
+
+.scale-in-br.is-visible {
+  animation: scaleInBr 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* コンセプト */

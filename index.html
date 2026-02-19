@@ -55,12 +55,24 @@
      =============================================== -->
     <section class="concept_area">
       <!-- 装飾写真: position: absolute -->
-      <img src="img/concept/concept01.jpg" alt="植物写真" class="concept_img concept_plant" />
-      <img src="img/concept/concept02.jpg" alt="花の写真" class="concept_img concept_flower2" />
-      <img src="img/concept/concept03.jpg" alt="インテリア写真" class="concept_img concept_interior3" />
-      <img src="img/concept/concept04.jpg" alt="玄関・植物写真" class="concept_img concept_entrance4" />
-      <img src="img/concept/concept05.jpg" alt="ティー写真" class="concept_img concept_tea" />
-      <img src="img/concept/concept06.jpg" alt="暖色インテリア写真" class="concept_img concept_warm" />
+      <div class="concept_common concept_img diagonal-reveal">
+        <img src="img/concept/concept01.jpg" alt="植物写真" />
+      </div>
+      <div class="concept_common concept_img diagonal-reveal">
+        <img src="img/concept/concept02.jpg" alt="花の写真" />
+      </div>
+      <div class="concept_common concept_img diagonal-reveal">
+        <img src="img/concept/concept03.jpg" alt="インテリア写真" />
+      </div>
+      <div class="concept_common concept_img diagonal-reveal">
+        <img src="img/concept/concept04.jpg" alt="玄関・植物写真" />
+      </div>
+      <div class="concept_common concept_img diagonal-reveal">
+        <img src="img/concept/concept05.jpg" alt="ティー写真" />
+      </div>
+      <div class="concept_common concept_img diagonal-reveal">
+        <img src="img/concept/concept06.jpg" alt="暖色インテリア写真" />
+      </div>
 
       <!-- 中央テキスト: 通常フロー -->
       <p class="concept_label layer">Concept</p>
@@ -181,5 +193,20 @@
     <footer class="footer_area"></footer>
 
     <script src="js/script.js"></script>
+    <script>
+      // Diagonal Reveal: スクロールで左上から右下へ表示
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document.querySelectorAll(".diagonal-reveal, .scale-in-br").forEach((el) => observer.observe(el));
+    </script>
   </body>
 </html>

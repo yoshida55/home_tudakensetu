@@ -3,9 +3,9 @@ Theme Name: 溝田建築設計株式会社
 */
 
 html {
-  /* font-size: calc(10 / 1200 * 100vw); */
+  font-size: calc(10 / 1200 * 100vw);
   /* 画面幅1200pxで10px = 1rem */
-  font-size: clamp(10px, (10 / 1280 * 100vw), 16px);
+  /* font-size: clamp(10px, (10 / 1280 * 100vw), 16px); */
 }
 
 /*
