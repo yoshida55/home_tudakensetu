@@ -4,14 +4,17 @@ const items = document.querySelectorAll(".case_item");
 const btnPrev = document.querySelectorAll(".case_nav_button")[0]; // ＜
 const btnNext = document.querySelectorAll(".case_nav_button")[1]; // ＞
 
+// いんでっくすは０から始まるので、currentが0のときは最初のカードが表示されている状態です。
 let current = 0;
 const visibleCount = 4; // 一度に見える枚数
+// items.lengthは現在５枚なので、5 - 4 = 1枚分動ける
 const maxIndex = items.length - visibleCount; // 動ける最大数
 
 btnNext.addEventListener("click", (e) => {
   e.preventDefault();
   // 現在の表示位置(current)が動ける最大数(maxIndex)より小さい場合、次へ移動
   if (current < maxIndex) {
+    // currentを1増やして次の位置へ移動
     current++;
     move();
   }
@@ -19,7 +22,7 @@ btnNext.addEventListener("click", (e) => {
 
 btnPrev.addEventListener("click", (e) => {
   e.preventDefault();
-  // 現在の表示位置(current)が0より大きい場合、前へ移動
+  // (current)（（つまり次にすすんでいる数））が0より大きい場合、戻れる
   if (current > 0) {
     current--;
     move();
@@ -30,6 +33,7 @@ function move() {
   const cardWidth = items[0].offsetWidth + 20;
   console.log("cardWidth:", cardWidth); // ← 追加
   console.log("current:", current); // ← 追加
+  //　次の位置にすすんだ数だけ、カードの幅に余白20pxを加えた値をかけて、translateXで移動させる
   track.style.transform = `translateX(-${current * cardWidth}px)`;
 }
 
@@ -63,3 +67,18 @@ HTML内の `.case_track` というコンテナの中に複数の `.case_item` �
 
 カードの幅と現在位置を確認するためのデバッグ用出力が2行追加されています。
 */
+
+// クリックしたら、テキストデコレーションがつくようにする
+
+document.querySelectorAll(".case_description").forEach((case_description) => {
+  case_description.addEventListener("mouseover", (e) => {
+    e.preventDefault();
+
+    document.querySelectorAll(".case_description").forEach((el) => {
+      el.style.textDecoration = "none";
+    });
+
+    // (current)（（つまり次にすすんでいる数））が0より大きい場合、戻れる
+    e.target.style.textDecoration = "underline";
+  });
+});
