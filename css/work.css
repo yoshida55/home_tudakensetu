@@ -277,6 +277,68 @@ html {
   top: 15rem;
   left: 11rem;
   width: 13rem;
+
+  /* === ここが修正の肝 (ベンダープレフィックスの追加) === */
+  /* black(表示)からtransparent(非表示)へのグラデーションをマスクにする */
+  -webkit-mask-image: linear-gradient(
+    135deg,
+    black 40%,
+    transparent 60%
+  ) !important;
+  mask-image: linear-gradient(135deg, black 40%, transparent 60%) !important;
+
+  /* マスクのサイズを元の画像の3倍にして移動距離を作る */
+  -webkit-mask-size: 300% 300% !important;
+  mask-size: 300% 300% !important;
+
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+
+  /* アニメーションを4秒でループ */
+  animation: flowReveal 4s ease-in-out infinite !important;
+}
+
+/* 既存のカーテンアニメーションを1つ目だけ無効化 */
+.concept_img:nth-child(1)::before {
+  display: none !important;
+}
+
+/* --- マスクが左上から右下へ「流れる」アニメーション --- */
+@keyframes flowReveal {
+  /* 0%~20%: 動画の開始時（表示されている状態） */
+  0%,
+  20% {
+    /* マスクの「black」部分が画像を覆っている状態 */
+    -webkit-mask-position: 0% 0%;
+    mask-position: 0% 0%;
+    opacity: 1;
+  }
+
+  /* 25%~50%: パッと消えて、そのまま待機 */
+  25%,
+  50% {
+    /* マスクの「transparent」部分を画像に合わせる（隠す） */
+    -webkit-mask-position: 100% 100%;
+    mask-position: 100% 100%;
+    /* 完全に消すためにopacityも0にする */
+    opacity: 0;
+  }
+
+  /* 51%: 再び現れる直前 */
+  51% {
+    /* 位置は隠れたまま、opacityだけ元に戻す */
+    -webkit-mask-position: 100% 100%;
+    mask-position: 100% 100%;
+    opacity: 1;
+  }
+
+  /* 100%: 左上から右下へ流れるように表示完了 */
+  100% {
+    /* 再びマスクの「black」部分を左上から引っ張ってくる */
+    -webkit-mask-position: 0% 0%;
+    mask-position: 0% 0%;
+    opacity: 1;
+  }
 }
 /* 装飾写真 個別 */
 .concept_img:nth-child(2) {
@@ -320,7 +382,13 @@ html {
   left: -50%; /* 大きく左にはみ出す */
   width: 200%;
   height: 200%;
-  background: linear-gradient(to right, #5a5247 80%, /* 画像の右端(75%)より広く隠す */ rgba(160, 130, 95, 0.5) 89%, /* 温かい光 */ rgba(220, 195, 160, 0.1) 95%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    #5a5247 80%,
+    /* 画像の右端(75%)より広く隠す */ rgba(160, 130, 95, 0.5) 89%,
+    /* 温かい光 */ rgba(220, 195, 160, 0.1) 95%,
+    transparent 100%
+  );
   transform: translate(0%, 0%);
   animation: curtainSlide 3.3s ease-out both;
   z-index: 1;
@@ -350,11 +418,21 @@ html {
 }
 
 .diagonal-reveal {
-  -webkit-mask-image: linear-gradient(135deg, black 50%, rgba(0, 0, 0, 0.3) 65%, transparent 80%);
+  -webkit-mask-image: linear-gradient(
+    135deg,
+    black 50%,
+    rgba(0, 0, 0, 0.3) 65%,
+    transparent 80%
+  );
   -webkit-mask-size: 0% 0%;
   -webkit-mask-position: 0% 0%;
   -webkit-mask-repeat: no-repeat;
-  mask-image: linear-gradient(135deg, black 50%, rgba(0, 0, 0, 0.3) 65%, transparent 80%);
+  mask-image: linear-gradient(
+    135deg,
+    black 50%,
+    rgba(0, 0, 0, 0.3) 65%,
+    transparent 80%
+  );
   mask-size: 0% 0%;
   mask-position: 0% 0%;
   mask-repeat: no-repeat;

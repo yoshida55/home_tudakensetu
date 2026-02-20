@@ -1,4 +1,5 @@
 const track = document.querySelector(".case_track");
+// カードの枚数
 const items = document.querySelectorAll(".case_item");
 const btnPrev = document.querySelectorAll(".case_nav_button")[0]; // ＜
 const btnNext = document.querySelectorAll(".case_nav_button")[1]; // ＞
@@ -7,14 +8,18 @@ let current = 0;
 const visibleCount = 4; // 一度に見える枚数
 const maxIndex = items.length - visibleCount; // 動ける最大数
 
-btnNext.addEventListener("click", () => {
+btnNext.addEventListener("click", (e) => {
+  e.preventDefault();
+  // 現在の表示位置(current)が動ける最大数(maxIndex)より小さい場合、次へ移動
   if (current < maxIndex) {
     current++;
     move();
   }
 });
 
-btnPrev.addEventListener("click", () => {
+btnPrev.addEventListener("click", (e) => {
+  e.preventDefault();
+  // 現在の表示位置(current)が0より大きい場合、前へ移動
   if (current > 0) {
     current--;
     move();
@@ -23,23 +28,38 @@ btnPrev.addEventListener("click", () => {
 
 function move() {
   const cardWidth = items[0].offsetWidth + 20;
-  /* ✨
-## コードの説明
-
-このコードは、`items`配列の最初の要素（`items[0]`）の幅を取得���、それに20ピクセルを加算した値を`cardWidth`という定数に代入しています。
-
-## 各部分の詳細
-
-`offsetWidth`はHTML要素の表示幅を取得するプロパティで、要素のコンテンツ幅、パディング、ボーダーを含めた合計の幅をピクセル単位で返します。
-
-`+ 20`の部分は、要素間のマージンやギャップとして20ピクセルを追加していると考えられます。
-
-## 想定される利用目的
-
-カルーセルやスライダー、グリッドレイアウトなどで、カード要素を横にスクロールさせる際の移動距離を計算するために使われることが多いです。各カードの実際の幅に余白を加えた値を把握することで、正確なスクロール量やレイアウト計算が可能になります。
-*/
-
   console.log("cardWidth:", cardWidth); // ← 追加
   console.log("current:", current); // ← 追加
   track.style.transform = `translateX(-${current * cardWidth}px)`;
 }
+
+/* ✨
+## コードの概要
+
+このコードはカルーセル（スライダー）UIを実装しています。複数のカードを横にスライドさせて表示切り替えを行う機能です。
+
+## 主な動作
+
+HTML内の `.case_track` というコンテナの中に複数の `.case_item` カードが並んでおり、前へ・次へボタンでスライド表示を制御します。
+
+## 変数の役割
+
+- `track`: カードを格納する親要素
+- `items`: 全てのカード要素
+- `btnPrev` と `btnNext`: 前へ・次へボタン
+- `current`: 現在の表示位置（インデックス）
+- `visibleCount`: 画面に一度に表示されるカード枚数（4枚）
+- `maxIndex`: スライドできる最大位置（全カード数 - 表示枚数）
+
+## ボタンの動作
+
+次へボタンをクリックすると、`current` が1増加し、まだスライド可能であれば `move()` 関数が実行されます。前へボタンは逆に `current` を1減少させます。
+
+## スライドの仕組み
+
+`move()` 関数内で、1枚目のカードの幅に余白20pxを加えた値を `cardWidth` として計算し、`current * cardWidth` の距離だけ `translateX` でトラッ��全体を左に移動させます。
+
+## 追加されたコンソールログ
+
+カードの幅と現在位置を確認するためのデバッグ用出力が2行追加されています。
+*/

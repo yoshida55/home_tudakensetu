@@ -14,7 +14,8 @@
       "Bash(cmd /c \"dir D:\\\\50_knowledge\")",
       "Bash(cmd /c \"dir D:\"\")",
       "Bash(powershell -Command \"Test-Path ''D:\\\\50_knowledge\\\\01_memo.md''\")",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "WebFetch(domain:omodakaya.jp)"
     ]
   }
 }

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>おもだか屋 (テスト用)</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ===============================================
+       ヘッダーエリア
+       =============================================== -->
+    <header class="header_area">
+      <div class="header_inner">
+        <div class="header_logo_box">
+          <a href="#" class="logo_link">
+            <img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/logo_omodakaya.png"
+              alt="おもだか屋"
+              class="img_logo pc_only"
+            />
+            <img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/logo_omodakaya-vrt.png"
+              alt="おもだか屋"
+              class="img_logo sp_only"
+            />
+          </a>
+          <p class="logo_subtext">中外陶園の直営店</p>
+        </div>
+        <div class="header_links pc_only">
+          <a href="#" class="sns_link">
+            <img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/sns_instagram.svg"
+              alt="Instagram"
+              class="icon_sns"
+            />
+            <span>Instagram</span>
+          </a>
+          <a href="#" class="store_link">
+            <img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/icon_shop.svg"
+              alt="Online Store"
+              class="icon_store"
+            />
+            <span>Online Store</span>
+          </a>
+        </div>
+        <!-- ハンバーガーボタン -->
+        <button class="menu_btn" id="js_menu_btn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===============================================
+       モーダルナビゲーション (初期非表示)
+       =============================================== -->
+    <div class="modal_nav" id="js_modal_nav">
+      <div class="modal_nav_inner">
+        <ul class="nav_list">
+          <li><a href="#">トップ</a></li>
+          <li><a href="#">おもだか屋について</a></li>
+          <li><a href="#">今週のひと品</a></li>
+          <li><a href="#">お知らせ</a></li>
+          <li><a href="#">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+        <div class="nav_footer_links">
+          <a href="#">運営会社</a>
+          <a href="#">お問い合わせ</a>
+          <a href="#">プライバシーポリシー</a>
+        </div>
+        <p class="copyright">©︎ CHUGAI TOEN CO., LTD. All Rights Reserved.</p>
+        <div class="nav_banners">
+          <a href="#"
+            ><img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_luckycat.png"
+              alt="招き猫ミュージアム"
+          /></a>
+          <a href="#"
+            ><img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_studio894.png"
+              alt="STUDIO 894"
+          /></a>
+          <a href="#"
+            ><img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_yakushigama.png"
+              alt="薬師窯"
+          /></a>
+          <a href="#"
+            ><img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_onlinestore.png"
+              alt="ONLINE STORE"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- ===============================================
+         キービジュアルエリア (スライダー)
+         =============================================== -->
+      <section class="kv_area fade_in">
+        <div class="kv_slider" id="js_kv_slider">
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/kv1.jpg"
+            alt=""
+            class="kv_img active"
+          />
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/kv2.jpg"
+            alt=""
+            class="kv_img"
+          />
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/kv3.jpg"
+            alt=""
+            class="kv_img"
+          />
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/kv4.jpg"
+            alt=""
+            class="kv_img"
+          />
+        </div>
+        <ul class="kv_nav_list pc_only">
+          <li><a href="#">トップ</a></li>
+          <li><a href="#">おもだか屋について</a></li>
+          <li><a href="#">今週のひと品</a></li>
+          <li><a href="#">お知らせ</a></li>
+          <li><a href="#">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+      </section>
+
+      <!-- ===============================================
+         イントロダクションエリア
+         =============================================== -->
+      <section class="intro_area">
+        <div class="intro_heading_box fade_in">
+          <h1 class="intro_title">
+            <span>やきものの街 瀬戸で</span><br />
+            <span>しあわせ招くお買い物</span>
+          </h1>
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/intro_ph2.jpg"
+            alt=""
+            class="intro_img_sub pc_only"
+          />
+        </div>
+
+        <div class="intro_content_box fade_in">
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/intro_ph1.jpg"
+            alt=""
+            class="intro_img_main"
+          />
+          <div class="intro_text">
+            <p>
+              おもだか屋は、1952年に創業した<a href="#">中外陶園</a
+              >の直営店です。職人がつくりあげる招き猫や干支の置物、クリエイターとのコラボレーション製品、日本各地の手仕事の品など、暮らしにちいさなしあわせを招く品々を取りそろえてお待ちしています。商家の趣を残す店内で、ゆっくりとお買い物をおたのしみください。
+            </p>
+            <a href="#" class="btn_more">おもだか屋について →</a>
+          </div>
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/intro_ph2.jpg"
+            alt=""
+            class="intro_img_sub sp_only"
+          />
+        </div>
+      </section>
+
+      <!-- ===============================================
+         今週のひと品エリア
+         =============================================== -->
+      <section class="product_area">
+        <div class="section_header fade_in">
+          <p class="section_subtitle">
+            毎週、スタッフが選んだおすすめ製品をご紹介
+          </p>
+          <h2 class="section_title">今週のひと品</h2>
+          <a href="#" class="btn_more pc_only">今週のひと品 一覧 →</a>
+        </div>
+
+        <!-- ピックアップ（大） -->
+        <a href="#" class="product_pickup_card fade_in">
+          <time class="date_label">2026.02.16〜</time>
+          <div class="pickup_img_box">
+            <img
+              src="https://omodakaya.jp/wp/wp-content/uploads/2026/02/7895_透過.png"
+              alt=""
+              class="img_pickup"
+            />
+          </div>
+          <div class="pickup_info">
+            <div>
+              <h3 class="product_name">円満宝まねき猫</h3>
+              <p class="product_spec">H7.5×W7×D5cm／約165g(箱含)／磁器</p>
+            </div>
+            <span class="btn_detail">くわしく見る →</span>
+          </div>
+        </a>
+
+        <!-- 商品リスト（小） -->
+        <div class="product_list fade_in">
+          <a href="#" class="product_card">
+            <time class="date_label">2026.02.09〜</time>
+            <img
+              src="https://omodakaya.jp/wp/wp-content/uploads/2026/02/2633透過-300x200.png"
+              alt=""
+              class="img_thumb"
+            />
+            <h4 class="product_name_sm">染絵弥生飾り雛</h4>
+          </a>
+          <a href="#" class="product_card">
+            <time class="date_label">2026.02.02〜</time>
+            <img
+              src="https://omodakaya.jp/wp/wp-content/uploads/2026/02/あ_背景なし-300x300.png"
+              alt=""
+              class="img_thumb"
+            />
+            <h4 class="product_name_sm">うちの招き猫</h4>
+          </a>
+          <a href="#" class="product_card">
+            <time class="date_label">2026.01.26〜</time>
+            <img
+              src="https://omodakaya.jp/wp/wp-content/uploads/2026/01/2611透過-300x200.png"
+              alt=""
+              class="img_thumb"
+            />
+            <h4 class="product_name_sm">染錦立雛</h4>
+          </a>
+          <a href="#" class="product_card">
+            <time class="date_label">2026.01.19〜</time>
+            <img
+              src="https://omodakaya.jp/wp/wp-content/uploads/2026/01/7806_透過-300x300.png"
+              alt=""
+              class="img_thumb"
+            />
+            <h4 class="product_name_sm">彩絵開運猫だるま</h4>
+          </a>
+        </div>
+
+        <a href="#" class="btn_more sp_only center">今週のひと品 一覧 →</a>
+      </section>
+
+      <!-- ===============================================
+         お知らせエリア
+         =============================================== -->
+      <section class="news_area">
+        <div class="section_header flex fade_in">
+          <div>
+            <p class="section_subtitle">限定製品情報なども。ぜひご覧ください</p>
+            <h2 class="section_title">お知らせ</h2>
+          </div>
+        </div>
+
+        <div class="news_inner">
+          <div class="news_list">
+            <a href="#" class="news_card fade_in">
+              <img
+                src="https://omodakaya.jp/wp/wp-content/uploads/2025/10/ogp2-300x158.jpg"
+                alt=""
+                class="img_news"
+              />
+              <div class="news_info">
+                <h3 class="news_title">年末年始の営業について(2025-2026)</h3>
+                <time class="news_date">2025.12.01</time>
+              </div>
+            </a>
+            <a href="#" class="news_card fade_in">
+              <img
+                src="https://omodakaya.jp/wp/wp-content/uploads/2025/10/ogp2-300x158.jpg"
+                alt=""
+                class="img_news"
+              />
+              <div class="news_info">
+                <h3 class="news_title">【12/11(木)】休業のお知らせ</h3>
+                <time class="news_date">2025.11.28</time>
+              </div>
+            </a>
+          </div>
+          <div class="news_more_wrap fade_in">
+            <a href="#" class="btn_more">もっと見る →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 外観画像差し込み -->
+      <div class="shop_exterior fade_in">
+        <img
+          src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/shop_exterior.jpg"
+          alt="店舗外観"
+          style="width: 100%; height: auto"
+        />
+      </div>
+
+      <!-- ===============================================
+         店舗情報エリア (アクセス)
+         =============================================== -->
+      <section class="shop_info_area">
+        <div class="section_header fade_in">
+          <h2 class="section_title">店舗情報</h2>
+        </div>
+
+        <div class="shop_info_inner fade_in">
+          <div class="info_box">
+            <dl class="info_list">
+              <dt>TEL</dt>
+              <dd>0561-87-1700</dd>
+              <dt>住所</dt>
+              <dd>〒489-0821<br />愛知県瀬戸市薬師町３番地</dd>
+              <dt>営業時間</dt>
+              <dd>10:00～17:00</dd>
+              <dt>休業日</dt>
+              <dd>火曜日（祝日の場合は営業）<br />年末年始</dd>
+            </dl>
+            <a href="#" class="btn_map">Google Maps →</a>
+          </div>
+          <div class="map_box">
+            <img
+              src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/top/shop_map.jpg"
+              alt="MAP"
+            />
+          </div>
+        </div>
+
+        <div class="access_box fade_in">
+          <dl class="access_list">
+            <dt>電車でお越しの方</dt>
+            <dd>名鉄 瀬戸線「尾張瀬戸駅」から徒歩8分</dd>
+            <dt>車でお越しの方</dt>
+            <dd>
+              東名高速道路「名古屋インター」から約30分<br />東海環状自動車道「せと赤津インター」から約５分
+            </dd>
+            <dt>駐車場のご案内</dt>
+            <dd>
+              STUDIO 894敷地内にございます3店舗共通駐車場をご利用ください。
+            </dd>
+          </dl>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===============================================
+       フッターエリア
+       =============================================== -->
+    <footer class="footer_area">
+      <div class="footer_inner">
+        <div class="footer_header">
+          <img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/logo_omodakaya-hor.png"
+            alt="おもだか屋"
+            class="footer_logo"
+          />
+          <div class="footer_nav">
+            <ul class="footer_nav_list">
+              <li><a href="#">トップ</a></li>
+              <li><a href="#">おもだか屋について</a></li>
+              <li><a href="#">今週のひと品</a></li>
+              <li><a href="#">お知らせ</a></li>
+              <li><a href="#">アクセス</a></li>
+              <li><a href="#">お問い合わせ</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer_bottom">
+          <div class="footer_company_links">
+            <a href="#">運営会社</a>
+            <a href="#">お問い合わせ</a>
+            <a href="#">プライバシーポリシー</a>
+          </div>
+          <p class="copyright">©︎ CHUGAI TOEN CO., LTD. All Rights Reserved.</p>
+        </div>
+      </div>
+
+      <div class="footer_banners">
+        <a href="#"
+          ><img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_luckycat.png"
+            alt="招き猫ミュージアム"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_studio894.png"
+            alt="STUDIO 894"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_yakushigama.png"
+            alt="薬師窯"
+        /></a>
+        <a href="#"
+          ><img
+            src="https://omodakaya.jp/wp/wp-content/themes/omodakaya/assets/img/common/bnr_onlinestore.png"
+            alt="ONLINE STORE"
+        /></a>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
