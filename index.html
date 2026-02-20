@@ -87,10 +87,10 @@
      施工事例
      =============================================== -->
     <section class="case_area">
-      <p class="case_label">Case</p>
+      <p class="section_label">Case</p>
       <!-- 施工事例と左右への遷移ボタンのコンテナ【flex 2列】 -->
       <div class="case_header">
-        <h2 class="case_title">施工事例</h2>
+        <h2 class="section_title">施工事例</h2>
         <div class="case_nav">
           <a href="#" class="case_nav_button">＜ </a>
           <a href="#" class="case_nav_button">＞ </a>
@@ -198,14 +198,122 @@
     </section>
 
     <!-- ===============================================
-     お知らせ
+     お知らせ・ブログ
      =============================================== -->
-    <section class="news_area"></section>
+    <!-- グリッドでお知らせ・ブログを左右分割【grid】 -->
+    <section class="news_blog_area">
+      <!-- お知らせエリア -->
+      <div class="news_column">
+        <p class="section_label">information</p>
+        <h2 class="section_title">お知らせ</h2>
+        <!-- 記事1ブロック【flex 横2列: サムネイルリンク + テキスト側】 -->
+        <article class="news_item">
+          <a href="#" class="news_link">
+            <img src="img/news/no-image.png" alt="溝田会社" class="news_img" />
+          </a>
+          <!-- └ テキスト側（右） -->
+          <div class="news_body">
+            <!-- └ └ カテゴリ+日付【flex 縦2行】 -->
+            <div class="news_meta">
+              <span class="news_category">お知らせ</span>
+              <time class="news_date" datetime="2025-11-11">2025.11.11</time>
+            </div>
+            <!-- └ └ 詳細文 -->
+            <p class="news_text">ブログ更新のお知らせ</p>
+          </div>
+        </article>
 
-    <!-- ===============================================
-     ブログ
-     =============================================== -->
-    <section class="blog_area"></section>
+        <article class="news_item">
+          <a href="#" class="news_link">
+            <img src="img/news/no-image.png" alt="溝田会社" class="news_img" />
+          </a>
+          <!-- └ テキスト側（右） -->
+          <div class="news_body">
+            <!-- └ └ カテゴリ+日付【flex 縦2行】 -->
+            <div class="news_meta">
+              <span class="news_category">お知らせ</span>
+              <time class="news_date" datetime="2025-10-23">2025.10.23</time>
+            </div>
+            <!-- └ └ 詳細文 -->
+            <p class="news_text">ホームページリニューアルのお知らせ</p>
+          </div>
+        </article>
+
+        <article class="news_item">
+          <a href="#" class="news_link">
+            <img src="img/news/thum-mashiki.jpg" alt="溝田会社" class="news_img" />
+          </a>
+          <!-- └ テキスト側（右） -->
+          <div class="news_body">
+            <!-- └ └ カテゴリ+日付【flex 縦2行】 -->
+            <div class="news_meta">
+              <span class="news_category">お知らせ</span>
+              <time class="news_date" datetime="2025-10-02">2025.10.02</time>
+            </div>
+            <!-- └ └ 詳細文 -->
+            <p class="news_text">【熊本・福岡】新モデルハウス、来年グランドオープン！</p>
+          </div>
+        </article>
+        <!-- 一覧をみる-->
+        <a href="#" class="case_link">一覧を見る</a>
+      </div>
+
+      <!-- ブログエリア -->
+      <div class="blog_column">
+        <p class="section_label">Blog</p>
+        <h2 class="section_title">ブログ</h2>
+        <!-- 記事1ブロック【flex 横2列: サムネイルリンク + テキスト側】 -->
+        <article class="blog_item">
+          <a href="#" class="blog_link">
+            <img src="img/news/thum-mashiki.jpg" alt="ブログ写真" class="blog_img" />
+          </a>
+          <!-- └ テキスト側（右） -->
+          <div class="blog_body">
+            <!-- └ └ カテゴリ+日付【flex 縦2行】 -->
+            <div class="blog_meta">
+              <span class="blog_category">地鎮祭</span>
+              <time class="blog_date" datetime="2026-02-14">2026.02.14</time>
+            </div>
+            <!-- └ └ 詳細文 -->
+            <p class="blog_text">【地鎮祭】IN様邸</p>
+          </div>
+        </article>
+
+        <article class="blog_item">
+          <a href="#" class="blog_link">
+            <img src="img/news/thum-mashiki.jpg" alt="ブログ写真" class="blog_img" />
+          </a>
+          <!-- └ テキスト側（右） -->
+          <div class="blog_body">
+            <!-- └ └ カテゴリ+日付【flex 縦2行】 -->
+            <div class="blog_meta">
+              <span class="blog_category">上棟</span>
+              <time class="blog_date" datetime="2026-02-11">2026.02.11</time>
+            </div>
+            <!-- └ └ 詳細文 -->
+            <p class="blog_text">【上棟式】久留米モデルハウス</p>
+          </div>
+        </article>
+
+        <article class="blog_item">
+          <a href="#" class="blog_link">
+            <img src="img/news/thum-mashiki.jpg" alt="ブログ写真" class="blog_img" />
+          </a>
+          <!-- └ テキスト側（右） -->
+          <div class="blog_body">
+            <!-- └ └ カテゴリ+日付【flex 縦2行】 -->
+            <div class="blog_meta">
+              <span class="blog_category">お引渡し</span>
+              <time class="blog_date" datetime="2026-02-10">2026.02.10</time>
+            </div>
+            <!-- └ └ 詳細文 -->
+            <p class="blog_text">【引き渡し】FK様邸</p>
+          </div>
+        </article>
+        <!-- 一覧をみる-->
+        <a href="#" class="case_link">一覧を見る</a>
+      </div>
+    </section>
 
     <!-- ===============================================
      About/For sale

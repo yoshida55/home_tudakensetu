@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="900" viewBox="0 0 560 450">
+
+  <!-- 凡例バー -->
+  <rect x="0" y="0" width="560" height="28" fill="#111"/>
+  <rect x="8" y="8" width="12" height="12" fill="none" stroke="#ff8800" stroke-width="2"/>
+  <text x="24" y="19" fill="#ff8800" font-size="10" font-weight="bold" font-family="sans-serif">relative</text>
+  <rect x="110" y="8" width="12" height="12" fill="none" stroke="#0055ff" stroke-width="2"/>
+  <text x="126" y="19" fill="#0055ff" font-size="10" font-weight="bold" font-family="sans-serif">absolute</text>
+  <rect x="220" y="8" width="12" height="12" fill="none" stroke="#007722" stroke-width="2"/>
+  <text x="236" y="19" fill="#007722" font-size="10" font-weight="bold" font-family="sans-serif">flex / grid</text>
+  <rect x="330" y="8" width="12" height="12" fill="none" stroke="#cc7700" stroke-dasharray="3" stroke-width="2"/>
+  <text x="346" y="19" fill="#cc7700" font-size="10" font-weight="bold" font-family="sans-serif">overflow: hidden</text>
+  <rect x="460" y="8" width="12" height="12" fill="none" stroke="#ff4444" stroke-width="2"/>
+  <text x="476" y="19" fill="#ff4444" font-size="10" font-weight="bold" font-family="sans-serif">fixed</text>
+
+  <!-- セクション全体 section [position: relative] -->
+  <rect x="10" y="40" width="540" height="400" fill="#fafafa" stroke="#ff8800" stroke-width="2" rx="2"/>
+  <text x="15" y="52" fill="#ff8800" font-size="9" font-weight="bold" font-family="sans-serif">section [position: relative]  background: #fff</text>
+
+  <!-- 小見出し GALLERY -->
+  <rect x="240" y="60" width="80" height="16" fill="#eee" stroke="#999" stroke-width="0.5" rx="1"/>
+  <text x="255" y="72" fill="#333" font-size="8" font-family="sans-serif">GALLERY</text>
+  <text x="325" y="72" fill="#666" font-size="7" font-family="sans-serif">span  text-align: center</text>
+
+  <!-- メイン見出し -->
+  <rect x="130" y="82" width="300" height="24" fill="#eee" stroke="#999" stroke-width="0.5" rx="1"/>
+  <text x="145" y="98" fill="#333" font-size="11" font-family="sans-serif">ちょうどいい暮らしギャラリー</text>
+  <text x="435" y="98" fill="#666" font-size="7" font-family="sans-serif">h2  text-align: center</text>
+
+  <!-- 写真グリッド grid 3列x2行 -->
+  <rect x="30" y="120" width="500" height="245" fill="none" stroke="#007722" stroke-width="2" stroke-dasharray="4" rx="2"/>
+  <text x="35" y="133" fill="#007722" font-size="9" font-weight="bold" font-family="sans-serif">div  display: grid  grid-template-columns: repeat(3, 1fr)  gap: 10px</text>
+
+  <!-- 1行目 写真3枚 -->
+  <!-- 写真1 -->
+  <rect x="40" y="140" width="155" height="105" fill="#ddd" stroke="#999" stroke-width="0.5" rx="2"/>
+  <text x="85" y="195" fill="#888" font-size="10" font-family="sans-serif">img</text>
+  <line x1="40" y1="140" x2="195" y2="245" stroke="#ccc" stroke-width="0.5"/>
+  <line x1="195" y1="140" x2="40" y2="245" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- 写真2 -->
+  <rect x="203" y="140" width="155" height="105" fill="#ddd" stroke="#999" stroke-width="0.5" rx="2"/>
+  <text x="248" y="195" fill="#888" font-size="10" font-family="sans-serif">img</text>
+  <line x1="203" y1="140" x2="358" y2="245" stroke="#ccc" stroke-width="0.5"/>
+  <line x1="358" y1="140" x2="203" y2="245" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- 写真3 -->
+  <rect x="366" y="140" width="155" height="105" fill="#ddd" stroke="#999" stroke-width="0.5" rx="2"/>
+  <text x="411" y="195" fill="#888" font-size="10" font-family="sans-serif">img</text>
+  <line x1="366" y1="140" x2="521" y2="245" stroke="#ccc" stroke-width="0.5"/>
+  <line x1="521" y1="140" x2="366" y2="245" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- 2行目 写真3枚 -->
+  <!-- 写真4 -->
+  <rect x="40" y="253" width="155" height="105" fill="#ddd" stroke="#999" stroke-width="0.5" rx="2"/>
+  <text x="85" y="308" fill="#888" font-size="10" font-family="sans-serif">img</text>
+  <line x1="40" y1="253" x2="195" y2="358" stroke="#ccc" stroke-width="0.5"/>
+  <line x1="195" y1="253" x2="40" y2="358" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- 写真5 -->
+  <rect x="203" y="253" width="155" height="105" fill="#ddd" stroke="#999" stroke-width="0.5" rx="2"/>
+  <text x="248" y="308" fill="#888" font-size="10" font-family="sans-serif">img</text>
+  <line x1="203" y1="253" x2="358" y2="358" stroke="#ccc" stroke-width="0.5"/>
+  <line x1="358" y1="253" x2="203" y2="358" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- 写真6 -->
+  <rect x="366" y="253" width="155" height="105" fill="#ddd" stroke="#999" stroke-width="0.5" rx="2"/>
+  <text x="411" y="308" fill="#888" font-size="10" font-family="sans-serif">img</text>
+  <line x1="366" y1="253" x2="521" y2="358" stroke="#ccc" stroke-width="0.5"/>
+  <line x1="521" y1="253" x2="366" y2="358" stroke="#ccc" stroke-width="0.5"/>
+
+  <!-- img注釈 -->
+  <text x="40" y="375" fill="#666" font-size="7" font-family="sans-serif">各 img  width: 100%  aspect-ratio: 3/2  object-fit: cover  border-radius: 小</text>
+
+  <!-- VIEW MORE ボタン -->
+  <rect x="215" y="388" width="130" height="32" fill="none" stroke="#555" stroke-width="1.5" rx="16"/>
+  <text x="244" y="408" fill="#333" font-size="9" font-family="sans-serif">VIEW MORE</text>
+  <text x="350" y="408" fill="#666" font-size="7" font-family="sans-serif">a / button  text-align: center  margin: 0 auto</text>
+
+</svg>
