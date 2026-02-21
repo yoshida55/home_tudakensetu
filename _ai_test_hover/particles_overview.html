@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>particles.js — 概要ビュア</title>
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d1117; color: #c9d1d9;
+    height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column;
+}
+
+/* ─── ヘッダー ─── */
+#header {
+    background: #161b22; border-bottom: 1px solid #30363d;
+    padding: 10px 20px; display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+#header h1 { font-size: 1.0rem; color: #e6edf3; font-weight: 600; }
+.badge { background: #21262d; border: 1px solid #30363d; border-radius: 20px; padding: 2px 10px; font-size: 0.73rem; color: #8b949e; }
+#esc-hint { margin-left: auto; font-size: 0.7rem; color: #484f58; opacity: 0; transition: opacity 0.3s; }
+#esc-hint.show { opacity: 1; }
+
+/* ─── レイアウト ─── */
+#layout { display: flex; flex: 1; overflow: hidden; }
+
+/* ════════════ 左パネル ════════════ */
+#left-panel {
+    width: 315px; min-width: 315px;
+    background: #0d1117; border-right: 1px solid #21262d;
+    overflow-y: auto; padding: 14px 12px;
+    display: flex; flex-direction: column; gap: 5px;
+}
+
+/* ── セクションラベル ── */
+.section-label {
+    font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #484f58; padding: 10px 0 3px;
+}
+.section-label.primary {
+    color: #cba6f7;
+    font-size: 0.76rem;
+    padding: 12px 0 5px;
+    text-shadow: 0 0 12px rgba(203,166,247,0.3);
+}
+
+/* ── fn-box ── */
+.fn-box {
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; padding: 9px 11px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    user-select: none; position: relative;
+}
+.fn-box:hover { background: #1c2128; border-color: #58a6ff; }
+.fn-box.active { border-color: #f0b429 !important; background: #1c1a0f; box-shadow: 0 0 0 2px #f0b42930; }
+
+.fn-box.primary {
+    background: #13182a;
+    border-color: #2d3550;
+    box-shadow: 0 0 0 1px #3843700040;
+}
+.fn-box.primary:hover { border-color: #7aa2f7; background: #181f36; }
+
+.fn-name { font-family: 'Cascadia Code','Consolas',monospace; font-size: 0.85rem; color: #58a6ff; font-weight: 600; }
+.fn-box.primary .fn-name { color: #7aa2f7; }
+.fn-box.active .fn-name { color: #f0b429; }
+.fn-desc { font-size: 0.74rem; color: #8b949e; margin-top: 3px; line-height: 1.5; }
+
+/* 色種別 */
+.event { border-left: 3px solid #cba6f7; }
+.util  { border-left: 3px solid #3fb950; }
+.loop  { border-left: 3px solid #374768; }
+.cfg   { border-left: 3px solid #f0883e; }
+.struct { background: #12111a; border: 1px dashed #30363d; cursor: default; }
+.struct:hover { background: #12111a; border-color: #30363d; box-shadow: none; }
+
+.arrow { text-align: center; color: #484f58; font-size: 0.75rem; padding: 1px 0; }
+.arrow.primary { color: #7aa2f7; }
+
+.config-grid { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 0.74rem; }
+.config-grid span:nth-child(odd)  { font-family: monospace; color: #e3b341; }
+.config-grid span:nth-child(even) { font-family: monospace; color: #3fb950; text-align: right; }
+
+.loop-group {
+    border: 1px solid #2a4a6a; border-radius: 10px;
+    padding: 9px; background: #0e1f30;
+    display: flex; flex-direction: column; gap: 4px;
+    position: relative;
+}
+.loop-group::before {
+    content: '🔄 毎フレーム'; position: absolute; top: -9px; left: 10px;
+    background: #0e1f30; padding: 0 6px; font-size: 0.62rem; color: #4a90d0; font-weight: 700;
+}
+.loop-group .fn-box { background: #122030; border-color: #2a4060; }
+.loop-group .fn-box:hover { background: #1a2e44; border-color: #4a80c0; }
+.loop-group .fn-name { color: #7dc4f7; }
+.sub-group { display: flex; gap: 5px; padding-left: 8px; }
+.fn-box.small .fn-name { font-size: 0.76rem; }
+.fn-box.small .fn-desc { font-size: 0.67rem; }
+
+/* ════════════ 右パネル ════════════ */
+#right-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#right-header { background: #161b22; border-bottom: 1px solid #30363d; padding: 7px 16px; font-size: 0.75rem; color: #8b949e; flex-shrink: 0; }
+#right-header span { color: #58a6ff; font-family: monospace; }
+
+/* ── ナビバー ── */
+#nav-bar {
+    background: #0d1117; border-bottom: 1px solid #21262d;
+    padding: 5px 10px; display: flex; align-items: center; gap: 6px;
+    min-height: 36px; flex-shrink: 0;
+}
+#back-btn {
+    background: #21262d; border: 1px solid #30363d; border-radius: 5px;
+    color: #8b949e; font-size: 0.72rem; padding: 3px 10px; cursor: pointer;
+    transition: background 0.15s, color 0.15s; white-space: nowrap;
+}
+#back-btn:hover:not(:disabled) { background: #30363d; color: #e6edf3; }
+#back-btn:disabled { opacity: 0.3; cursor: default; }
+#breadcrumb { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; overflow: hidden; }
+.bc-hint { color: #484f58; font-size: 0.7rem; }
+.bc-item { color: #58a6ff; cursor: pointer; font-family: monospace; font-size: 0.72rem; padding: 1px 7px; border-radius: 4px; transition: background 0.15s; }
+.bc-item:hover { background: #21262d; }
+.bc-current { color: #f0b429; font-family: monospace; font-size: 0.72rem; background: #1a1500; border: 1px solid #f0b42930; padding: 1px 7px; border-radius: 4px; font-weight: 600; }
+.bc-sep { color: #30363d; font-size: 0.7rem; }
+
+/* ── コードコンテナ ── */
+#code-container { flex: 1; overflow-y: auto; position: relative; background: #1e1e2e; }
+
+#line-highlight {
+    position: absolute; left: 0; right: 0;
+    background: rgba(240, 180, 41, 0.12);
+    border-left: 3px solid rgba(240, 180, 41, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(240,180,41,0.08);
+    pointer-events: none; opacity: 0;
+    transition: top 0.25s ease, height 0.25s ease, opacity 0.2s ease;
+    z-index: 5;
+}
+#back-float {
+    position: absolute; right: 12px;
+    background: rgba(22, 27, 34, 0.92);
+    border: 1px solid #f0b42980; border-radius: 20px;
+    color: #f0b429; font-size: 0.73rem; font-weight: 600;
+    padding: 5px 14px; cursor: pointer;
+    opacity: 0; pointer-events: none;
+    transform: translateX(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, top 0.25s ease;
+    z-index: 10; white-space: nowrap; user-select: none;
+}
+#back-float.visible { opacity: 1; pointer-events: auto; transform: translateX(0); }
+#back-float:hover { background: rgba(35, 30, 5, 0.98); border-color: #f0b429; }
+
+pre[class*="language-"] { margin: 0; border-radius: 0; background: #1e1e2e !important; font-size: 14px; tab-size: 4; padding-bottom: 50vh !important; }
+code[class*="language-"] { font-size: 14px; }
+#loading-msg { padding: 40px; color: #484f58; font-size: 0.85rem; }
+
+/* Ctrl+Clickできる関数名 */
+#code-el .token.function.fn-link { cursor: default; border-bottom: 1px dotted rgba(88,166,255,0.4); transition: background 0.1s; }
+#code-el .token.function.fn-link:hover { background: rgba(88,166,255,0.08); border-radius: 2px; }
+body.ctrl-held #code-el .token.function.fn-link { cursor: pointer; background: rgba(88,166,255,0.18); border-bottom: 1px solid #58a6ff; }
+
+/* ════════════ AIホバーツールチップ ════════════ */
+#fn-tooltip {
+    position: fixed; background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 12px 14px; max-width: 260px; font-size: 0.73rem; color: #c9d1d9; line-height: 1.65;
+    z-index: 999; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+#fn-tooltip.show { opacity: 1; }
+#fn-tooltip .tip-role { font-size: 0.62rem; color: #3fb950; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+#fn-tooltip .tip-name { font-family: monospace; color: #7aa2f7; font-weight: 700; font-size: 0.82rem; margin-bottom: 6px; }
+#fn-tooltip .tip-body { color: #b0bcc8; }
+#fn-tooltip .tip-hint { margin-top: 8px; font-size: 0.65rem; color: #484f58; border-top: 1px solid #21262d; padding-top: 6px; }
+</style>
+</head>
+<body>
+
+<div id="header">
+    <h1>🎆 particles.js 概要ビュア</h1>
+    <span class="badge">左ブロックをクリック → スポットライト</span>
+    <span class="badge">コード内関数名は <kbd>Ctrl</kbd>+クリックでジャンプ</span>
+    <span id="esc-hint">ESC でハイライト解除</span>
+</div>
+
+<div id="layout">
+    <!-- ═════ 左パネル ═════ -->
+    <div id="left-panel">
+        <div class="section-label primary">⚡ 起動時</div>
+<div class="fn-box primary event" id="fn-resizeCanvas"
+                data-start="136" data-end="139" data-name="resizeCanvas()"
+                data-tip-role="トリガー：ウィンドウリサイズ / 役割：キャンバス設定"
+                data-tip="キャンバスの幅と高さを現在のブラウザウィンドウの内部幅と高さに設定します。これにより、ウィンドウサイズが変更され���も花火が画面全体に表示され続けます。">
+                <div class="fn-name">resizeCanvas()</div>
+                <div class="fn-desc">キャンバスサイズをウィンドウに合わせる</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box primary primary" id="fn-animate"
+                data-start="118" data-end="132" data-name="animate()"
+                data-tip-role="トリガー：requestAnimationFrame / 役割：描画・更新制御"
+                data-tip="&lt;code&gt;requestAnimationFrame&lt;/code&gt; によって毎フレーム呼び出されるメインループです。キャンバスのクリア、全パーティクルの状態更新と描画、そして寿命が尽きたパーティクルの削除を行います。この関数が花火アニメーションの心臓部です。">
+                <div class="fn-name">animate()</div>
+                <div class="fn-desc">メインアニメーションループ</div>
+            </div>
+<div class="section-label primary">🔄 メインアニメーションループ</div>
+<div class="fn-box primary primary" id="fn-animate"
+                data-start="118" data-end="132" data-name="animate()"
+                data-tip-role="トリガー：requestAnimationFrame / 役割：描画・更新制御"
+                data-tip="&lt;code&gt;requestAnimationFrame&lt;/code&gt; によって毎フレーム呼び出されるメインループです。キャンバスのクリア、全パーティクルの状態更新と描画、そして寿命が尽きたパーティクルの削除を行います。この関数が花火アニメーションの心臓部です。">
+                <div class="fn-name">animate()</div>
+                <div class="fn-desc">メインアニメーションループ</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box primary loop" id="fn-clearCanvas"
+                data-start="111" data-end="114" data-name="clearCanvas()"
+                data-tip-role="役割���キャンバス描画"
+                data-tip="キャンバス全体を半透明の黒で塗りつぶします。これにより、前のフレームの描画がわずかに残り、パーティクルの残像（トレイル）効果を生み出します。">
+                <div class="fn-name">clearCanvas()</div>
+                <div class="fn-desc">キャンバスを半透明でクリアし残像効果を生成</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box primary loop" id="fn-updateParticle"
+                data-start="73" data-end="81" data-name="updateParticle()"
+                data-tip-role="役割：パーティクル物理計算"
+                data-tip="パーティクル (p) の速度に重力と摩擦を適用し、その結果に基づいて位置とライフを更新します。アニメーションループ内で毎フレーム呼び出されます。">
+                <div class="fn-name">updateParticle()</div>
+                <div class="fn-desc">パーティクルの物理状態を更新</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box primary loop" id="fn-drawParticle"
+                data-start="86" data-end="95" data-name="drawParticle()"
+                data-tip-role="役割：パーティクル描画"
+                data-tip="パーティクル (p) の現在の状態（位置、半径、色、ライフ）に基づいて、キャンバス上に円として描画します。ライフが減るにつれて透明度が増します。">
+                <div class="fn-name">drawParticle()</div>
+                <div class="fn-desc">単一パーティクルをキャンバスに描画</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box util small" id="fn-isAlive"
+                    data-start="99" data-end="103" data-name="isAlive()"
+                    data-tip-role="ユーティリティ"
+                    data-tip="パーティクル (p) のライフが0より大きいかどうかを判定します。アニメーションループ内で、寿命が尽きたパーティクルを削除するために使用されます。">
+                    <div class="fn-name">isAlive()</div>
+                    <div class="fn-desc">パーティクルが生存しているか判定</div>
+                </div>
+<div class="section-label">👆 ユーザー操作 (クリック)</div>
+<div class="loop-group">
+<div class="fn-box" data-name="canvas.addEventListener('click')">
+                <div class="fn-name">canvas.addEventListener('click')</div>
+            </div>
+<div class="arrow">↓</div>
+<div class="fn-box primary" id="fn-explode"
+                data-start="64" data-end="68" data-name="explode()"
+                data-tip-role="役割：パーティクル生成トリガー"
+                data-tip="指定された座標 (x, y) を中心に、&lt;code&gt;CONFIG.particleCount&lt;/code&gt; で設定された数のパーティクルを一斉に生成し、&lt;code&gt;particles&lt;/code&gt; 配列に追加します。クリックやタッチイベントによって呼び出されます。">
+                <div class="fn-name">explode()</div>
+                <div class="fn-desc">指定座標でパーティクルを爆発させる</div>
+            </div>
+</div>
+<div class="section-label">👆 ユーザー操作 (タッチ)</div>
+<div class="loop-group">
+<div class="fn-box" data-name="canvas.addEventListener('touchstart')">
+                <div class="fn-name">canvas.addEventListener('touchstart')</div>
+            </div>
+<div class="arrow">↓</div>
+<div class="fn-box primary" id="fn-explode"
+                data-start="64" data-end="68" data-name="explode()"
+                data-tip-role="役割：パーティクル生成トリガー"
+                data-tip="指定された座標 (x, y) を中心に、&lt;code&gt;CONFIG.particleCount&lt;/code&gt; で設定された数のパーティクルを一斉に生成し、&lt;code&gt;particles&lt;/code&gt; 配列に追加します。クリックやタッチイベントによって呼び出されます。">
+                <div class="fn-name">explode()</div>
+                <div class="fn-desc">指定座標でパーティクルを爆発させる</div>
+            </div>
+</div>
+<div class="section-label">📏 ウィンドウリサイズ</div>
+<div class="loop-group">
+<div class="fn-box" data-name="window.addEventListener('resize')">
+                <div class="fn-name">window.addEventListener('resize')</div>
+            </div>
+<div class="arrow">↓</div>
+<div class="fn-box event" id="fn-resizeCanvas"
+                data-start="136" data-end="139" data-name="resizeCanvas()"
+                data-tip-role="トリガー：ウィンドウリサイズ / 役割：キャンバス設定"
+                data-tip="キャンバスの幅と高さを現在のブラウザウィンドウの内部幅と高さに設定します。これにより、ウィンドウサイズが変更され���も花火が画面全体に表示され続けます。">
+                <div class="fn-name">resizeCanvas()</div>
+                <div class="fn-desc">キャンバスサイズをウィンドウに合わせる</div>
+            </div>
+</div>
+<div class="section-label">⚙️ CONFIG — 設定値</div>
+<div class="fn-box cfg">
+<div class="config-grid">
+<span>CONFIG.particleCount</span><span>80 (1回の爆発で生成する粒子の数)</span>
+<span>CONFIG.gravity</span><span>0.15 (粒子にかかる下方向の加速度)</span>
+<span>CONFIG.friction</span><span>0.98 (速度を毎フレーム減衰させる係数（1に近いほど長く飛ぶ）)</span>
+<span>CONFIG.minSpeed</span><span>2 (粒子が飛び出す最小の速さ)</span>
+<span>CONFIG.maxSpeed</span><span>10 (粒子が飛び出す最大の速さ)</span>
+<span>CONFIG.lifespan</span><span>1.0 (粒子の初期ライフ量（1.0 = 100%）)</span>
+<span>CONFIG.decayRate</span><span>0.015 (1フレームあたりのライフ減衰量)</span>
+</div>
+</div>
+
+    </div>
+
+    <!-- ═════ 右パネル ═════ -->
+    <div id="right-panel">
+        <div id="right-header">📄 <span>particles.js</span> — 159行</div>
+        <div id="nav-bar">
+            <button id="back-btn" disabled title="1つ前の関数に戻る">← 戻る</button>
+            <div id="breadcrumb">
+                <span class="bc-hint">📍 左の関数をクリックするとスポットライト表示されます</span>
+            </div>
+        </div>
+        <div id="code-container">
+            <div id="line-highlight"></div>
+            <div id="back-float">← 戻る</div>
+            <div id="loading-msg">⏳ コードを読み込み中...</div>
+            <pre id="code-pre" class="language-javascript line-numbers" style="display:none"><code id="code-el"></code></pre>
+        </div>
+    </div>
+</div>
+
+<div id="fn-tooltip">
+    <div class="tip-role" id="tip-role"></div>
+    <div class="tip-name" id="tip-name"></div>
+    <div class="tip-body" id="tip-body"></div>
+    <div class="tip-hint">クリックでスポットライト表示</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script>
+const codeEl        = document.getElementById('code-el');
+const codePre       = document.getElementById('code-pre');
+const codeContainer = document.getElementById('code-container');
+const hlBox         = document.getElementById('line-highlight');
+const breadcrumb    = document.getElementById('breadcrumb');
+const backBtn       = document.getElementById('back-btn');
+const backFloat     = document.getElementById('back-float');
+const escHint       = document.getElementById('esc-hint');
+const loadingMsg    = document.getElementById('loading-msg');
+const tooltip       = document.getElementById('fn-tooltip');
+
+let currentActive = null;
+let spotlitActive = false;
+const navStack = [];
+
+// APIから提供された関数情報をマップ化
+const fnList = [{"name":"randomBetween()","start":26,"end":28},{"name":"randomColor()","start":32,"end":35},{"name":"createParticle()","start":45,"end":57},{"name":"explode()","start":64,"end":68},{"name":"updateParticle()","start":73,"end":81},{"name":"drawParticle()","start":86,"end":95},{"name":"isAlive()","start":99,"end":103},{"name":"clearCanvas()","start":111,"end":114},{"name":"animate()","start":118,"end":132},{"name":"resizeCanvas()","start":136,"end":139}];
+const fnMap = {};
+fnList.forEach(f => {
+    const raw = f.name;
+    const bare = raw.split('(')[0];  // 'resizeCanvas()' -> 'resizeCanvas'
+    const box = document.getElementById('fn-' + bare);
+    const entry = { start: f.start, end: f.end, box, name: raw };
+    fnMap[bare] = entry;
+    fnMap[raw] = entry;
+});
+
+// ソースコードを直接埋め込み（fetchの代わり）
+const __embeddedSource = `// =============================================================
+// 🎆 AIホバー機能テスト用 ── パーティクル花火
+// このファイルは _ai_test_hover フォルダごと削除すれば元に戻ります
+// =============================================================
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const particles = [];
+
+// 動作パラメータをまとめた設定オブジェクト
+const CONFIG = {
+    particleCount: 80,   // 1回の爆発で生成する粒子の数
+    gravity: 0.15,       // 粒子にかかる下方向の加速度
+    friction: 0.98,      // 速度を毎フレーム減衰させる係数（1に近いほど長く飛ぶ）
+    minSpeed: 2,         // 粒子が飛び出す最小の速さ
+    maxSpeed: 10,        // 粒子が飛び出す最大の速さ
+    lifespan: 1.0,       // 粒子の初期ライフ量（1.0 = 100%）
+    decayRate: 0.015,    // 1フレームあたりのライフ減衰量
+};
+
+// ------------------- ユーティリティ -------------------
+
+/**
+ * min〜max の範囲でランダムな実数を返す
+ */
+function randomBetween(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+/**
+ * ランダムな HSL カラー文字列を返す（鮮やかな色のみ）
+ */
+function randomColor() {
+    const hue = Math.floor(Math.random() * 360);
+    return \`hsl(\${hue}, 100%, 60%)\`;
+}
+
+// ------------------- パーティクル管理 -------------------
+
+/**
+ * 指定座標にパーティクル1つのデータを生成して返す
+ * @param {number} x - 生成X座標
+ * @param {number} y - 生成Y座標
+ */
+function createParticle(x, y) {
+    const angle = randomBetween(0, Math.PI * 2);
+    const speed = randomBetween(CONFIG.minSpeed, CONFIG.maxSpeed);
+    return {
+        x,
+        y,
+        vx: Math.cos(angle) * speed,  // X方向の速度成分
+        vy: Math.sin(angle) * speed,  // Y方向の速度成分
+        radius: randomBetween(2, 5),
+        color: randomColor(),
+        life: CONFIG.lifespan,
+    };
+}
+
+/**
+ * 指定座標でパーティクルを一斉爆発させる
+ * @param {number} x - 爆発中心X
+ * @param {number} y - 爆発中心Y
+ */
+function explode(x, y) {
+    for (let i = 0; i < CONFIG.particleCount; i++) {
+        particles.push(createParticle(x, y));
+    }
+}
+
+/**
+ * パーティクルの物理状態を1フレーム分更新する（移動・重力・摩擦）
+ * @param {object} p - パーティクルオブジェクト
+ */
+function updateParticle(p) {
+    p.vy += CONFIG.gravity;    // 重力で下に加速
+    p.vx *= CONFIG.friction;   // 摩擦で速度を減衰
+    p.vy *= CONFIG.friction;
+    p.x += p.vx;              // 位置を更新
+    p.y += p.vy;
+    p.life -= CONFIG.decayRate; // ライフを消費
+}
+
+/**
+ * パーティクルをキャンバスに1つ描画する
+ * @param {object} p - パーティクルオブジェクト
+ */
+function drawParticle(p) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.life); // ライフが減るほど透明に
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.restore();
+}
+
+/**
+ * パーティクルがまだ生きているかを返す
+ * @param {object} p - パーティクルオブジェクト
+ * @returns {boolean}
+ */
+function isAlive(p) {
+    return p.life > 0;
+}
+
+// ------------------- 描画・アニメーション -------------------
+
+/**
+ * キャンバスを半透明の黒で塗りつぶす（残像トレイル効果）
+ */
+function clearCanvas() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+/**
+ * メインのアニメーションループ（requestAnimationFrame で毎フレーム呼ばれる）
+ */
+function animate() {
+    requestAnimationFrame(animate);
+    clearCanvas();
+
+    // 後ろから走査して死んだパーティクルを splice で削除
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        updateParticle(p);
+        drawParticle(p);
+        if (!isAlive(p)) {
+            particles.splice(i, 1);
+        }
+    }
+}
+
+/**
+ * キャンバスサイズをウィンドウに合わせてリサイズする
+ */
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// ------------------- イベント登録 -------------------
+
+canvas.addEventListener('click', (e) => {
+    explode(e.clientX, e.clientY);
+});
+
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    explode(touch.clientX, touch.clientY);
+}, { passive: false });
+
+window.addEventListener('resize', resizeCanvas);
+
+// ------------------- 起動 -------------------
+resizeCanvas();
+animate();
+`;
+(function() {
+    loadingMsg.style.display = 'none';
+    codePre.style.display = 'block';
+    codeEl.textContent = __embeddedSource;
+    Prism.highlightElement(codeEl);
+    // PrismJSのDOM操作が完了するのを待つ
+    setTimeout(function() { setupCodeLinks(); }, 200);
+})();
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Control') document.body.classList.add('ctrl-held');
+    if (e.key === 'Escape')  clearSpotlight();
+});
+document.addEventListener('keyup', e => {
+    if (e.key === 'Control') document.body.classList.remove('ctrl-held');
+});
+
+function setupCodeLinks() {
+    document.querySelectorAll('#code-el .token.function').forEach(function(span) {
+        var name = span.textContent.trim();
+        if (!fnMap[name]) return;
+        span.classList.add('fn-link');
+        span.setAttribute('data-fn', name);
+    });
+}
+
+// イベント委譲でCtrl+Clickを処理（個別spanへのリスナーより確実）
+codeEl.addEventListener('mousedown', function(e) {
+    if (!e.ctrlKey && !e.metaKey) return;
+    var target = e.target;
+    while (target && target !== codeEl) {
+        if (target.classList && target.classList.contains('fn-link')) {
+            var fname = target.getAttribute('data-fn');
+            if (fname && fnMap[fname]) {
+                e.preventDefault();
+                e.stopPropagation();
+                var entry = fnMap[fname];
+                highlightLines(entry.start, entry.end, entry.box, entry.name);
+            }
+            return;
+        }
+        target = target.parentNode;
+    }
+});
+
+function clearSpotlight() {
+    hlBox.style.opacity = '0';
+    spotlitActive = false;
+    escHint.classList.remove('show');
+    if (currentActive) { currentActive.classList.remove('active'); currentActive = null; }
+}
+
+function highlightLines(startLine, endLine, box, name, addHistory = true) {
+    const lineRows = codePre.querySelector('.line-numbers-rows');
+    if (!lineRows) return;
+    const spans = Array.from(lineRows.querySelectorAll('span'));
+    if (startLine > spans.length) return;
+
+    const s = spans[startLine - 1];
+    const e = spans[Math.min(endLine, spans.length) - 1];
+
+    const top = codePre.offsetTop + lineRows.offsetTop + s.offsetTop;
+    const height = (e.offsetTop + e.offsetHeight) - s.offsetTop;
+
+    hlBox.style.top = top + "px";
+    hlBox.style.height = height + "px";
+    hlBox.style.opacity = "1";
+    backFloat.style.top = (top + 4) + "px";
+
+    spotlitActive = true;
+    escHint.classList.add("show");
+
+    const viewH = codeContainer.clientHeight;
+    codeContainer.scrollTop = Math.max(0, top + height / 2 - viewH / 2);
+
+    if (currentActive) currentActive.classList.remove('active');
+    if (box) { box.classList.add('active'); currentActive = box; }
+
+    if (addHistory && name) {
+        const last = navStack[navStack.length - 1];
+        if (!last || last.name !== name) {
+            navStack.push({ name, start: startLine, end: endLine, box });
+            if (navStack.length > 10) navStack.shift();
+        }
+    }
+    renderNav();
+}
+
+function renderNav() {
+    const canBack = navStack.length >= 2;
+    backBtn.disabled = !canBack;
+    backFloat.classList.toggle('visible', canBack);
+
+    if (navStack.length === 0) {
+        breadcrumb.innerHTML = '<span class="bc-hint">📍 左の関数をクリックすると強調表示されます</span>';
+        return;
+    }
+    const parts = navStack.map((item, i) => {
+        const isCurrent = (i === navStack.length - 1);
+        return `<span class="${isCurrent ? 'bc-current' : 'bc-item'}" data-idx="${i}">${item.name}</span>`;
+    });
+    breadcrumb.innerHTML = '<span class="bc-hint">📍 </span>' + parts.join('<span class="bc-sep"> → </span>');
+    breadcrumb.querySelectorAll('.bc-item').forEach(el => {
+        el.addEventListener('click', () => {
+            const idx = parseInt(el.dataset.idx, 10);
+            navStack.splice(idx + 1);
+            const target = navStack[navStack.length - 1];
+            if (target) highlightLines(target.start, target.end, target.box, null, false);
+            renderNav();
+        });
+    });
+}
+
+function goBack() {
+    if (navStack.length < 2) return;
+    navStack.pop();
+    const prev = navStack[navStack.length - 1];
+    if (prev) highlightLines(prev.start, prev.end, prev.box, null, false);
+    renderNav();
+}
+backBtn.addEventListener('click', goBack);
+backFloat.addEventListener('click', e => { e.stopPropagation(); goBack(); });
+
+document.querySelectorAll('.fn-box[data-start]').forEach(box => {
+    box.addEventListener('click', () => {
+        const s = parseInt(box.dataset.start, 10);
+        const e = parseInt(box.dataset.end, 10);
+        const name = box.dataset.name;
+        highlightLines(s, e, box, name);
+    });
+});
+
+codeContainer.addEventListener('click', e => {
+    if (!e.ctrlKey && spotlitActive) clearSpotlight();
+});
+
+let tooltipTimer = null;
+document.querySelectorAll('.fn-box[data-tip]').forEach(box => {
+    box.addEventListener('mouseenter', e => {
+        clearTimeout(tooltipTimer);
+        document.getElementById('tip-role').textContent = box.dataset.tipRole || '';
+        document.getElementById('tip-name').textContent = box.dataset.name || '';
+        document.getElementById('tip-body').innerHTML = box.dataset.tip;
+        positionTooltip(e);
+        tooltip.classList.add('show');
+    });
+    box.addEventListener('mousemove', positionTooltip);
+    box.addEventListener('mouseleave', () => {
+        tooltipTimer = setTimeout(() => tooltip.classList.remove('show'), 80);
+    });
+});
+
+function positionTooltip(e) {
+    const margin = 14;
+    const tipW = 270;
+    let x = e.clientX + margin;
+    let y = e.clientY + margin;
+    if (x + tipW > window.innerWidth) x = e.clientX - tipW - margin;
+    if (y + tooltip.offsetHeight > window.innerHeight) y = e.clientY - tooltip.offsetHeight - margin;
+    tooltip.style.left = Math.max(4, x) + 'px';
+    tooltip.style.top = Math.max(4, y) + 'px';
+}
+</script>
+</body>
+</html>

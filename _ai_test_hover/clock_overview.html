@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>clock.js — 概要ビュア</title>
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d1117; color: #c9d1d9;
+    height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column;
+}
+
+/* ─── ヘッダー ─── */
+#header {
+    background: #161b22; border-bottom: 1px solid #30363d;
+    padding: 10px 20px; display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+#header h1 { font-size: 1.0rem; color: #e6edf3; font-weight: 600; }
+.badge { background: #21262d; border: 1px solid #30363d; border-radius: 20px; padding: 2px 10px; font-size: 0.73rem; color: #8b949e; }
+#esc-hint { margin-left: auto; font-size: 0.7rem; color: #484f58; opacity: 0; transition: opacity 0.3s; }
+#esc-hint.show { opacity: 1; }
+
+/* ─── レイアウト ─── */
+#layout { display: flex; flex: 1; overflow: hidden; }
+
+/* ════════════ 左パネル ════════════ */
+#left-panel {
+    width: 315px; min-width: 315px;
+    background: #0d1117; border-right: 1px solid #21262d;
+    overflow-y: auto; padding: 14px 12px;
+    display: flex; flex-direction: column; gap: 5px;
+}
+
+/* ── セクションラベル ── */
+.section-label {
+    font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #484f58; padding: 10px 0 3px;
+}
+.section-label.primary {
+    color: #cba6f7;
+    font-size: 0.76rem;
+    padding: 12px 0 5px;
+    text-shadow: 0 0 12px rgba(203,166,247,0.3);
+}
+
+/* ── fn-box ── */
+.fn-box {
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; padding: 9px 11px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    user-select: none; position: relative;
+}
+.fn-box:hover { background: #1c2128; border-color: #58a6ff; }
+.fn-box.active { border-color: #f0b429 !important; background: #1c1a0f; box-shadow: 0 0 0 2px #f0b42930; }
+
+.fn-box.primary {
+    background: #13182a;
+    border-color: #2d3550;
+    box-shadow: 0 0 0 1px #3843700040;
+}
+.fn-box.primary:hover { border-color: #7aa2f7; background: #181f36; }
+
+.fn-name { font-family: 'Cascadia Code','Consolas',monospace; font-size: 0.85rem; color: #58a6ff; font-weight: 600; }
+.fn-box.primary .fn-name { color: #7aa2f7; }
+.fn-box.active .fn-name { color: #f0b429; }
+.fn-desc { font-size: 0.74rem; color: #8b949e; margin-top: 3px; line-height: 1.5; }
+
+/* 色種別 */
+.event { border-left: 3px solid #cba6f7; }
+.util  { border-left: 3px solid #3fb950; }
+.loop  { border-left: 3px solid #374768; }
+.cfg   { border-left: 3px solid #f0883e; }
+.struct { background: #12111a; border: 1px dashed #30363d; cursor: default; }
+.struct:hover { background: #12111a; border-color: #30363d; box-shadow: none; }
+
+.arrow { text-align: center; color: #484f58; font-size: 0.75rem; padding: 1px 0; }
+.arrow.primary { color: #7aa2f7; }
+
+.config-grid { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; font-size: 0.74rem; }
+.config-grid span:nth-child(odd)  { font-family: monospace; color: #e3b341; }
+.config-grid span:nth-child(even) { font-family: monospace; color: #3fb950; text-align: right; }
+
+.loop-group {
+    border: 1px solid #2a4a6a; border-radius: 10px;
+    padding: 9px; background: #0e1f30;
+    display: flex; flex-direction: column; gap: 4px;
+    position: relative;
+}
+.loop-group::before {
+    content: '🔄 毎フレーム'; position: absolute; top: -9px; left: 10px;
+    background: #0e1f30; padding: 0 6px; font-size: 0.62rem; color: #4a90d0; font-weight: 700;
+}
+.loop-group .fn-box { background: #122030; border-color: #2a4060; }
+.loop-group .fn-box:hover { background: #1a2e44; border-color: #4a80c0; }
+.loop-group .fn-name { color: #7dc4f7; }
+.sub-group { display: flex; gap: 5px; padding-left: 8px; }
+.fn-box.small .fn-name { font-size: 0.76rem; }
+.fn-box.small .fn-desc { font-size: 0.67rem; }
+
+/* ════════════ 右パネル ════════════ */
+#right-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#right-header { background: #161b22; border-bottom: 1px solid #30363d; padding: 7px 16px; font-size: 0.75rem; color: #8b949e; flex-shrink: 0; }
+#right-header span { color: #58a6ff; font-family: monospace; }
+
+/* ── ナビバー ── */
+#nav-bar {
+    background: #0d1117; border-bottom: 1px solid #21262d;
+    padding: 5px 10px; display: flex; align-items: center; gap: 6px;
+    min-height: 36px; flex-shrink: 0;
+}
+#back-btn {
+    background: #21262d; border: 1px solid #30363d; border-radius: 5px;
+    color: #8b949e; font-size: 0.72rem; padding: 3px 10px; cursor: pointer;
+    transition: background 0.15s, color 0.15s; white-space: nowrap;
+}
+#back-btn:hover:not(:disabled) { background: #30363d; color: #e6edf3; }
+#back-btn:disabled { opacity: 0.3; cursor: default; }
+#breadcrumb { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; overflow: hidden; }
+.bc-hint { color: #484f58; font-size: 0.7rem; }
+.bc-item { color: #58a6ff; cursor: pointer; font-family: monospace; font-size: 0.72rem; padding: 1px 7px; border-radius: 4px; transition: background 0.15s; }
+.bc-item:hover { background: #21262d; }
+.bc-current { color: #f0b429; font-family: monospace; font-size: 0.72rem; background: #1a1500; border: 1px solid #f0b42930; padding: 1px 7px; border-radius: 4px; font-weight: 600; }
+.bc-sep { color: #30363d; font-size: 0.7rem; }
+
+/* ── コードコンテナ ── */
+#code-container { flex: 1; overflow-y: auto; position: relative; background: #1e1e2e; }
+
+#line-highlight {
+    position: absolute; left: 0; right: 0;
+    background: rgba(240, 180, 41, 0.12);
+    border-left: 3px solid rgba(240, 180, 41, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(240,180,41,0.08);
+    pointer-events: none; opacity: 0;
+    transition: top 0.25s ease, height 0.25s ease, opacity 0.2s ease;
+    z-index: 5;
+}
+#back-float {
+    position: absolute; right: 12px;
+    background: rgba(22, 27, 34, 0.92);
+    border: 1px solid #f0b42980; border-radius: 20px;
+    color: #f0b429; font-size: 0.73rem; font-weight: 600;
+    padding: 5px 14px; cursor: pointer;
+    opacity: 0; pointer-events: none;
+    transform: translateX(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, top 0.25s ease;
+    z-index: 10; white-space: nowrap; user-select: none;
+}
+#back-float.visible { opacity: 1; pointer-events: auto; transform: translateX(0); }
+#back-float:hover { background: rgba(35, 30, 5, 0.98); border-color: #f0b429; }
+
+pre[class*="language-"] { margin: 0; border-radius: 0; background: #1e1e2e !important; font-size: 14px; tab-size: 4; padding-bottom: 50vh !important; }
+code[class*="language-"] { font-size: 14px; }
+#loading-msg { padding: 40px; color: #484f58; font-size: 0.85rem; }
+
+/* Ctrl+Clickできる関数名 */
+#code-el .token.function.fn-link { cursor: default; border-bottom: 1px dotted rgba(88,166,255,0.4); transition: background 0.1s; }
+#code-el .token.function.fn-link:hover { background: rgba(88,166,255,0.08); border-radius: 2px; }
+body.ctrl-held #code-el .token.function.fn-link { cursor: pointer; background: rgba(88,166,255,0.18); border-bottom: 1px solid #58a6ff; }
+
+/* ════════════ AIホバーツールチップ ════════════ */
+#fn-tooltip {
+    position: fixed; background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 12px 14px; max-width: 260px; font-size: 0.73rem; color: #c9d1d9; line-height: 1.65;
+    z-index: 999; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+#fn-tooltip.show { opacity: 1; }
+#fn-tooltip .tip-role { font-size: 0.62rem; color: #3fb950; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+#fn-tooltip .tip-name { font-family: monospace; color: #7aa2f7; font-weight: 700; font-size: 0.82rem; margin-bottom: 6px; }
+#fn-tooltip .tip-body { color: #b0bcc8; }
+#fn-tooltip .tip-hint { margin-top: 8px; font-size: 0.65rem; color: #484f58; border-top: 1px solid #21262d; padding-top: 6px; }
+</style>
+</head>
+<body>
+
+<div id="header">
+    <h1>🎆 clock.js 概要ビュア</h1>
+    <span class="badge">左ブロックをクリック → スポットライト</span>
+    <span class="badge">コード内関数名は <kbd>Ctrl</kbd>+クリックでジャンプ</span>
+    <span id="esc-hint">ESC でハイライト解除</span>
+</div>
+
+<div id="layout">
+    <!-- ═════ 左パネル ═════ -->
+    <div id="left-panel">
+        <div class="section-label primary">⚡ 起動時</div>
+<div class="fn-box primary primary" id="fn-init"
+                data-start="31" data-end="35" data-name="init()"
+                data-tip-role="トリガー：起動時"
+                data-tip="canvas のサイズをウィンドウにフィットさせ、アニメーションを開始します。&lt;br&gt;ウィンドウのリサイズイベントも監視します。">
+                <div class="fn-name">init()</div>
+                <div class="fn-desc">canvas のサイズをウィンドウにフィットさせ、アニメーションを開始する</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box primary event" id="fn-resizeCanvas"
+                data-start="39" data-end="43" data-name="resizeCanvas()"
+                data-tip-role="役割：canvasサイズ調整 / トリガー：init(), resizeイベント"
+                data-tip="canvas の &lt;code&gt;width&lt;/code&gt; と &lt;code&gt;height&lt;/code&gt; を現在のウィンドウサイズに設定します。">
+                <div class="fn-name">resizeCanvas()</div>
+                <div class="fn-desc">canvas サイズをウィンドウに合わせてリサイズする</div>
+            </div>
+<div class="arrow primary">↓</div>
+<div class="fn-box primary loop" id="fn-animate"
+                data-start="169" data-end="187" data-name="animate()"
+                data-tip-role="役割：メインループ / トリガー：init(), requestAnimationFrame"
+                data-tip="&lt;code&gt;requestAnimationFrame&lt;/code&gt; を使って毎フレーム自身を呼び出し、アニメーションを実現します。&lt;br&gt;canvas をクリアし、時計の各要素を再描画します。">
+                <div class="fn-name">animate()</div>
+                <div class="fn-desc">毎フレーム呼ばれるアニメーションループ。canvas をクリアしてから時計全体を再描画する。</div>
+            </div>
+<div class="section-label">🔄 メインループ</div>
+<div class="loop-group">
+<div class="fn-box loop loop" id="fn-animate"
+                data-start="169" data-end="187" data-name="animate()"
+                data-tip-role="役割：メインループ / トリガー：init(), requestAnimationFrame"
+                data-tip="&lt;code&gt;requestAnimationFrame&lt;/code&gt; を使って毎フレーム自身を呼び出し、アニメーションを実現します。&lt;br&gt;canvas をクリアし、時計の各要素を再描画します。">
+                <div class="fn-name">animate()</div>
+                <div class="fn-desc">毎フレーム呼ばれるアニメーションループ。canvas をクリアしてから時計全体を再描画する。</div>
+            </div>
+<div class="arrow">↓</div>
+<div class="fn-box util small" id="fn-drawFace"
+                    data-start="93" data-end="111" data-name="drawFace()"
+                    data-tip-role="役割：描画"
+                    data-tip="時計の外枠と文字盤の背景円を描画します。&lt;br&gt;外枠にはグロー効果を適用しています。">
+                    <div class="fn-name">drawFace()</div>
+                    <div class="fn-desc">時計の文字盤（円形の背景）を描画する</div>
+                </div>
+<div class="arrow">↓</div>
+<div class="fn-box util small" id="fn-drawTicksAndNumbers"
+                    data-start="116" data-end="143" data-name="drawTicksAndNumbers()"
+                    data-tip-role="役割：描画"
+                    data-tip="12個の目盛り線と、3, 6, 9, 12の数字を描画します。&lt;br&gt;3, 6, 9, 12の目盛りは長く、太くなります。">
+                    <div class="fn-name">drawTicksAndNumbers()</div>
+                    <div class="fn-desc">12個の目盛り（時間マーク）と数字を描画する</div>
+                </div>
+<div class="arrow">↓</div>
+<div class="fn-box util small" id="fn-drawHands"
+                    data-start="149" data-end="162" data-name="drawHands()"
+                    data-tip-role="役割：描画"
+                    data-tip="&lt;code&gt;getHandAngles()&lt;/code&gt; を使って現在の時刻の角度を取得し、時針、分針、秒針を描画します。&lt;br&gt;中央にはドットも描画されます。">
+                    <div class="fn-name">drawHands()</div>
+                    <div class="fn-desc">時針・分針・秒針と中心ドットを描画する</div>
+                </div>
+</div>
+<div class="section-label">🎨 針の描画</div>
+<div class="loop-group">
+<div class="fn-box util small" id="fn-drawHands"
+                    data-start="149" data-end="162" data-name="drawHands()"
+                    data-tip-role="役割：描画"
+                    data-tip="&lt;code&gt;getHandAngles()&lt;/code&gt; を使って現在の時刻の角度を取得し、時針、分針、秒針を描画します。&lt;br&gt;中央にはドットも描画されます。">
+                    <div class="fn-name">drawHands()</div>
+                    <div class="fn-desc">時針・分針・秒針と中心ドットを描画する</div>
+                </div>
+<div class="arrow">↓</div>
+<div class="fn-box util small" id="fn-getHandAngles"
+                    data-start="53" data-end="65" data-name="getHandAngles()"
+                    data-tip-role="ユーティリティ"
+                    data-tip="現在のシステム時刻を取得し、時針、分針、秒針の角度をラジアンで計算して返します。&lt;br&gt;12時が上になるように -π/2 のオフセットを適用しています。">
+                    <div class="fn-name">getHandAngles()</div>
+                    <div class="fn-desc">現在の時刻から時針・分針・秒針の角度（ラジアン）を返す</div>
+                </div>
+<div class="arrow">↓</div>
+<div class="fn-box util small" id="fn-drawHand"
+                    data-start="74" data-end="88" data-name="drawHand()"
+                    data-tip-role="役割：描画"
+                    data-tip="指定された角度、長さ、太さ、色で時計の針を1本描画します。&lt;br&gt;影の描画も行います。">
+                    <div class="fn-name">drawHand()</div>
+                    <div class="fn-desc">針を1本描画する</div>
+                </div>
+</div>
+<div class="section-label">🌐 ウィンドウリサイズ</div>
+<div class="loop-group">
+<div class="fn-box event" id="fn-resizeCanvas"
+                data-start="39" data-end="43" data-name="resizeCanvas()"
+                data-tip-role="役割：canvasサイズ調整 / トリガー：init(), resizeイベント"
+                data-tip="canvas の &lt;code&gt;width&lt;/code&gt; と &lt;code&gt;height&lt;/code&gt; を現在のウィンドウサイズに設定します。">
+                <div class="fn-name">resizeCanvas()</div>
+                <div class="fn-desc">canvas サイズをウィンドウに合わせてリサイズする</div>
+            </div>
+</div>
+<div class="section-label">⚙️ CONFIG — 設定値</div>
+<div class="fn-box cfg">
+<div class="config-grid">
+<span>CONFIG.radius</span><span>180px (時計の半径)</span>
+<span>CONFIG.faceColor</span><span>#1a1a2e (文字盤の色)</span>
+<span>CONFIG.rimColor</span><span>#e0c97f (外枠の色)</span>
+<span>CONFIG.tickColor</span><span>#c9d1d9 (目盛りの色)</span>
+<span>CONFIG.handColors.hour</span><span>#e0c97f (時針の色)</span>
+<span>CONFIG.handColors.minute</span><span>#c9d1d9 (分針の色)</span>
+<span>CONFIG.handColors.second</span><span>#e05555 (秒針の色)</span>
+<span>CONFIG.numberColor</span><span>#e6edf3 (数字の色)</span>
+<span>CONFIG.shadowColor</span><span>rgba(0, 0, 0, 0.5)</span>
+</div>
+</div>
+
+    </div>
+
+    <!-- ═════ 右パネル ═════ -->
+    <div id="right-panel">
+        <div id="right-header">📄 <span>clock.js</span> — 193行</div>
+        <div id="nav-bar">
+            <button id="back-btn" disabled title="1つ前の関数に戻る">← 戻る</button>
+            <div id="breadcrumb">
+                <span class="bc-hint">📍 左の関数をクリックするとスポットライト表示されます</span>
+            </div>
+        </div>
+        <div id="code-container">
+            <div id="line-highlight"></div>
+            <div id="back-float">← 戻る</div>
+            <div id="loading-msg">⏳ コードを読み込み中...</div>
+            <pre id="code-pre" class="language-javascript line-numbers" style="display:none"><code id="code-el"></code></pre>
+        </div>
+    </div>
+</div>
+
+<div id="fn-tooltip">
+    <div class="tip-role" id="tip-role"></div>
+    <div class="tip-name" id="tip-name"></div>
+    <div class="tip-body" id="tip-body"></div>
+    <div class="tip-hint">クリックでスポットライト表示</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script>
+const codeEl        = document.getElementById('code-el');
+const codePre       = document.getElementById('code-pre');
+const codeContainer = document.getElementById('code-container');
+const hlBox         = document.getElementById('line-highlight');
+const breadcrumb    = document.getElementById('breadcrumb');
+const backBtn       = document.getElementById('back-btn');
+const backFloat     = document.getElementById('back-float');
+const escHint       = document.getElementById('esc-hint');
+const loadingMsg    = document.getElementById('loading-msg');
+const tooltip       = document.getElementById('fn-tooltip');
+
+let currentActive = null;
+let spotlitActive = false;
+const navStack = [];
+
+// APIから提供された関数情報をマップ化
+const fnList = [{"name":"init()","start":31,"end":35},{"name":"resizeCanvas()","start":39,"end":43},{"name":"getHandAngles()","start":53,"end":65},{"name":"drawHand()","start":74,"end":88},{"name":"drawFace()","start":93,"end":111},{"name":"drawTicksAndNumbers()","start":116,"end":143},{"name":"drawHands()","start":149,"end":162},{"name":"animate()","start":169,"end":187}];
+const fnMap = {};
+fnList.forEach(f => {
+    const raw = f.name;
+    const bare = raw.split('(')[0];  // 'resizeCanvas()' -> 'resizeCanvas'
+    const box = document.getElementById('fn-' + bare);
+    const entry = { start: f.start, end: f.end, box, name: raw };
+    fnMap[bare] = entry;
+    fnMap[raw] = entry;
+});
+
+// ソースコードを直接埋め込み（fetchの代わり）
+const __embeddedSource = `// =============================================================
+// 🕐 アナログ時計 — canvas 描画デモ
+// clock.html と同じフォルダに置いて開いてください
+// =============================================================
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+// ─── 設定オブジェクト ───────────────────────────────────
+const CONFIG = {
+    radius: 180,          // 時計の半径（px）
+    faceColor: '#1a1a2e', // 文字盤の色
+    rimColor: '#e0c97f',  // 外枠の色
+    tickColor: '#c9d1d9', // 目盛りの色
+    handColors: {
+        hour:   '#e0c97f', // 時針の色
+        minute: '#c9d1d9', // 分針の色
+        second: '#e05555', // 秒針の色
+    },
+    numberColor: '#e6edf3', // 数字の色
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+};
+
+// =============================================================
+// ── 初期化 ────────────────────────────────────────────────
+// =============================================================
+
+/**
+ * canvas のサイズをウィンドウにフィットさせ、アニメーションを開始する
+ */
+function init() {
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    animate();
+}
+
+/**
+ * canvas サイズをウィンドウに合わせてリサイズする
+ */
+function resizeCanvas() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// =============================================================
+// ── 描画ユーティリティ ────────────────────────────────────
+// =============================================================
+
+/**
+ * 現在の時刻から時針・分針・秒針の角度（ラジアン）を返す
+ * @returns {{ h: number, m: number, s: number }}
+ */
+function getHandAngles() {
+    const now = new Date();
+    const h = now.getHours() % 12;
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+
+    return {
+        // -π/2 ずらして12時を上にする
+        h: ((h + m / 60) / 12) * Math.PI * 2 - Math.PI / 2,
+        m: ((m + s / 60) / 60) * Math.PI * 2 - Math.PI / 2,
+        s: (s / 60) * Math.PI * 2 - Math.PI / 2,
+    };
+}
+
+/**
+ * 針を1本描画する
+ * @param {number} angle  - 角度（ラジアン）
+ * @param {number} length - 針の長さ（px）
+ * @param {number} width  - 針の太さ（px）
+ * @param {string} color  - 針の色
+ */
+function drawHand(angle, length, width, color) {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(
+        Math.cos(angle) * length,
+        Math.sin(angle) * length
+    );
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineCap = 'round';
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = color;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+}
+
+/**
+ * 時計の文字盤（円形の背景）を描画する
+ */
+function drawFace() {
+    const r = CONFIG.radius;
+
+    // 外枠のグロー効果
+    ctx.beginPath();
+    ctx.arc(0, 0, r + 4, 0, Math.PI * 2);
+    ctx.strokeStyle = CONFIG.rimColor;
+    ctx.lineWidth = 4;
+    ctx.shadowColor = CONFIG.rimColor;
+    ctx.shadowBlur = 20;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // 文字盤の塗りつぶし
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fillStyle = CONFIG.faceColor;
+    ctx.fill();
+}
+
+/**
+ * 12個の目盛り（時間マーク）と数字を描画する
+ */
+function drawTicksAndNumbers() {
+    const r = CONFIG.radius;
+
+    for (let i = 1; i <= 12; i++) {
+        const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
+
+        // 目盛り線
+        const isHour = i % 3 === 0; // 3・6・9・12は長い目盛り
+        const tickLen = isHour ? 18 : 10;
+        const inner = r - tickLen;
+
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+        ctx.lineTo(Math.cos(angle) * (r - 4), Math.sin(angle) * (r - 4));
+        ctx.strokeStyle = CONFIG.tickColor;
+        ctx.lineWidth = isHour ? 2.5 : 1;
+        ctx.stroke();
+
+        // 数字（3・6・9・12のみ）
+        if (isHour) {
+            const textR = r - 36;
+            ctx.font = 'bold 22px "Segoe UI", sans-serif';
+            ctx.fillStyle = CONFIG.numberColor;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(String(i), Math.cos(angle) * textR, Math.sin(angle) * textR);
+        }
+    }
+}
+
+/**
+ * 時針・分針・秒針と中心ドットを描画する
+ */
+function drawHands() {
+    const r = CONFIG.radius;
+    const { h, m, s } = getHandAngles();
+
+    drawHand(h, r * 0.55, 6,  CONFIG.handColors.hour);
+    drawHand(m, r * 0.78, 4,  CONFIG.handColors.minute);
+    drawHand(s, r * 0.88, 1.5, CONFIG.handColors.second);
+
+    // 中心ドット
+    ctx.beginPath();
+    ctx.arc(0, 0, 6, 0, Math.PI * 2);
+    ctx.fillStyle = CONFIG.handColors.second;
+    ctx.fill();
+}
+
+// =============================================================
+// ── メインループ ───────────────────────────────────────────
+// =============================================================
+
+/**
+ * 毎フレーム呼ばれるアニメーションループ。
+ * canvas をクリアしてから時計全体を再描画する。
+ */
+function animate() {
+    requestAnimationFrame(animate);
+
+    // 背景をクリア
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 時計の中心に座標系を移動して描画
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+
+    drawFace();
+    drawTicksAndNumbers();
+    drawHands();
+
+    ctx.restore();
+}
+
+// =============================================================
+// ── 起動 ───────────────────────────────────────────────────
+// =============================================================
+init();
+`;
+(function() {
+    loadingMsg.style.display = 'none';
+    codePre.style.display = 'block';
+    codeEl.textContent = __embeddedSource;
+    Prism.highlightElement(codeEl);
+    // PrismJSのDOM操作が完了するのを待つ
+    setTimeout(function() { setupCodeLinks(); }, 200);
+})();
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Control') document.body.classList.add('ctrl-held');
+    if (e.key === 'Escape')  clearSpotlight();
+});
+document.addEventListener('keyup', e => {
+    if (e.key === 'Control') document.body.classList.remove('ctrl-held');
+});
+
+function setupCodeLinks() {
+    document.querySelectorAll('#code-el .token.function').forEach(function(span) {
+        var name = span.textContent.trim();
+        if (!fnMap[name]) return;
+        span.classList.add('fn-link');
+        span.setAttribute('data-fn', name);
+    });
+}
+
+// イベント委譲でCtrl+Clickを処理（個別spanへのリスナーより確実）
+codeEl.addEventListener('mousedown', function(e) {
+    if (!e.ctrlKey && !e.metaKey) return;
+    var target = e.target;
+    while (target && target !== codeEl) {
+        if (target.classList && target.classList.contains('fn-link')) {
+            var fname = target.getAttribute('data-fn');
+            if (fname && fnMap[fname]) {
+                e.preventDefault();
+                e.stopPropagation();
+                var entry = fnMap[fname];
+                highlightLines(entry.start, entry.end, entry.box, entry.name);
+            }
+            return;
+        }
+        target = target.parentNode;
+    }
+});
+
+function clearSpotlight() {
+    hlBox.style.opacity = '0';
+    spotlitActive = false;
+    escHint.classList.remove('show');
+    if (currentActive) { currentActive.classList.remove('active'); currentActive = null; }
+}
+
+function highlightLines(startLine, endLine, box, name, addHistory = true) {
+    const lineRows = codePre.querySelector('.line-numbers-rows');
+    if (!lineRows) return;
+    const spans = Array.from(lineRows.querySelectorAll('span'));
+    if (startLine > spans.length) return;
+
+    const s = spans[startLine - 1];
+    const e = spans[Math.min(endLine, spans.length) - 1];
+
+    const top = codePre.offsetTop + lineRows.offsetTop + s.offsetTop;
+    const height = (e.offsetTop + e.offsetHeight) - s.offsetTop;
+
+    hlBox.style.top = top + "px";
+    hlBox.style.height = height + "px";
+    hlBox.style.opacity = "1";
+    backFloat.style.top = (top + 4) + "px";
+
+    spotlitActive = true;
+    escHint.classList.add("show");
+
+    const viewH = codeContainer.clientHeight;
+    codeContainer.scrollTop = Math.max(0, top + height / 2 - viewH / 2);
+
+    if (currentActive) currentActive.classList.remove('active');
+    if (box) { box.classList.add('active'); currentActive = box; }
+
+    if (addHistory && name) {
+        const last = navStack[navStack.length - 1];
+        if (!last || last.name !== name) {
+            navStack.push({ name, start: startLine, end: endLine, box });
+            if (navStack.length > 10) navStack.shift();
+        }
+    }
+    renderNav();
+}
+
+function renderNav() {
+    const canBack = navStack.length >= 2;
+    backBtn.disabled = !canBack;
+    backFloat.classList.toggle('visible', canBack);
+
+    if (navStack.length === 0) {
+        breadcrumb.innerHTML = '<span class="bc-hint">📍 左の関数をクリックすると強調表示されます</span>';
+        return;
+    }
+    const parts = navStack.map((item, i) => {
+        const isCurrent = (i === navStack.length - 1);
+        return `<span class="${isCurrent ? 'bc-current' : 'bc-item'}" data-idx="${i}">${item.name}</span>`;
+    });
+    breadcrumb.innerHTML = '<span class="bc-hint">📍 </span>' + parts.join('<span class="bc-sep"> → </span>');
+    breadcrumb.querySelectorAll('.bc-item').forEach(el => {
+        el.addEventListener('click', () => {
+            const idx = parseInt(el.dataset.idx, 10);
+            navStack.splice(idx + 1);
+            const target = navStack[navStack.length - 1];
+            if (target) highlightLines(target.start, target.end, target.box, null, false);
+            renderNav();
+        });
+    });
+}
+
+function goBack() {
+    if (navStack.length < 2) return;
+    navStack.pop();
+    const prev = navStack[navStack.length - 1];
+    if (prev) highlightLines(prev.start, prev.end, prev.box, null, false);
+    renderNav();
+}
+backBtn.addEventListener('click', goBack);
+backFloat.addEventListener('click', e => { e.stopPropagation(); goBack(); });
+
+document.querySelectorAll('.fn-box[data-start]').forEach(box => {
+    box.addEventListener('click', () => {
+        const s = parseInt(box.dataset.start, 10);
+        const e = parseInt(box.dataset.end, 10);
+        const name = box.dataset.name;
+        highlightLines(s, e, box, name);
+    });
+});
+
+codeContainer.addEventListener('click', e => {
+    if (!e.ctrlKey && spotlitActive) clearSpotlight();
+});
+
+let tooltipTimer = null;
+document.querySelectorAll('.fn-box[data-tip]').forEach(box => {
+    box.addEventListener('mouseenter', e => {
+        clearTimeout(tooltipTimer);
+        document.getElementById('tip-role').textContent = box.dataset.tipRole || '';
+        document.getElementById('tip-name').textContent = box.dataset.name || '';
+        document.getElementById('tip-body').innerHTML = box.dataset.tip;
+        positionTooltip(e);
+        tooltip.classList.add('show');
+    });
+    box.addEventListener('mousemove', positionTooltip);
+    box.addEventListener('mouseleave', () => {
+        tooltipTimer = setTimeout(() => tooltip.classList.remove('show'), 80);
+    });
+});
+
+function positionTooltip(e) {
+    const margin = 14;
+    const tipW = 270;
+    let x = e.clientX + margin;
+    let y = e.clientY + margin;
+    if (x + tipW > window.innerWidth) x = e.clientX - tipW - margin;
+    if (y + tooltip.offsetHeight > window.innerHeight) y = e.clientY - tooltip.offsetHeight - margin;
+    tooltip.style.left = Math.max(4, x) + 'px';
+    tooltip.style.top = Math.max(4, y) + 'px';
+}
+</script>
+</body>
+</html>

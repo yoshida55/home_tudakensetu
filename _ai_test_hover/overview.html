@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>particles.js — 概要ビュア</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #0d1117;
+        color: #c9d1d9;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ─── ヘッダー ─── */
+      #header {
+        background: #161b22;
+        border-bottom: 1px solid #30363d;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      #header h1 {
+        font-size: 0.95rem;
+        color: #e6edf3;
+        font-weight: 600;
+      }
+      .badge {
+        background: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 20px;
+        padding: 2px 10px;
+        font-size: 0.7rem;
+        color: #8b949e;
+      }
+      #esc-hint {
+        margin-left: auto;
+        font-size: 0.7rem;
+        color: #484f58;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      #esc-hint.show {
+        opacity: 1;
+      }
+
+      /* ─── レイアウト ─── */
+      #layout {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+      }
+
+      /* ════════════ 左パネル ════════════ */
+      #left-panel {
+        width: 315px;
+        min-width: 315px;
+        background: #0d1117;
+        border-right: 1px solid #21262d;
+        overflow-y: auto;
+        padding: 14px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      /* ── セクションラベル ── */
+      .section-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #484f58;
+        padding: 10px 0 3px;
+      }
+      /* 重要セクション（起動時・ユーザー操作）は明るく */
+      .section-label.primary {
+        color: #cba6f7;
+        font-size: 0.73rem;
+        padding: 12px 0 5px;
+        text-shadow: 0 0 12px rgba(203, 166, 247, 0.3);
+      }
+
+      /* ── fn-box ── */
+      .fn-box {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 9px 11px;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          box-shadow 0.15s;
+        user-select: none;
+        position: relative;
+      }
+      .fn-box:hover {
+        background: #1c2128;
+        border-color: #58a6ff;
+      }
+      .fn-box.active {
+        border-color: #f0b429 !important;
+        background: #1c1a0f;
+        box-shadow: 0 0 0 2px #f0b42930;
+      }
+
+      /* 重要ボックス（起動時・ユーザー操作の中身）*/
+      .fn-box.primary {
+        background: #13182a;
+        border-color: #2d3550;
+        box-shadow: 0 0 0 1px #3843700040;
+      }
+      .fn-box.primary:hover {
+        border-color: #7aa2f7;
+        background: #181f36;
+      }
+
+      .fn-name {
+        font-family: "Cascadia Code", "Consolas", monospace;
+        font-size: 0.82rem;
+        color: #58a6ff;
+        font-weight: 600;
+      }
+      .fn-box.primary .fn-name {
+        color: #7aa2f7;
+      }
+      .fn-box.active .fn-name {
+        color: #f0b429;
+      }
+      .fn-desc {
+        font-size: 0.71rem;
+        color: #8b949e;
+        margin-top: 3px;
+        line-height: 1.5;
+      }
+
+      /* 色種別 */
+      .event {
+        border-left: 3px solid #cba6f7;
+      }
+      .util {
+        border-left: 3px solid #3fb950;
+      }
+      .loop {
+        border-left: 3px solid #374768;
+      }
+      .cfg {
+        border-left: 3px solid #f0883e;
+      }
+      .struct {
+        background: #12111a;
+        border: 1px dashed #30363d;
+        cursor: default;
+      }
+      .struct:hover {
+        background: #12111a;
+        border-color: #30363d;
+        box-shadow: none;
+      }
+
+      .arrow {
+        text-align: center;
+        color: #484f58;
+        font-size: 0.75rem;
+        padding: 1px 0;
+      }
+      .arrow.primary {
+        color: #7aa2f7;
+      }
+
+      .loop-group {
+        border: 1px solid #1f3040;
+        border-radius: 10px;
+        padding: 9px;
+        background: #07111a;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: relative;
+        opacity: 0.7;
+      }
+      .loop-group::before {
+        content: "🔄 毎フレーム";
+        position: absolute;
+        top: -9px;
+        left: 10px;
+        background: #07111a;
+        padding: 0 6px;
+        font-size: 0.6rem;
+        color: #374768;
+        font-weight: 700;
+      }
+      .sub-group {
+        display: flex;
+        gap: 5px;
+        padding-left: 8px;
+      }
+      .fn-box.small .fn-name {
+        font-size: 0.73rem;
+      }
+      .fn-box.small .fn-desc {
+        font-size: 0.65rem;
+      }
+
+      .config-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2px 10px;
+        font-size: 0.71rem;
+      }
+      .config-grid span:nth-child(odd) {
+        font-family: monospace;
+        color: #e3b341;
+      }
+      .config-grid span:nth-child(even) {
+        font-family: monospace;
+        color: #3fb950;
+        text-align: right;
+      }
+      .struct-grid {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 3px 10px;
+        font-size: 0.71rem;
+      }
+      .struct-grid .key {
+        font-family: monospace;
+        color: #79c0ff;
+      }
+      .struct-grid .val {
+        color: #8b949e;
+      }
+
+      /* ════════════ 右パネル ════════════ */
+      #right-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      #right-header {
+        background: #161b22;
+        border-bottom: 1px solid #30363d;
+        padding: 7px 16px;
+        font-size: 0.75rem;
+        color: #8b949e;
+        flex-shrink: 0;
+      }
+      #right-header span {
+        color: #58a6ff;
+        font-family: monospace;
+      }
+
+      /* ── ナビバー ── */
+      #nav-bar {
+        background: #0d1117;
+        border-bottom: 1px solid #21262d;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 36px;
+        flex-shrink: 0;
+      }
+      #back-btn {
+        background: #21262d;
+        border: 1px solid #30363d;
+        border-radius: 5px;
+        color: #8b949e;
+        font-size: 0.72rem;
+        padding: 3px 10px;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          color 0.15s;
+        white-space: nowrap;
+      }
+      #back-btn:hover:not(:disabled) {
+        background: #30363d;
+        color: #e6edf3;
+      }
+      #back-btn:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+      #breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        flex-wrap: wrap;
+        overflow: hidden;
+      }
+      .bc-hint {
+        color: #484f58;
+        font-size: 0.7rem;
+      }
+      .bc-item {
+        color: #58a6ff;
+        cursor: pointer;
+        font-family: monospace;
+        font-size: 0.72rem;
+        padding: 1px 7px;
+        border-radius: 4px;
+        transition: background 0.15s;
+      }
+      .bc-item:hover {
+        background: #21262d;
+      }
+      .bc-current {
+        color: #f0b429;
+        font-family: monospace;
+        font-size: 0.72rem;
+        background: #1a1500;
+        border: 1px solid #f0b42930;
+        padding: 1px 7px;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+      .bc-sep {
+        color: #30363d;
+        font-size: 0.7rem;
+      }
+
+      /* ── コードコンテナ ── */
+      #code-container {
+        flex: 1;
+        overflow-y: auto;
+        position: relative;
+        background: #1e1e2e;
+      }
+      #spotlight-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        pointer-events: none;
+        z-index: 3;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      #line-highlight {
+        position: absolute;
+        left: 0;
+        right: 0;
+        background: rgba(240, 180, 41, 0.12);
+        border-left: 3px solid rgba(240, 180, 41, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(240, 180, 41, 0.08);
+        pointer-events: none;
+        opacity: 0;
+        transition:
+          top 0.25s ease,
+          height 0.25s ease,
+          opacity 0.2s ease;
+        z-index: 5;
+      }
+      /* 戻るボタン（ハイライト右横追従） */
+      #back-float {
+        position: absolute;
+        right: 12px;
+        background: rgba(22, 27, 34, 0.92);
+        border: 1px solid #f0b42980;
+        border-radius: 20px;
+        color: #f0b429;
+        font-size: 0.73rem;
+        font-weight: 600;
+        padding: 5px 14px;
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(6px);
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          top 0.25s ease;
+        z-index: 10;
+        white-space: nowrap;
+        user-select: none;
+      }
+      #back-float.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+      #back-float:hover {
+        background: rgba(35, 30, 5, 0.98);
+        border-color: #f0b429;
+      }
+
+      pre[class*="language-"] {
+        margin: 0;
+        border-radius: 0;
+        background: #1e1e2e !important;
+        font-size: 13px;
+        tab-size: 4;
+        padding-bottom: 50vh !important;
+      }
+      code[class*="language-"] {
+        font-size: 13px;
+      }
+      #loading-msg {
+        padding: 40px;
+        color: #484f58;
+        font-size: 0.85rem;
+      }
+
+      /* Ctrl+Clickできる関数名 */
+      #code-el .token.function.fn-link {
+        cursor: crosshair;
+        border-bottom: 1px dotted rgba(88, 166, 255, 0.5);
+        transition: background 0.1s;
+      }
+      #code-el .token.function.fn-link:hover {
+        background: rgba(88, 166, 255, 0.12);
+        border-bottom-style: solid;
+        border-radius: 2px;
+      }
+      body.ctrl-held #code-el .token.function.fn-link {
+        cursor: pointer;
+        background: rgba(88, 166, 255, 0.18);
+        border-bottom-color: #58a6ff;
+      }
+
+      /* ════════════ AIホバーツールチップ ════════════ */
+      #fn-tooltip {
+        position: fixed;
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 12px 14px;
+        max-width: 260px;
+        font-size: 0.73rem;
+        color: #c9d1d9;
+        line-height: 1.65;
+        z-index: 999;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.15s;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      }
+      #fn-tooltip.show {
+        opacity: 1;
+      }
+      #fn-tooltip .tip-role {
+        font-size: 0.62rem;
+        color: #3fb950;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 5px;
+      }
+      #fn-tooltip .tip-name {
+        font-family: monospace;
+        color: #7aa2f7;
+        font-weight: 700;
+        font-size: 0.82rem;
+        margin-bottom: 6px;
+      }
+      #fn-tooltip .tip-body {
+        color: #b0bcc8;
+      }
+      #fn-tooltip .tip-hint {
+        margin-top: 8px;
+        font-size: 0.65rem;
+        color: #484f58;
+        border-top: 1px solid #21262d;
+        padding-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">
+      <h1>🎆 particles.js 概要ビュア</h1>
+      <span class="badge">左ブロックをクリック → スポットライト</span>
+      <span class="badge"
+        >コード内関数名は <kbd>Ctrl</kbd>+クリックでジャンプ</span
+      >
+      <span id="esc-hint">ESC でスポットライト解除</span>
+    </div>
+
+    <div id="layout">
+      <!-- ═════ 左パネル ═════ -->
+      <div id="left-panel">
+        <!-- ⚡ 起動時（重要） -->
+        <div class="section-label primary">⚡ 起動時</div>
+        <div
+          class="fn-box primary"
+          data-start="137"
+          data-end="140"
+          data-name="resizeCanvas()"
+          data-tip-role="実行タイミング：起動時 + リサイズ時"
+          data-tip="ウィンドウのサイズに合わせて canvas の幅と高さをリセットする。<br>これがないと画面を広げても描画範囲が狭いままになる。<br><br>window.resize イベントでも呼ばれるため、リサイズのたびに再調整される。"
+        >
+          <div class="fn-name">resizeCanvas()</div>
+          <div class="fn-desc">キャンバスをウィンドウサイズに合わせる</div>
+        </div>
+        <div class="arrow primary">↓ 起動</div>
+        <div
+          class="fn-box primary"
+          data-start="119"
+          data-end="132"
+          data-name="animate()"
+          data-tip-role="実行タイミング：起動時に1回呼ぶだけで永続化"
+          data-tip="requestAnimationFrame(animate) で自分を次フレームに登録し続ける<strong>無限ループ</strong>。<br><br>ゲームの「メインループ」にあたり、毎秒60回程度呼ばれてパーティクル全体を更新・描画する。"
+        >
+          <div class="fn-name">animate()</div>
+          <div class="fn-desc">アニメーションループを開始</div>
+        </div>
+
+        <!-- 👆 ユーザー操作（重要） -->
+        <div class="section-label primary">👆 ユーザー操作（クリック）</div>
+        <div
+          class="fn-box primary event"
+          data-start="144"
+          data-end="154"
+          data-name="canvas click"
+          data-tip-role="トリガー：クリック / タッチ"
+          data-tip="クリックされた座標 (clientX, clientY) を取得して explode() へ渡す。<br><br>タッチ操作（スマホ）用の touchstart も同じ仕組みで処理。{ passive: false } でスクロールを防いでいる。"
+        >
+          <div class="fn-name">canvas click イベント</div>
+          <div class="fn-desc">クリック座標 (x, y) を取得して explode へ</div>
+        </div>
+        <div class="arrow primary">↓</div>
+        <div
+          class="fn-box primary"
+          data-start="64"
+          data-end="68"
+          data-name="explode()"
+          data-tip-role="役割：爆発の起爆装置"
+          data-tip="createParticle を CONFIG.particleCount（= 80）回呼び、生成されたパーティクルを配列に一気に追加する。<br><br>1回のクリックで80個の粒子が瞬時に誕生する。"
+        >
+          <div class="fn-name">explode(x, y)</div>
+          <div class="fn-desc">指定座標で一斉爆発！</div>
+        </div>
+        <div class="arrow primary">↓ 80個生成</div>
+        <div
+          class="fn-box primary"
+          data-start="45"
+          data-end="57"
+          data-name="createParticle()"
+          data-tip-role="役割：パーティクル1個の設計図"
+          data-tip="ランダムな角度（0〜2π）と速度から、<br>vx = cos(θ)×speed、vy = sin(θ)×speed を計算して初速を設定。<br><br>三角関数で全方向に均等に広がるようにしている。"
+        >
+          <div class="fn-name">createParticle(x, y)</div>
+          <div class="fn-desc">パーティクル1つのデータを生成して返す</div>
+        </div>
+        <div class="arrow">↙ 内部で使用</div>
+        <div class="sub-group">
+          <div
+            class="fn-box util small"
+            data-start="26"
+            data-end="28"
+            data-name="randomBetween()"
+            data-tip-role="ユーティリティ"
+            data-tip="min〜max の実数をランダムに返す。<br>Math.random() は 0〜1 なので (max-min) を掛けて min を足す。速度・サイズの初期値に広く使われる。"
+          >
+            <div class="fn-name">randomBetween()</div>
+            <div class="fn-desc">min〜maxの乱数</div>
+          </div>
+          <div
+            class="fn-box util small"
+            data-start="33"
+            data-end="36"
+            data-name="randomColor()"
+            data-tip-role="ユーティリティ"
+            data-tip="0〜359 の色相をランダムに選んで hsl() 文字列を返す。<br>彩度100%・明度60%に固定することで、くすんだ色を避け常に鮮やかな花火色だけが生成される。"
+          >
+            <div class="fn-name">randomColor()</div>
+            <div class="fn-desc">HSLランダム色</div>
+          </div>
+        </div>
+
+        <!-- 🔁 アニメーションループ（補足） -->
+        <div class="section-label">🔁 アニメーションループ（毎フレーム）</div>
+        <div class="loop-group">
+          <div
+            class="fn-box loop"
+            data-start="119"
+            data-end="132"
+            data-name="animate()"
+          >
+            <div class="fn-name">animate()</div>
+            <div class="fn-desc">rAF で自分を再帰呼び出し</div>
+          </div>
+          <div class="arrow">↓</div>
+          <div
+            class="fn-box loop"
+            data-start="111"
+            data-end="114"
+            data-name="clearCanvas()"
+          >
+            <div class="fn-name">clearCanvas()</div>
+            <div class="fn-desc">半透明塗りつぶし（残像効果）</div>
+          </div>
+          <div class="arrow">↓ 全パーティクルにループ</div>
+          <div
+            class="fn-box loop"
+            data-start="74"
+            data-end="81"
+            data-name="updateParticle()"
+          >
+            <div class="fn-name">updateParticle(p)</div>
+            <div class="fn-desc">重力・摩擦で位置を1フレーム進める</div>
+          </div>
+          <div class="arrow">↓</div>
+          <div
+            class="fn-box loop"
+            data-start="87"
+            data-end="95"
+            data-name="drawParticle()"
+          >
+            <div class="fn-name">drawParticle(p)</div>
+            <div class="fn-desc">透明度付きでキャンバスに描画</div>
+          </div>
+          <div class="arrow">↓</div>
+          <div
+            class="fn-box loop"
+            data-start="102"
+            data-end="104"
+            data-name="isAlive()"
+          >
+            <div class="fn-name">isAlive(p) → false → 削除</div>
+            <div class="fn-desc">life が 0 以下になったら splice で除去</div>
+          </div>
+        </div>
+
+        <div class="section-label">⚙️ CONFIG — 設定値</div>
+        <div
+          class="fn-box cfg"
+          data-start="10"
+          data-end="19"
+          data-name="CONFIG"
+        >
+          <div class="config-grid">
+            <span>particleCount</span><span>80</span> <span>gravity</span
+            ><span>0.15</span> <span>friction</span><span>0.98</span>
+            <span>minSpeed / maxSpeed</span><span>2〜10</span>
+            <span>lifespan</span><span>1.0</span> <span>decayRate</span
+            ><span>0.015</span>
+          </div>
+        </div>
+
+        <div class="section-label">📦 Particle オブジェクト構造</div>
+        <div
+          class="fn-box struct"
+          data-start="45"
+          data-end="57"
+          data-name="Particle構造"
+        >
+          <div class="struct-grid">
+            <span class="key">x, y</span
+            ><span class="val">位置（クリック座標から始まる）</span>
+            <span class="key">vx, vy</span
+            ><span class="val">速度ベクトル（角度とspeedから）</span>
+            <span class="key">radius</span><span class="val">半径 2〜5 px</span>
+            <span class="key">color</span
+            ><span class="val">HSLランダムカラー</span>
+            <span class="key">life</span
+            ><span class="val">残存ライフ 1.0 → 0 で消滅</span>
+          </div>
+        </div>
+      </div>
+      <!-- /left-panel -->
+
+      <!-- ═════ 右パネル ═════ -->
+      <div id="right-panel">
+        <div id="right-header">📄 <span>particles.js</span> — 159行</div>
+        <div id="nav-bar">
+          <button id="back-btn" disabled title="1つ前の関数に戻る">
+            ← 戻る
+          </button>
+          <div id="breadcrumb">
+            <span class="bc-hint"
+              >📍 左の関数をクリックするとスポットライト表示されます</span
+            >
+          </div>
+        </div>
+        <div id="code-container">
+          <div id="spotlight-overlay"></div>
+          <div id="line-highlight"></div>
+          <div id="back-float">← 戻る</div>
+          <div id="loading-msg">
+            ⏳ particles.js を読み込み中...（Live Server で開いてください）
+          </div>
+          <pre
+            id="code-pre"
+            class="language-javascript line-numbers"
+            style="display: none"
+          ><code id="code-el"></code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIホバーツールチップ -->
+    <div id="fn-tooltip">
+      <div class="tip-role" id="tip-role"></div>
+      <div class="tip-name" id="tip-name"></div>
+      <div class="tip-body" id="tip-body"></div>
+      <div class="tip-hint">クリックでスポットライト表示</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+      const codeEl = document.getElementById("code-el");
+      const codePre = document.getElementById("code-pre");
+      const codeContainer = document.getElementById("code-container");
+      const hlBox = document.getElementById("line-highlight");
+      const spotOverlay = document.getElementById("spotlight-overlay");
+      const breadcrumb = document.getElementById("breadcrumb");
+      const backBtn = document.getElementById("back-btn");
+      const backFloat = document.getElementById("back-float");
+      const escHint = document.getElementById("esc-hint");
+      const loadingMsg = document.getElementById("loading-msg");
+      const tooltip = document.getElementById("fn-tooltip");
+
+      let currentActive = null;
+      let spotlitActive = false;
+      const navStack = [];
+
+      // 関数名 → 行範囲マップ
+      const fnMap = {};
+      document
+        .querySelectorAll(".fn-box[data-start][data-name]")
+        .forEach((box) => {
+          const raw = box.dataset.name.trim();
+          const bare = raw.replace(/\(.*\)$/, "");
+          const entry = {
+            start: parseInt(box.dataset.start, 10),
+            end: parseInt(box.dataset.end, 10),
+            box,
+            name: raw,
+          };
+          fnMap[bare] = entry;
+          fnMap[raw] = entry;
+        });
+
+      // ─── ソース読み込み ───
+      fetch("./particles.js")
+        .then((r) => {
+          if (!r.ok)
+            throw new Error("fetch 失敗（Live Server で開いてください）");
+          return r.text();
+        })
+        .then((src) => {
+          loadingMsg.style.display = "none";
+          codePre.style.display = "block";
+          codeEl.textContent = src;
+          Prism.highlightElement(codeEl);
+          setupCodeLinks();
+        })
+        .catch((err) => {
+          loadingMsg.textContent = "⚠ " + err.message;
+        });
+
+      // ─── Ctrlキー表示 ───
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Control") document.body.classList.add("ctrl-held");
+        if (e.key === "Escape") clearSpotlight();
+      });
+      document.addEventListener("keyup", (e) => {
+        if (e.key === "Control") document.body.classList.remove("ctrl-held");
+      });
+
+      // ─── コード内Ctrl+Click ───
+      function setupCodeLinks() {
+        document
+          .querySelectorAll("#code-el .token.function")
+          .forEach((span) => {
+            const name = span.textContent.trim();
+            if (!fnMap[name]) return;
+            span.classList.add("fn-link");
+            span.title = `Ctrl+クリックで ${fnMap[name].name} の定義へジャンプ`;
+            span.addEventListener("click", (e) => {
+              if (!e.ctrlKey) return;
+              e.stopPropagation();
+              const { start, end, box, name: label } = fnMap[name];
+              highlightLines(start, end, box, label);
+            });
+          });
+      }
+
+      // ─── スポットライト解除 ───
+      function clearSpotlight() {
+        spotOverlay.style.opacity = "0";
+        hlBox.style.opacity = "0";
+        spotlitActive = false;
+        escHint.classList.remove("show");
+        if (currentActive) {
+          currentActive.classList.remove("active");
+          currentActive = null;
+        }
+      }
+
+      // ─── ハイライト ───
+      function highlightLines(
+        startLine,
+        endLine,
+        box,
+        name,
+        addHistory = true,
+      ) {
+        const lineRows = codePre.querySelector(".line-numbers-rows");
+        if (!lineRows) return;
+        const spans = Array.from(lineRows.querySelectorAll("span"));
+        if (startLine > spans.length) return;
+
+        const s = spans[startLine - 1];
+        const e = spans[Math.min(endLine, spans.length) - 1];
+
+        // offsetTop で絶対位置を計算（スクロール位置に依存しない安定した値）
+        const top = codePre.offsetTop + lineRows.offsetTop + s.offsetTop;
+        const height = e.offsetTop + e.offsetHeight - s.offsetTop;
+
+        hlBox.style.top = top + "px";
+        hlBox.style.height = height + "px";
+        hlBox.style.opacity = "1";
+        backFloat.style.top = top + 4 + "px";
+
+        spotlitActive = true;
+        escHint.classList.add("show");
+
+        // ハイライトの中心をコンテナの中央に合わせる（即時代入で確実に）
+        const viewH = codeContainer.clientHeight;
+        codeContainer.scrollTop = Math.max(0, top + height / 2 - viewH / 2);
+
+        if (currentActive) currentActive.classList.remove("active");
+        if (box) {
+          box.classList.add("active");
+          currentActive = box;
+        }
+
+        if (addHistory && name) {
+          const last = navStack[navStack.length - 1];
+          if (!last || last.name !== name) {
+            navStack.push({ name, start: startLine, end: endLine, box });
+            if (navStack.length > 10) navStack.shift();
+          }
+        }
+        renderNav();
+      }
+
+      // ─── ナビゲーション表示 ───
+      function renderNav() {
+        const canBack = navStack.length >= 2;
+        backBtn.disabled = !canBack;
+        backFloat.classList.toggle("visible", canBack);
+
+        if (navStack.length === 0) {
+          breadcrumb.innerHTML =
+            '<span class="bc-hint">📍 左の関数をクリックするとスポットライト表示されます</span>';
+          return;
+        }
+        const parts = navStack.map((item, i) => {
+          const isCurrent = i === navStack.length - 1;
+          return `<span class="${isCurrent ? "bc-current" : "bc-item"}" data-idx="${i}">${item.name}</span>`;
+        });
+        breadcrumb.innerHTML =
+          '<span class="bc-hint">📍 </span>' +
+          parts.join('<span class="bc-sep"> → </span>');
+        breadcrumb.querySelectorAll(".bc-item").forEach((el) => {
+          el.addEventListener("click", () => {
+            const idx = parseInt(el.dataset.idx, 10);
+            navStack.splice(idx + 1);
+            const target = navStack[navStack.length - 1];
+            if (target)
+              highlightLines(target.start, target.end, target.box, null, false);
+            renderNav();
+          });
+        });
+      }
+
+      // ─── 戻るボタン ───
+      function goBack() {
+        if (navStack.length < 2) return;
+        navStack.pop();
+        const prev = navStack[navStack.length - 1];
+        if (prev) highlightLines(prev.start, prev.end, prev.box, null, false);
+        renderNav();
+      }
+      backBtn.addEventListener("click", goBack);
+      backFloat.addEventListener("click", (e) => {
+        e.stopPropagation();
+        goBack();
+      });
+
+      // ─── 左パネルのブロッククリック ───
+      document.querySelectorAll(".fn-box[data-start]").forEach((box) => {
+        box.addEventListener("click", () => {
+          const s = parseInt(box.dataset.start, 10);
+          const e = parseInt(box.dataset.end, 10);
+          const name =
+            box.dataset.name || box.querySelector(".fn-name").textContent;
+          highlightLines(s, e, box, name);
+        });
+      });
+
+      // ─── コードパネルクリックでスポットライト解除 ───
+      codeContainer.addEventListener("click", (e) => {
+        if (!e.ctrlKey && spotlitActive) clearSpotlight();
+      });
+
+      // ─── AIホバーツールチップ ───
+      let tooltipTimer = null;
+      document.querySelectorAll(".fn-box[data-tip]").forEach((box) => {
+        box.addEventListener("mouseenter", (e) => {
+          clearTimeout(tooltipTimer);
+          document.getElementById("tip-role").textContent =
+            box.dataset.tipRole || "";
+          document.getElementById("tip-name").textContent =
+            box.dataset.name || "";
+          document.getElementById("tip-body").innerHTML = box.dataset.tip;
+          positionTooltip(e);
+          tooltip.classList.add("show");
+        });
+        box.addEventListener("mousemove", positionTooltip);
+        box.addEventListener("mouseleave", () => {
+          tooltipTimer = setTimeout(() => tooltip.classList.remove("show"), 80);
+        });
+      });
+
+      function positionTooltip(e) {
+        const margin = 14;
+        const tipW = 270;
+        let x = e.clientX + margin;
+        let y = e.clientY + margin;
+        if (x + tipW > window.innerWidth) x = e.clientX - tipW - margin;
+        if (y + tooltip.offsetHeight > window.innerHeight)
+          y = e.clientY - tooltip.offsetHeight - margin;
+        tooltip.style.left = Math.max(4, x) + "px";
+        tooltip.style.top = Math.max(4, y) + "px";
+      }
+    </script>
+  </body>
+</html>
