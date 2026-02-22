@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>clock.js — 概要ビュア</title>
+<meta name="overview-source-hash" content="f79e901d">
+<meta name="overview-generated-at" content="2026/02/21 23:00">
+<title>script.js — 概要ビュア</title>
 <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
 <style>
@@ -180,9 +182,10 @@ body.ctrl-held #code-el .token.function.fn-link { cursor: pointer; background: r
 <body>
 
 <div id="header">
-    <h1>🎆 clock.js 概要ビュア</h1>
+    <h1>🎆 script.js 概要ビュア</h1>
     <span class="badge">左ブロックをクリック → スポットライト</span>
     <span class="badge">コード内関数名は <kbd>Ctrl</kbd>+クリックでジャンプ</span>
+    <span class="badge" style="color:#3fb950;border-color:#3fb950;opacity:0.7">🕐 生成: 2026/02/21 23:00</span>
     <span id="esc-hint">ESC でハイライト解除</span>
 </div>
 
@@ -190,111 +193,85 @@ body.ctrl-held #code-el .token.function.fn-link { cursor: pointer; background: r
     <!-- ═════ 左パネル ═════ -->
     <div id="left-panel">
         <div class="section-label primary">⚡ 起動時</div>
-<div class="fn-box primary primary" id="fn-init"
-                data-start="31" data-end="35" data-name="init()"
-                data-tip-role="トリガー：起動時"
-                data-tip="canvas のサイズをウィンドウにフィットさせ、アニメーションを開始します。&lt;br&gt;ウィンドウのリサイズイベントも監視します。">
-                <div class="fn-name">init()</div>
-                <div class="fn-desc">canvas のサイズをウィンドウにフィットさせ、アニメーションを開始する</div>
+<div class="fn-box primary event" id="fn-btnNextClickHandler"
+                data-start="13" data-end="22" data-name="btnNextClickHandler()"
+                data-tip-role="トリガー：次へボタンクリック / 役割：カルーセルを前進させる"
+                data-tip="次へボタン（btnNext）がクリックされた際に、カルーセルを次の表示位置へ1枚分移動させます。現在の表示位置（current）が移動できる最大位置（maxIndex）より小さい場合にのみ移動処理（move()）を実行します。">
+                <div class="fn-name">btnNextClickHandler()</div>
+                <div class="fn-desc">次へボタンがクリックされた時の処理</div>
             </div>
 <div class="arrow primary">↓</div>
-<div class="fn-box primary event" id="fn-resizeCanvas"
-                data-start="39" data-end="43" data-name="resizeCanvas()"
-                data-tip-role="役割：canvasサイズ調整 / トリガー：init(), resizeイベント"
-                data-tip="canvas の &lt;code&gt;width&lt;/code&gt; と &lt;code&gt;height&lt;/code&gt; を現在のウィンドウサイズに設定します。">
-                <div class="fn-name">resizeCanvas()</div>
-                <div class="fn-desc">canvas サイズをウィンドウに合わせてリサイズする</div>
+<div class="fn-box primary event" id="fn-btnPrevClickHandler"
+                data-start="24" data-end="31" data-name="btnPrevClickHandler()"
+                data-tip-role="トリガー：��へボタンクリック / 役割：カルーセルを後退させる"
+                data-tip="前へボタン（btnPrev）がクリックされた際に、カルーセルを前の表示位置へ1枚分移動させます。現在の表示位置（current）が0より大きい場合にのみ移動処理（move()）を実行します。">
+                <div class="fn-name">btnPrevClickHandler()</div>
+                <div class="fn-desc">前へボタンがクリックされた時の処理</div>
             </div>
 <div class="arrow primary">↓</div>
-<div class="fn-box primary loop" id="fn-animate"
-                data-start="169" data-end="187" data-name="animate()"
-                data-tip-role="役割：メインループ / トリガー：init(), requestAnimationFrame"
-                data-tip="&lt;code&gt;requestAnimationFrame&lt;/code&gt; を使って毎フレーム自身を呼び出し、アニメーションを実現します。&lt;br&gt;canvas をクリアし、時計の各要素を再描画します。">
-                <div class="fn-name">animate()</div>
-                <div class="fn-desc">毎フレーム呼ばれるアニメーションループ。canvas をクリアしてから時計全体を再描画する。</div>
+<div class="fn-box primary event" id="fn-descriptionMouseoverHandler"
+                data-start="45" data-end="54" data-name="descriptionMouseoverHandler()"
+                data-tip-role="トリガー：説明文ホバー / 役割：ホバーした説明文に下線を表示する"
+                data-tip="各カルーセルカードの説明文（.case_description）にマウスカーソルが乗った際、他の説明���の下線を消し、ホバーされた説明文にのみ下線（text-decoration: underline）を表示します。">
+                <div class="fn-name">descriptionMouseoverHandler()</div>
+                <div class="fn-desc">説明文にマウスが乗った時の処理</div>
             </div>
-<div class="section-label">🔄 メインループ</div>
+<div class="section-label">▶️ 次へボタン操作</div>
 <div class="loop-group">
-<div class="fn-box loop loop" id="fn-animate"
-                data-start="169" data-end="187" data-name="animate()"
-                data-tip-role="役割：メインループ / トリガー：init(), requestAnimationFrame"
-                data-tip="&lt;code&gt;requestAnimationFrame&lt;/code&gt; を使って毎フレーム自身を呼び出し、アニメーションを実現します。&lt;br&gt;canvas をクリアし、時計の各要素を再描画します。">
-                <div class="fn-name">animate()</div>
-                <div class="fn-desc">毎フレーム呼ばれるアニメーションループ。canvas をクリアしてから時計全体を再描画する。</div>
+<div class="fn-box event" id="fn-btnNextClickHandler"
+                data-start="13" data-end="22" data-name="btnNextClickHandler()"
+                data-tip-role="トリガー：次へボタンクリック / 役割：カルーセルを前進させる"
+                data-tip="次へボタン（btnNext）がクリックされた際に、カルーセルを次の表示位置へ1枚分移動させます。現在の表示位置（current）が移動できる最大位置（maxIndex）より小さい場合にのみ移動処理（move()）を実行します。">
+                <div class="fn-name">btnNextClickHandler()</div>
+                <div class="fn-desc">次へボタンがクリックされた時の処理</div>
             </div>
 <div class="arrow">↓</div>
-<div class="fn-box util small" id="fn-drawFace"
-                    data-start="93" data-end="111" data-name="drawFace()"
-                    data-tip-role="役割：描画"
-                    data-tip="時計の外枠と文字盤の背景円を描画します。&lt;br&gt;外枠にはグロー効果を適用しています。">
-                    <div class="fn-name">drawFace()</div>
-                    <div class="fn-desc">時計の文字盤（円形の背景）を描画する</div>
-                </div>
-<div class="arrow">↓</div>
-<div class="fn-box util small" id="fn-drawTicksAndNumbers"
-                    data-start="116" data-end="143" data-name="drawTicksAndNumbers()"
-                    data-tip-role="役割：描画"
-                    data-tip="12個の目盛り線と、3, 6, 9, 12の数字を描画します。&lt;br&gt;3, 6, 9, 12の目盛りは長く、太くなります。">
-                    <div class="fn-name">drawTicksAndNumbers()</div>
-                    <div class="fn-desc">12個の目盛り（時間マーク）と数字を描画する</div>
-                </div>
-<div class="arrow">↓</div>
-<div class="fn-box util small" id="fn-drawHands"
-                    data-start="149" data-end="162" data-name="drawHands()"
-                    data-tip-role="役割：描画"
-                    data-tip="&lt;code&gt;getHandAngles()&lt;/code&gt; を使って現在の時刻の角度を取得し、時針、分針、秒針を描画します。&lt;br&gt;中央にはドットも描画されます。">
-                    <div class="fn-name">drawHands()</div>
-                    <div class="fn-desc">時針・分針・秒針と中心ドットを描画する</div>
+<div class="fn-box util small" id="fn-move"
+                    data-start="33" data-end="39" data-name="move()"
+                    data-tip-role="役割：カルーセル表示位置の更新 / ユーティリティ"
+                    data-tip="現在の表示位置（current）に基づいて、カルーセル全体（track）を横方向に移動させます。カード1枚の幅（cardWidth）と現在の表示位置を乗算し、translateXプロパティに設定することで、視覚的なスライドを実現します。">
+                    <div class="fn-name">move()</div>
+                    <div class="fn-desc">カルーセルを現在の位置に移動させる</div>
                 </div>
 </div>
-<div class="section-label">🎨 針の描画</div>
+<div class="section-label">◀️ 前へボタン操作</div>
 <div class="loop-group">
-<div class="fn-box util small" id="fn-drawHands"
-                    data-start="149" data-end="162" data-name="drawHands()"
-                    data-tip-role="役割：描画"
-                    data-tip="&lt;code&gt;getHandAngles()&lt;/code&gt; を使って現在の時刻の角度を取得し、時針、分針、秒針を描画します。&lt;br&gt;中央にはドットも描画されます。">
-                    <div class="fn-name">drawHands()</div>
-                    <div class="fn-desc">時針・分針・秒針と中心ドットを描画する</div>
-                </div>
+<div class="fn-box event" id="fn-btnPrevClickHandler"
+                data-start="24" data-end="31" data-name="btnPrevClickHandler()"
+                data-tip-role="トリガー：��へボタンクリック / 役割：カルーセルを後退させる"
+                data-tip="前へボタン（btnPrev）がクリックされた際に、カルーセルを前の表示位置へ1枚分移動させます。現在の表示位置（current）が0より大きい場合にのみ移動処理（move()）を実行します。">
+                <div class="fn-name">btnPrevClickHandler()</div>
+                <div class="fn-desc">前へボタンがクリックされた時の処理</div>
+            </div>
 <div class="arrow">↓</div>
-<div class="fn-box util small" id="fn-getHandAngles"
-                    data-start="53" data-end="65" data-name="getHandAngles()"
-                    data-tip-role="ユーティリティ"
-                    data-tip="現在のシステム時刻を取得し、時針、分針、秒針の角度をラジアンで計算して返します。&lt;br&gt;12時が上になるように -π/2 のオフセットを適用しています。">
-                    <div class="fn-name">getHandAngles()</div>
-                    <div class="fn-desc">現在の時刻から時針・分針・秒針の角度（ラジアン）を返す</div>
-                </div>
-<div class="arrow">↓</div>
-<div class="fn-box util small" id="fn-drawHand"
-                    data-start="74" data-end="88" data-name="drawHand()"
-                    data-tip-role="役割：描画"
-                    data-tip="指定された角度、長さ、太さ、色で時計の針を1本描画します。&lt;br&gt;影の描画も行います。">
-                    <div class="fn-name">drawHand()</div>
-                    <div class="fn-desc">針を1本描画する</div>
+<div class="fn-box util small" id="fn-move"
+                    data-start="33" data-end="39" data-name="move()"
+                    data-tip-role="役割：カルーセル表示位置の更新 / ユーティリティ"
+                    data-tip="現在の表示位置（current）に基づいて、カルーセル全体（track）を横方向に移動させます。カード1枚の幅（cardWidth）と現在の表示位置を乗算し、translateXプロパティに設定することで、視覚的なスライドを実現します。">
+                    <div class="fn-name">move()</div>
+                    <div class="fn-desc">カルーセルを現在の位置に移動させる</div>
                 </div>
 </div>
-<div class="section-label">🌐 ウィンドウリサイズ</div>
+<div class="section-label">💬 説明文ホバー</div>
 <div class="loop-group">
-<div class="fn-box event" id="fn-resizeCanvas"
-                data-start="39" data-end="43" data-name="resizeCanvas()"
-                data-tip-role="役割：canvasサイズ調整 / トリガー：init(), resizeイベント"
-                data-tip="canvas の &lt;code&gt;width&lt;/code&gt; と &lt;code&gt;height&lt;/code&gt; を現在のウィンドウサイズに設定します。">
-                <div class="fn-name">resizeCanvas()</div>
-                <div class="fn-desc">canvas サイズをウィンドウに合わせてリサイズする</div>
+<div class="fn-box event" id="fn-descriptionMouseoverHandler"
+                data-start="45" data-end="54" data-name="descriptionMouseoverHandler()"
+                data-tip-role="トリガー：説明文ホバー / 役割：ホバーした説明文に下線を表示する"
+                data-tip="各カルーセルカードの説明文（.case_description）にマウスカーソルが乗った際、他の説明���の下線を消し、ホバーされた説明文にのみ下線（text-decoration: underline）を表示します。">
+                <div class="fn-name">descriptionMouseoverHandler()</div>
+                <div class="fn-desc">説明文にマウスが乗った時の処理</div>
             </div>
 </div>
 <div class="section-label">⚙️ CONFIG — 設定値</div>
 <div class="fn-box cfg">
 <div class="config-grid">
-<span>CONFIG.radius</span><span>180px (時計の半径)</span>
-<span>CONFIG.faceColor</span><span>#1a1a2e (文字盤の色)</span>
-<span>CONFIG.rimColor</span><span>#e0c97f (外枠の色)</span>
-<span>CONFIG.tickColor</span><span>#c9d1d9 (目盛りの色)</span>
-<span>CONFIG.handColors.hour</span><span>#e0c97f (時針の色)</span>
-<span>CONFIG.handColors.minute</span><span>#c9d1d9 (分針の色)</span>
-<span>CONFIG.handColors.second</span><span>#e05555 (秒針の色)</span>
-<span>CONFIG.numberColor</span><span>#e6edf3 (数字の色)</span>
-<span>CONFIG.shadowColor</span><span>rgba(0, 0, 0, 0.5)</span>
+<span>track</span><span>カルーセル表示領域（.case_track要素）</span>
+<span>items</span><span>カルーセルカード要素のリスト（.case_item要素）</span>
+<span>btnPrev</span><span>前へボタン（.case_nav_buttonの最初の要素）</span>
+<span>btnNext</span><span>次へボタン（.case_nav_buttonの2番目の要素）</span>
+<span>current</span><span>カルーセルの現在の表示位置（0から始まるインデックス）</span>
+<span>visibleCount</span><span>一度に見えるカード枚数（画面に同時に表示されるカルーセルカードの枚数）</span>
+<span>maxIndex</span><span>最大移動可能位置（カルーセルがスライドできる最大のインデックス位置＝画面に表示されるスライド枚数の上限）</span>
 </div>
 </div>
 
@@ -302,7 +279,7 @@ body.ctrl-held #code-el .token.function.fn-link { cursor: pointer; background: r
 
     <!-- ═════ 右パネル ═════ -->
     <div id="right-panel">
-        <div id="right-header">📄 <span>clock.js</span> — 193行</div>
+        <div id="right-header">📄 <span>script.js</span> — 55行</div>
         <div id="nav-bar">
             <button id="back-btn" disabled title="1つ前の関数に戻る">← 戻る</button>
             <div id="breadcrumb">
@@ -345,7 +322,7 @@ let spotlitActive = false;
 const navStack = [];
 
 // APIから提供された関数情報をマップ化
-const fnList = [{"name":"init()","start":31,"end":35},{"name":"resizeCanvas()","start":39,"end":43},{"name":"getHandAngles()","start":53,"end":65},{"name":"drawHand()","start":74,"end":88},{"name":"drawFace()","start":93,"end":111},{"name":"drawTicksAndNumbers()","start":116,"end":143},{"name":"drawHands()","start":149,"end":162},{"name":"animate()","start":169,"end":187}];
+const fnList = [{"name":"btnNextClickHandler()","start":13,"end":22},{"name":"btnPrevClickHandler()","start":24,"end":31},{"name":"move()","start":33,"end":39},{"name":"descriptionMouseoverHandler()","start":45,"end":54}];
 const fnMap = {};
 fnList.forEach(f => {
     const raw = f.name;
@@ -357,198 +334,60 @@ fnList.forEach(f => {
 });
 
 // ソースコードを直接埋め込み（fetchの代わり）
-const __embeddedSource = `// =============================================================
-// 🕐 アナログ時計 — canvas 描画デモ
-// clock.html と同じフォルダに置いて開いてください
-// =============================================================
+const __embeddedSource = `const track = document.querySelector(".case_track");
+// カードの枚数
+const items = document.querySelectorAll(".case_item");
+const btnPrev = document.querySelectorAll(".case_nav_button")[0]; // ＜
+const btnNext = document.querySelectorAll(".case_nav_button")[1]; // ＞
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+// いんでっくすは０から始まるので、currentが0のときは最初のカードが表示されている状態です。
+let current = 0;
+const visibleCount = 4; // 一度に見える枚数
+// items.lengthは現在５枚なので、5 - 4 = 1枚分動ける
+const maxIndex = items.length - visibleCount; // 動ける最大数
 
-// ─── 設定オブジェクト ───────────────────────────────────
-const CONFIG = {
-    radius: 180,          // 時計の半径（px）
-    faceColor: '#1a1a2e', // 文字盤の色
-    rimColor: '#e0c97f',  // 外枠の色
-    tickColor: '#c9d1d9', // 目盛りの色
-    handColors: {
-        hour:   '#e0c97f', // 時針の色
-        minute: '#c9d1d9', // 分針の色
-        second: '#e05555', // 秒針の色
-    },
-    numberColor: '#e6edf3', // 数字の色
-    shadowColor: 'rgba(0, 0, 0, 0.5)',
-};
+btnNext.addEventListener("click", (e) => {
+  e.preventDefault();
+  //
+  // 現在の表示位置(current/現在の移動している数)が動ける最大数(maxIndex)より小さい場合、次へ移動
+  if (current < maxIndex) {
+    // currentを1増やして次の位置へ移動
+    current++;
+    move();
+  }
+});
 
-// =============================================================
-// ── 初期化 ────────────────────────────────────────────────
-// =============================================================
+btnPrev.addEventListener("click", (e) => {
+  e.preventDefault();
+  // 現在の表示位置(current/現在の移動している数)が0より大きい場合、戻れる
+  if (current > 0) {
+    current--;
+    move();
+  }
+});
 
-/**
- * canvas のサイズをウィンドウにフィットさせ、アニメーションを開始する
- */
-function init() {
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    animate();
+function move() {
+  const cardWidth = items[0].offsetWidth + 20;
+  console.log("cardWidth:", cardWidth); // ← 追加
+  console.log("current:", current); // ← 追加
+  //　次の位置にすすんだ数だけ、カードの幅に余白20pxを加えた値をかけて、translateXで移動させる
+  track.style.transform = \`translateX(-\${current * cardWidth}px)\`;
 }
 
-/**
- * canvas サイズをウィンドウに合わせてリサイズする
- */
-function resizeCanvas() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+// クリックしたら、テキストデコレーションがつくようにする
 
-// =============================================================
-// ── 描画ユーティリティ ────────────────────────────────────
-// =============================================================
+document.querySelectorAll(".case_description").forEach((case_description) => {
+  case_description.addEventListener("mouseover", (e) => {
+    e.preventDefault();
 
-/**
- * 現在の時刻から時針・分針・秒針の角度（ラジアン）を返す
- * @returns {{ h: number, m: number, s: number }}
- */
-function getHandAngles() {
-    const now = new Date();
-    const h = now.getHours() % 12;
-    const m = now.getMinutes();
-    const s = now.getSeconds();
+    document.querySelectorAll(".case_description").forEach((el) => {
+      el.style.textDecoration = "none";
+    });
 
-    return {
-        // -π/2 ずらして12時を上にする
-        h: ((h + m / 60) / 12) * Math.PI * 2 - Math.PI / 2,
-        m: ((m + s / 60) / 60) * Math.PI * 2 - Math.PI / 2,
-        s: (s / 60) * Math.PI * 2 - Math.PI / 2,
-    };
-}
-
-/**
- * 針を1本描画する
- * @param {number} angle  - 角度（ラジアン）
- * @param {number} length - 針の長さ（px）
- * @param {number} width  - 針の太さ（px）
- * @param {string} color  - 針の色
- */
-function drawHand(angle, length, width, color) {
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(
-        Math.cos(angle) * length,
-        Math.sin(angle) * length
-    );
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    ctx.lineCap = 'round';
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = color;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-}
-
-/**
- * 時計の文字盤（円形の背景）を描画する
- */
-function drawFace() {
-    const r = CONFIG.radius;
-
-    // 外枠のグロー効果
-    ctx.beginPath();
-    ctx.arc(0, 0, r + 4, 0, Math.PI * 2);
-    ctx.strokeStyle = CONFIG.rimColor;
-    ctx.lineWidth = 4;
-    ctx.shadowColor = CONFIG.rimColor;
-    ctx.shadowBlur = 20;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    // 文字盤の塗りつぶし
-    ctx.beginPath();
-    ctx.arc(0, 0, r, 0, Math.PI * 2);
-    ctx.fillStyle = CONFIG.faceColor;
-    ctx.fill();
-}
-
-/**
- * 12個の目盛り（時間マーク）と数字を描画する
- */
-function drawTicksAndNumbers() {
-    const r = CONFIG.radius;
-
-    for (let i = 1; i <= 12; i++) {
-        const angle = (i / 12) * Math.PI * 2 - Math.PI / 2;
-
-        // 目盛り線
-        const isHour = i % 3 === 0; // 3・6・9・12は長い目盛り
-        const tickLen = isHour ? 18 : 10;
-        const inner = r - tickLen;
-
-        ctx.beginPath();
-        ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
-        ctx.lineTo(Math.cos(angle) * (r - 4), Math.sin(angle) * (r - 4));
-        ctx.strokeStyle = CONFIG.tickColor;
-        ctx.lineWidth = isHour ? 2.5 : 1;
-        ctx.stroke();
-
-        // 数字（3・6・9・12のみ）
-        if (isHour) {
-            const textR = r - 36;
-            ctx.font = 'bold 22px "Segoe UI", sans-serif';
-            ctx.fillStyle = CONFIG.numberColor;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(String(i), Math.cos(angle) * textR, Math.sin(angle) * textR);
-        }
-    }
-}
-
-/**
- * 時針・分針・秒針と中心ドットを描画する
- */
-function drawHands() {
-    const r = CONFIG.radius;
-    const { h, m, s } = getHandAngles();
-
-    drawHand(h, r * 0.55, 6,  CONFIG.handColors.hour);
-    drawHand(m, r * 0.78, 4,  CONFIG.handColors.minute);
-    drawHand(s, r * 0.88, 1.5, CONFIG.handColors.second);
-
-    // 中心ドット
-    ctx.beginPath();
-    ctx.arc(0, 0, 6, 0, Math.PI * 2);
-    ctx.fillStyle = CONFIG.handColors.second;
-    ctx.fill();
-}
-
-// =============================================================
-// ── メインループ ───────────────────────────────────────────
-// =============================================================
-
-/**
- * 毎フレーム呼ばれるアニメーションループ。
- * canvas をクリアしてから時計全体を再描画する。
- */
-function animate() {
-    requestAnimationFrame(animate);
-
-    // 背景をクリア
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // 時計の中心に座標系を移動して描画
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-
-    drawFace();
-    drawTicksAndNumbers();
-    drawHands();
-
-    ctx.restore();
-}
-
-// =============================================================
-// ── 起動 ───────────────────────────────────────────────────
-// =============================================================
-init();
+    // 現在の表示位置(current/現在の移動している数)が0より大きい場合、戻れる
+    e.target.style.textDecoration = "underline";
+  });
+});
 `;
 (function() {
     loadingMsg.style.display = 'none';
