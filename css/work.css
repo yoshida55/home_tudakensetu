@@ -1026,7 +1026,6 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  background: #8b6914;
 
   clip-path: inset(100% 0 0 0);
   transition: clip-path 0.5s ease;
@@ -1035,8 +1034,4 @@ html {
 
 .footer_arrow:hover::before {
   clip-path: inset(0 0 0 0);
-}
-
-.footer_arrow:hover {
-  color: #8b6914;
 }
