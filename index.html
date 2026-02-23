@@ -385,11 +385,13 @@
     <!-- ===============================================
     お問い合わせ
     =============================================== -->
+    <!-- お問い合わせエリア【grid 2列】 -->
     <section class="inquiry_area">
-      <!-- お問い合わせテキスト -->
+      <!-- └ テキスト側（左） -->
       <div class="inquiry_text">
         <p class="section_label">Contact</p>
         <h2 class="section_title">お問い合わせ</h2>
+        <!-- └ └ 説明文 -->
         <p class="inquiry_description">
           お問い合わせはフォーム、または、
           <br />
@@ -397,34 +399,34 @@
         </p>
       </div>
 
-      <!-- お問い合わせフォーム 縦３列 フレックス -->
+      <!-- └ フォーム側（右） -->
       <div class="inquiry_form">
-        <!-- フレックスで左がメッセージ、右がボタン -->
+        <!-- └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 -->
         <div class="inquiry_row">
-          <p class="inquiry_row_label">
-            WEBからの
-            <br />
-            お問い合わせ
-          </p>
-          <button type="button" class="inquiry_button">お問い合わせフォームはこちら →</button>
+          <!-- 行ラベル -->
+          <p class="inquiry_row_label">WEBからの<br />お問い合わせ</p>
+          <!-- お問い合わせボタン -->
+          <button type="button" class="inquiry_button">
+            お問い合わせフォームはこちら
+            <a class="inquiry_form_link" href="#">→</a>
+          </button>
         </div>
-        <!-- フレックス電話からのお問い合わせ -->
+        <!-- └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 -->
         <div class="inquiry_row">
-          <p class="inquiry_row_label">
-            お電話から
-            <br />
-            のお問い合わせ
-          </p>
+          <!-- 行ラベル -->
+          <p class="inquiry_row_label">お電話からの<br />お問い合わせ</p>
+          <!-- 電話情報 -->
           <div class="inquiry_phone_info">
+            <!-- 電話番号 -->
             <p class="inquiry_phone_number">0964-27-5457</p>
+            <!-- 受付時間 -->
             <p class="inquiry_hours">受付時間：9:00〜17:30 | 定休日：水曜日</p>
           </div>
         </div>
-
-        <!-- モデルハウス一覧 -->
-        <div class="inquiry_row inquiry_links">
-          <a href="#" class="arrow_link">モデルハウス一覧</a>
-          <a href="#" class="arrow_link">土地・分譲情報</a>
+        <!-- リンク行 -->
+        <div class="inquiry_row_arrow">
+          <a href="#" class="inquiry_arrow_link">モデルハウス一覧</a>
+          <a href="#" class="inquiry_arrow_link2">土地・分譲情報</a>
         </div>
       </div>
     </section>

@@ -756,6 +756,152 @@ html {
    │ - 営業時間・定休日も表示                │
    └─────────────────────────────────────────┘ */
 
+/* お問い合わせエリア【grid 2列】 */
+.inquiry_area {
+  padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+  display: grid;
+
+  background-color: #f5efe6;
+  height: 60rem;
+  grid-template-columns: 4fr 6fr;
+  gap: 2rem;
+}
+
+/* └ テキスト側（左） */
+.inquiry_text {
+}
+
+/* └ └ 説明文 */
+.inquiry_description {
+  font-size: 1.8rem;
+  color: black;
+}
+
+/* └ フォーム側（右） */
+.inquiry_form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: space-between;
+}
+
+/* └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 */
+.inquiry_row {
+  height: 40%;
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  height: 15rem;
+  align-items: center;
+  background-color: #fcf5eb;
+}
+
+/* 行ラベル */
+.inquiry_row_label {
+  height: 40%;
+  width: 30%;
+  color: black;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  justify-content: center;
+
+  border-right: 0.1rem solid #8b6914;
+}
+
+/* お問い合わせボタン */
+.inquiry_button {
+  border-radius: 40px;
+  width: fit-content;
+  height: 6rem;
+  background-color: #bd7833;
+  color: white;
+  margin-right: auto;
+}
+
+.inquiry_form_link {
+  display: inline-block;
+  width: 3rem;
+  margin-left: 3rem;
+  text-align: center;
+  color: white;
+
+  border-radius: 40%;
+  border: 0.1px solid #ffffff;
+}
+
+/* 電話情報 */
+.inquiry_phone_info {
+  color: black;
+  width: 70%;
+}
+
+/* 電話番号 */
+.inquiry_phone_number {
+  width: 70%;
+  padding-left: 2rem;
+  font-size: 2.7rem;
+  color: #da6d00;
+  margin-right: auto;
+}
+
+/* 受付時間 */
+.inquiry_hours {
+  width: 70%;
+  padding-left: 2rem;
+  font-size: 1.2rem;
+  color: #da6d00;
+  margin-right: auto;
+}
+
+.inquiry_row_arrow {
+  padding-left: 6rem;
+  height: 20%;
+  color: black;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  font-size: 1.2rem;
+}
+
+/* リンク行 */
+.inquiry_arrow_link {
+  width: 30%;
+  margin-top: 0rem;
+  color: black;
+  position: relative;
+}
+.inquiry_arrow_link2 {
+  width: 70%;
+  margin-right: auto;
+  color: black;
+  position: relative;
+}
+
+/* 一覧を見るリンク */
+.inquiry_arrow_link2::after,
+.inquiry_arrow_link::after {
+  content: "→";
+  position: absolute;
+  left: -6rem;
+
+  top: -0.3rem;
+  width: 4rem;
+  height: 1.8rem;
+
+  margin-top: 0.3rem;
+  border-radius: 40%;
+  border: 0.1rem solid #8b6914;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ┌─────────────────────────────────────────┐
    │ フッター                                │
    │ - 会社情報（住所・電話・Instagram）     │
