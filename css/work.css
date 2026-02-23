@@ -1022,16 +1022,22 @@ html {
   isolation: isolate;
 }
 
-.footer_arrow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 0.5s ease;
-  z-index: -1;
+.footer_arrow_icon {
+  display: block;
 }
 
-.footer_arrow:hover::before {
-  clip-path: inset(0 0 0 0);
+.footer_arrow:hover .footer_arrow_icon {
+  animation: arrow-reveal 0.5s ease forwards;
+}
+
+@keyframes arrow-reveal {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  1% {
+    clip-path: inset(100% 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }
