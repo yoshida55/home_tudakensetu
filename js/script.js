@@ -32,8 +32,6 @@ btnPrev.addEventListener("click", (e) => {
 
 function move() {
   const cardWidth = items[0].offsetWidth + 20;
-  console.log("cardWidth:", cardWidth); // ← 追加
-  console.log("current:", current); // ← 追加
   //　次の位置にすすんだ数だけ、カードの幅に余白20pxを加えた値をかけて、translateXで移動させる
   track.style.transform = `translateX(-${current * cardWidth}px)`;
 }

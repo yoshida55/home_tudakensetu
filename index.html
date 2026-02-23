@@ -404,17 +404,22 @@
         <!-- └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 -->
         <div class="inquiry_row">
           <!-- 行ラベル -->
-          <p class="inquiry_row_label">WEBからの<br />お問い合わせ</p>
+          <p class="inquiry_row_label">
+            WEBからの
+            <br />
+            お問い合わせ
+          </p>
           <!-- お問い合わせボタン -->
-          <button type="button" class="inquiry_button">
-            お問い合わせフォームはこちら
-            <a class="inquiry_form_link" href="#">→</a>
-          </button>
+          <button type="button" class="inquiry_button">お問い合わせフォームはこちら</button>
         </div>
         <!-- └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 -->
         <div class="inquiry_row">
           <!-- 行ラベル -->
-          <p class="inquiry_row_label">お電話からの<br />お問い合わせ</p>
+          <p class="inquiry_row_label">
+            お電話からの
+            <br />
+            お問い合わせ
+          </p>
           <!-- 電話情報 -->
           <div class="inquiry_phone_info">
             <!-- 電話番号 -->
@@ -434,28 +439,54 @@
     <!-- =============================================== -->
     <!-- フッター -->
     <!-- =============================================== -->
-    <!-- 会社名・私たちについて、施工事例（フレックス３列） -->
+    <!-- フッター全体【flex 横4列: 会社情報 + ナビ列1 + ナビ列2 + ナビ列3】 -->
     <footer class="footer_area">
-      <h2>
-        <a href="#" class="footer_link"
-          >私たちについて
-          <img src="img/common/logo.png" alt="会社のロゴ" />
+      <!-- └ 会社情報（左） -->
+      <div class="footer_company">
+        <!-- └ └ ロゴリンク -->
+        <a href="#" class="footer_logo_link">
+          <!-- └ └ ロゴ画像 -->
+          <img src="img/common/logo.png" alt="会社のロゴ" class="footer_logo_img" />
         </a>
-      </h2>
-      <!-- 私たちについて -->
-      <div class="footer_nav">
-        <a href="#" class="footer_nav">会社概要</a>
-        <a href="#" class="footer_nav">アクセス</a>
-        <a href="#" class="footer_nav_sub">採用情報</a>
-        <a href="#" class="footer_nav_sub">採用情報</a>
-        <a href="#" class="footer_nav_sub">採用情報</a>
-        <a href="#" class="footer_nav_sub">採用情報</a>
-        <a href="#" class="footer_nav_sub">採用情報</a>
+        <!-- └ └ 住所 -->
+        <address class="footer_address">住所：熊本県熊本市南区城南町碇201-6</address>
+        <!-- └ └ 電話番号 -->
+        <p class="footer_tel">TEL：0964-27-5457</p>
+        <!-- └ └ SNSリンク【flex 横2列: アイコン + 名前】 -->
+        <a href="#" class="footer_sns_link">
+          <img src="img/icons/logo-instagram.svg" alt="インスタグラムアイコン" class="footer_sns_img" />
+          <span class="footer_sns_name">Instagram</span>
+        </a>
+        <!-- └ └ バナーリンク -->
+        <a href="#" class="footer_banner_link">
+          <img src="img/icons/bn-jutakutenjijo-net.png" alt="住宅展示場ネット" class="footer_banner_img" />
+        </a>
       </div>
-      <div>
-        <a href="#" class="施工">施工事例</a>
+      <!-- └ ナビゲーション列1 -->
+      <div class="footer_nav_column">
+        <a href="#" class="footer_nav_link">私たちについて</a>
+        <a href="#" class="footer_nav_link">家づくりのこだわり</a>
+        <a href="#" class="footer_sub_link">超高気密 ＋ 超高断熱</a>
+        <a href="#" class="footer_sub_link">パッシブ設計 ＋ 全館空調</a>
+        <a href="#" class="footer_sub_link">高耐震 ＋ 耐久性</a>
+        <a href="#" class="footer_sub_link">フルオーダーメイド</a>
+        <a href="#" class="footer_sub_link">手の届く価格</a>
       </div>
-      <script src="js/script.js"></script>
+      <!-- └ ナビゲーション列2 -->
+      <div class="footer_nav_column">
+        <a href="#" class="footer_nav_link">施工事例</a>
+        <a href="#" class="footer_nav_link">モデルハウス</a>
+        <a href="#" class="footer_nav_link">土地・分譲情報</a>
+      </div>
+      <!-- └ ナビゲーション列3（右） -->
+      <div class="footer_nav_column">
+        <a href="#" class="footer_nav_link">会社案内</a>
+        <a href="#" class="footer_nav_link">お知らせ</a>
+        <a href="#" class="footer_nav_link">ブログ</a>
+      </div>
     </footer>
+
+    <div class="copyright">© Mizota Architectural Design Co., Ltd.</div>
+    <script src="js/script.js"></script>
   </body>
 </html>

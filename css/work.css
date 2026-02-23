@@ -302,28 +302,24 @@ html {
 .concept_img:nth-child(3) {
   top: 50rem;
   width: 20rem;
-  height: auto;
 }
 
 .concept_img:nth-child(4) {
   top: 65rem;
   right: 10rem;
   width: 20rem;
-  height: auto;
 }
 
 .concept_img:nth-child(5) {
   top: 30rem;
   right: 0;
   width: 13rem;
-  height: auto;
 }
 
 .concept_img:nth-child(6) {
   bottom: 0;
   right: 0;
   width: 15rem;
-  height: auto;
 }
 
 /* ============================================
@@ -359,7 +355,6 @@ html {
 .concept_label {
   padding-top: 13rem;
   width: 100%;
-  height: auto;
   font-size: 1.1rem;
   transition: transform 0.3s ease-out;
   text-align: center;
@@ -406,7 +401,6 @@ html {
   display: block;
   width: 20rem;
   margin-top: 8rem;
-  height: auto;
   font-size: 1.4rem;
   left: 50%;
   transform: translateX(-50%);
@@ -439,8 +433,6 @@ html {
 
 /* 施工事例エリア */
 .case_area {
-  /* debug前提的に数値を設定 */
-  height: auto;
   padding: var(--section-gap) 2rem var(--section-gap); /* 基本セクション間は10rem*2=20rem */
   width: 100%;
 }
@@ -490,7 +482,7 @@ html {
   overflow: hidden;
 }
 
-/* jsで利用する。ために設定 基本的にＨＴＭＬ上利用しない*/
+/* jsで利用する。ために設定 基本的にHTML上利用しない*/
 .case_track {
   gap: 2rem;
 
@@ -506,7 +498,6 @@ html {
   padding-bottom: 2rem;
   width: calc((100% - 6rem) / 4); /* 4枚でgap2remを考慮して計算 */
   background-color: #fff;
-  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -690,7 +681,7 @@ html {
 
 /* 私たちについて【flex 横2列: 私たちについて + 販売中の物件】 */
 .office_area {
-  padding: 0rem var(--padding-side) var(--section-gap) var(--padding-side);
+  padding: 0 var(--padding-side) var(--section-gap) var(--padding-side);
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -761,7 +752,7 @@ html {
   padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
   display: grid;
 
-  background-color: #f5efe6;
+  background-color: #d6d2ce;
   height: 60rem;
   grid-template-columns: 4fr 6fr;
   gap: 2rem;
@@ -814,11 +805,26 @@ html {
 /* お問い合わせボタン */
 .inquiry_button {
   border-radius: 40px;
-  width: fit-content;
+  width: 25rem;
+
   height: 6rem;
   background-color: #bd7833;
   color: white;
   margin-right: auto;
+  position: relative;
+}
+
+.inquiry_button::after {
+  content: "→";
+  position: absolute;
+  right: 0.8rem;
+  top: 2.2rem;
+
+  border: 0.1rem solid white;
+  width: 2.8rem;
+  height: 1.5rem;
+  border-radius: 40%;
+  color: white;
 }
 
 .inquiry_form_link {
@@ -871,7 +877,7 @@ html {
 /* リンク行 */
 .inquiry_arrow_link {
   width: 30%;
-  margin-top: 0rem;
+  margin-top: 0;
   color: black;
   position: relative;
 }
@@ -904,7 +910,95 @@ html {
 
 /* ┌─────────────────────────────────────────┐
    │ フッター                                │
-   │ - 会社情報（住所・電話・Instagram）     │
-   │ - メニューを再掲                        │
-   │ - ページトップ戻るボタン                │
    └─────────────────────────────────────────┘ */
+
+/* フッター全体【flex 横4列: 会社情報 + ナビ列1 + ナビ列2 + ナビ列3】 */
+.footer_area {
+  padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+
+  background-color: #f5efe6;
+
+  display: flex;
+  gap: 2rem;
+}
+
+/* └ 会社情報（左） */
+.footer_company {
+  width: 50%;
+}
+
+/* └ └ ロゴ画像 */
+.footer_logo_img {
+  width: 25rem;
+  height: 5rem;
+}
+
+/* └ └ 住所 */
+.footer_address {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: black;
+  text-decoration: underline;
+}
+
+/* └ └ 電話番号 */
+.footer_tel {
+  font-size: 1.2rem;
+  color: black;
+}
+
+/* └ └ SNSリンク【flex 横2列: アイコン + 名前】 */
+.footer_sns_link {
+  margin-top: 2rem;
+  display: flex;
+}
+
+/* SNSアイコン */
+.footer_sns_img {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+/* └ └ バナーリンク */
+.footer_banner_link {
+  display: block;
+  margin-top: 4rem;
+}
+
+/* └ └ バナー画像 */
+.footer_banner_img {
+  width: 13rem;
+}
+
+/* └ ナビゲーション列 */
+.footer_nav_column {
+  width: 15%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+/* ナビリンク */
+.footer_nav_link {
+  color: black;
+  font-size: 1.4rem;
+}
+
+/* サブナビリンク */
+.footer_sub_link {
+  color: black;
+  font-size: 1rem;
+  padding-left: 1rem;
+}
+
+/* コピーライト */
+.copyright {
+  padding: 2rem 0 4rem 0;
+  width: auto;
+  height: 5rem;
+  font-size: 1rem;
+  color: black;
+  text-align: center;
+}
