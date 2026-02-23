@@ -1002,3 +1002,41 @@ html {
   color: black;
   text-align: center;
 }
+
+.footer_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 4rem;
+  height: 5rem;
+
+  font-size: 1.5rem;
+
+  border: 0.1rem solid #8b6914;
+  border-radius: 45%;
+  color: #da6d00;
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.footer_arrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #8b6914;
+
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.5s ease;
+  z-index: -1;
+}
+
+.footer_arrow:hover::before {
+  clip-path: inset(0 0 0 0);
+}
+
+.footer_arrow:hover {
+  color: #8b6914;
+}
