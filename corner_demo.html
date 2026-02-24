@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>コーナーのwidth/height説明</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+        padding: 4rem;
+      }
+
+      h2 {
+        margin-bottom: 0.5rem;
+      }
+      p {
+        margin: 0 0 1.5rem;
+        color: #555;
+      }
+
+      /* ===== 共通ボタン ===== */
+      .btn {
+        position: relative;
+        padding: 1rem 3rem;
+        font-size: 1.2rem;
+        background: none;
+        border: none;
+        cursor: default;
+      }
+      .btn::before,
+      .btn::after {
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        transition:
+          width 0.6s ease,
+          height 0.6s ease;
+      }
+      .btn::before {
+        top: 0;
+        left: 0;
+        border-top: 3px solid black;
+        border-left: 3px solid black;
+      }
+      .btn::after {
+        bottom: 0;
+        right: 0;
+        border-bottom: 3px solid black;
+        border-right: 3px solid black;
+      }
+
+      /* ===== 3パターン ===== */
+      .size-small::before,
+      .size-small::after {
+        width: 10px;
+        height: 10px;
+      }
+      .size-medium::before,
+      .size-medium::after {
+        width: 25px;
+        height: 25px;
+      }
+      .size-large::before,
+      .size-large::after {
+        width: 60px;
+        height: 60px;
+      }
+
+      /* ===== ラベル付きSVG説明 ===== */
+      .demo-row {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+      .label {
+        font-size: 0.85rem;
+        color: #888;
+        text-align: center;
+      }
+
+      /* ===== アニメーション確認 ===== */
+      .btn-anim::before,
+      .btn-anim::after {
+        width: 20px;
+        height: 20px;
+      }
+      .btn-anim:hover::before,
+      .btn-anim:hover::after {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>① width/height の大きさ比較</h2>
+    <p>width・height を変えると「L字の見える範囲」が変わる</p>
+
+    <div class="demo-row">
+      <div>
+        <button class="btn size-small">Read More</button>
+        <div class="label">
+          width: 10px
+          <br />
+          height: 10px
+          <br />
+          （小さいL字）
+        </div>
+      </div>
+      <div>
+        <button class="btn size-medium">Read More</button>
+        <div class="label">
+          width: 25px
+          <br />
+          height: 25px
+          <br />
+          （中くらい）
+        </div>
+      </div>
+      <div>
+        <button class="btn size-large">Read More</button>
+        <div class="label">
+          width: 60px
+          <br />
+          height: 60px
+          <br />
+          （大きいL字）
+        </div>
+      </div>
+    </div>
+
+    <hr style="width: 100%" />
+
+    <h2>② SVGで仕組みを図解</h2>
+    <p>3ステップで「なぜコーナーに見えるか」を理解する</p>
+
+    <svg width="680" height="220" viewBox="0 0 680 220" style="background:#fff; border:1px solid #ddd; border-radius:8px;">
+      <defs>
+        <marker id="arr-r" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="tomato"/>
+        </marker>
+        <marker id="arr-l" markerWidth="7" markerHeight="7" refX="1" refY="3.5" orient="auto">
+          <path d="M7,0 L0,3.5 L7,7 Z" fill="tomato"/>
+        </marker>
+        <marker id="arr-d" markerWidth="7" markerHeight="7" refX="3.5" refY="6" orient="auto">
+          <path d="M0,0 L7,0 L3.5,7 Z" fill="royalblue"/>
+        </marker>
+        <marker id="arr-u" markerWidth="7" markerHeight="7" refX="3.5" refY="1" orient="auto">
+          <path d="M0,7 L7,7 L3.5,0 Z" fill="royalblue"/>
+        </marker>
+      </defs>
+
+      <!-- ======= STEP 1 ======= -->
+      <text x="90" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">STEP 1</text>
+      <text x="90" y="42" text-anchor="middle" font-size="11" fill="#888">透明な箱がある</text>
+
+      <!-- 透明な箱（破線） -->
+      <rect x="40" y="60" width="100" height="100" fill="#eef" stroke="#aaa" stroke-dasharray="6,4" stroke-width="2"/>
+      <text x="90" y="116" text-anchor="middle" font-size="11" fill="#aaa">透明な箱</text>
+      <text x="90" y="130" text-anchor="middle" font-size="10" fill="#bbb">width:100px</text>
+      <text x="90" y="143" text-anchor="middle" font-size="10" fill="#bbb">height:100px</text>
+
+      <!-- 矢印区切り -->
+      <text x="175" y="115" font-size="22" fill="#ccc">→</text>
+
+      <!-- ======= STEP 2 ======= -->
+      <text x="310" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">STEP 2</text>
+      <text x="310" y="42" text-anchor="middle" font-size="11" fill="#888">上と左だけに線を引く</text>
+
+      <!-- 透明な箱（破線） -->
+      <rect x="260" y="60" width="100" height="100" fill="#eef" stroke="#aaa" stroke-dasharray="6,4" stroke-width="2"/>
+
+      <!-- 上辺（tomato） -->
+      <line x1="260" y1="60" x2="360" y2="60" stroke="tomato" stroke-width="3"/>
+      <!-- 左辺（royalblue） -->
+      <line x1="260" y1="60" x2="260" y2="160" stroke="royalblue" stroke-width="3"/>
+
+      <!-- width 矢印 -->
+      <line x1="260" y1="48" x2="360" y2="48" stroke="tomato" stroke-width="1.5" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+      <text x="310" y="44" text-anchor="middle" font-size="10" fill="tomato">width = 横線の長さ</text>
+
+      <!-- height 矢印 -->
+      <line x1="245" y1="60" x2="245" y2="160" stroke="royalblue" stroke-width="1.5" marker-start="url(#arr-u)" marker-end="url(#arr-d)"/>
+      <text x="192" y="114" text-anchor="middle" font-size="10" fill="royalblue" transform="rotate(-90,192,110)">height = 縦線の長さ</text>
+
+      <!-- CSS説明 -->
+      <text x="310" y="178" text-anchor="middle" font-size="10" fill="tomato">border-top: 2px solid</text>
+      <text x="310" y="192" text-anchor="middle" font-size="10" fill="royalblue">border-left: 2px solid</text>
+      <text x="310" y="206" text-anchor="middle" font-size="10" fill="#bbb">右・下 → 指定なし（透明）</text>
+
+      <!-- 矢印区切り -->
+      <text x="395" y="115" font-size="22" fill="#ccc">→</text>
+
+      <!-- ======= STEP 3 ======= -->
+      <text x="550" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">STEP 3</text>
+      <text x="550" y="42" text-anchor="middle" font-size="11" fill="#888">コーナーに見える！</text>
+
+      <!-- 箱は非表示（破線なし） -->
+      <!-- 上辺（黒） -->
+      <line x1="480" y1="60" x2="620" y2="60" stroke="black" stroke-width="3"/>
+      <!-- 左辺（黒） -->
+      <line x1="480" y1="60" x2="480" y2="160" stroke="black" stroke-width="3"/>
+
+      <text x="570" y="120" text-anchor="middle" font-size="28" fill="#ddd">┌</text>
+      <text x="550" y="185" text-anchor="middle" font-size="11" fill="#888">箱は見えない</text>
+      <text x="550" y="200" text-anchor="middle" font-size="11" fill="#888">線だけ見える = コーナー</text>
+    </svg>
+
+    <hr style="width: 100%" />
+
+    <h2>③ ホバーで width/height が 100% になる動き</h2>
+    <p>ホバーしてみてください → L字が四辺に伸びる</p>
+    <button class="btn btn-anim" style="font-size: 1.2rem">Read More</button>
+  </body>
+</html>

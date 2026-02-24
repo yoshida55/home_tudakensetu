@@ -1020,6 +1020,8 @@ html {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+
+  cursor: pointer;
 }
 
 .footer_arrow_icon {
@@ -1048,8 +1050,10 @@ html {
 
 /* デザインのためだけの要素はHTMLに書かない */
 .btn-corner {
+  display: block;
   position: relative;
-  padding: 1rem 2rem;
+  width: 200px;
+  height: 200px;
   color: black;
   overflow: hidden;
   margin-left: 5rem;
@@ -1059,9 +1063,9 @@ html {
 .btn-corner::after {
   content: "";
   position: absolute;
-  width: 20px; /* コーナーの「長さ」 */
-  height: 20px; /* コーナーの「高さ」 */
-  transition: all 0.4s ease;
+  width: 100px; /* コーナーの「長さ」 */
+  height: 100px; /* コーナーの「高さ」 */
+  transition: all 0.8s ease;
   box-sizing: border-box; /* ボーダーを内側に収める */
 }
 
@@ -1069,16 +1073,16 @@ html {
 .btn-corner::before {
   top: 0;
   left: 0;
-  border-top: 2px solid black;
-  border-left: 2px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
 }
 
 /* 右下コーナー ┘ */
 .btn-corner::after {
   bottom: 0;
   right: 0;
-  border-bottom: 2px solid black;
-  border-right: 2px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 
 /* ホバーで全辺に伸びる */
@@ -1943,6 +1947,7 @@ html {
   .inquiry_phone_info {
     color: black;
     width: 70%;
+    min-width: 0;
   }
 
   /* 電話番号 */

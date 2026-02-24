@@ -4,6 +4,16 @@ const items = document.querySelectorAll(".case_item");
 const btnPrev = document.querySelectorAll(".case_nav_button")[0]; // ＜
 const btnNext = document.querySelectorAll(".case_nav_button")[1]; // ＞
 
+// ↑へボタンが押された場合、トップ画面に戻る
+const footer_arrow = document.querySelector(".footer_arrow");
+footer_arrow.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+console.log(btnNext.textContent);
+console.log("JavaScript開始");
+
 // いんでっくすは０から始まるので、currentが0のときは最初のカードが表示されている状態です。
 let current = 0;
 const visibleCount = 4; // 一度に見える枚数
@@ -11,10 +21,13 @@ const visibleCount = 4; // 一度に見える枚数
 const maxIndex = items.length - visibleCount; // 動ける最大数
 
 btnNext.addEventListener("click", (e) => {
-  e.preventDefault();
-  //
+  // e.preventDefault();
+
+  console.log("次へボタンがおされました");
   // 現在の表示位置(current/現在の移動している数)が動ける最大数(maxIndex)より小さい場合、次へ移動
   if (current < maxIndex) {
+    console.log("current", current);
+    console.log("maxIndex", maxIndex);
     // currentを1増やして次の位置へ移動
     current++;
     move();
@@ -41,7 +54,7 @@ function move() {
 document.querySelectorAll(".case_description").forEach((case_description) => {
   case_description.addEventListener("mouseover", (e) => {
     // e.preventDefault();
-
+    console.log("mouseover", e.target);
     document.querySelectorAll(".case_description").forEach((el) => {
       el.style.textDecoration = "none";
     });
