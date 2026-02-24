@@ -1041,3 +1041,1082 @@ html {
     clip-path: inset(0 0 0 0);
   }
 }
+
+/* ┌─────────────────────────────────────────┐
+   │ レスポンシブ                        │
+   └─────────────────────────────────────────┘ */
+
+@media screen and (max-width: 699.98px) {
+  /* ┌─────────────────────────────────────────┐
+   │ 共通                                │
+   │    └─────────────────────────────────────────┘ */
+
+  html {
+    color: #fff;
+    font-family: "Noto Serif JP", "Yu Mincho", serif;
+    background-color: #f2ece4;
+  }
+
+  /* 会社・お問い合わせ・ハンバーの縦幅 */
+
+  :root {
+    /* 基準値: 1200px基準 */
+    --padding-side: 2rem; /* サイドパディング */
+    --padding-base: 2rem; /* 基本パディング */
+    --section-gap: 6rem; /* セクション上下余白 */
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ ヘッダー                                │
+   │ - 上に固定                              │
+   │ - ロゴとメニューを横並び                │
+   │ - サブメニューはドロップダウンで出す    │
+   └─────────────────────────────────────────┘ */
+
+  .header_area {
+    width: 100%;
+
+    position: relative;
+    height: 100svh;
+    /* overflow: hidden; */
+  }
+
+  .header_inner {
+    position: relative;
+    height: 100svh;
+  }
+
+  /* 左上のロゴ */
+  .header_logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    opacity: 0;
+    animation: dropDown 1.5s ease-out 1.5s forwards;
+  }
+
+  .header_logo_img {
+    height: 1.9rem;
+    width: 17rem;
+  }
+
+  /* グローバルナビゲーション【グリッド 2列】 */
+  .header_nav {
+    display: none; /* ★debugテストここだけのこるか */
+    position: absolute;
+    top: 2rem;
+    right: 30rem;
+
+    grid-template-columns: repeat(2, auto);
+    gap: 0.5rem 2rem;
+    align-items: center;
+
+    opacity: 0;
+    animation: dropDown 1.5s ease-out 2s forwards;
+  }
+
+  .header_nav_link {
+    display: block;
+    text-decoration: none;
+    color: white;
+  }
+
+  /* お問い合わせ */
+  .header_inquiry {
+    position: fixed;
+    top: 1.8rem;
+    right: 9rem;
+    opacity: 0;
+    color: white;
+    animation: dropDown 1.5s ease-out 2s forwards;
+  }
+
+  .inquiry_link {
+    /* 文字を中央に配置するため */
+    display: flex;
+    align-items: center; /* 縦中央 */
+    justify-content: center; /* 横中央 */
+
+    height: 3rem;
+    width: 8rem;
+    border: 0.1rem solid #fff;
+    border-radius: 2rem;
+    text-decoration: none;
+  }
+
+  @keyframes dropDown {
+    from {
+      opacity: 0;
+      transform: translateY(-3rem); /* 上から */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* リビールで横から、左からゆっくり表示させる */
+  .header_title {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 2rem;
+    font-size: 3.5rem;
+
+    animation: revealLeftToRight 1.5s ease-out forwards;
+  }
+  .header_description {
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+
+    left: 2rem;
+    font-size: 1.2rem;
+    animation: revealLeftToRight 2.5s ease-out forwards;
+  }
+
+  @keyframes revealLeftToRight {
+    from {
+      clip-path: inset(0 100% 0 0); /* 左を100%隠す = 右から表示開始 */
+    }
+    to {
+      clip-path: inset(0 0 0 0); /* 全て表示 = 左から右へ進む */
+    }
+  }
+
+  /* スライドショーのスタイル */
+
+  /* 背景 */
+  .bg_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* スライドショーアニメーション */
+  .slide {
+    position: absolute;
+    width: 108%;
+    left: -4%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+  }
+
+  .slide1 {
+    background-image: url("../img/hero/hero01.jpg");
+    animation: slideshow 15s infinite;
+  }
+
+  .slide2 {
+    background-image: url("../img/hero/hero02.jpg");
+    animation: slideshow 15s infinite;
+    animation-delay: 5s;
+  }
+
+  .slide3 {
+    background-image: url("../img/hero/hero03.jpg");
+    animation: slideshow 15s infinite;
+    animation-delay: 10s;
+  }
+
+  @keyframes slideshow {
+    0% {
+      opacity: 1;
+      transform: translateX(2%); /* 移動量を小さく */
+    }
+    33% {
+      opacity: 1;
+      transform: translateX(0%); /* 5秒目=次のスライドが始まる直前 */
+    }
+    38% {
+      opacity: 0;
+      transform: translateX(-1%); /* フェードアウト完了 */
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-2%); /* 待機 */
+    }
+  }
+
+  /* ハンバーガーメニュー */
+  .hamburger_menu {
+    position: fixed;
+    top: 2rem;
+    right: 5rem;
+    z-index: 1000;
+
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.5rem;
+    padding: 0;
+
+    background-color: transparent;
+    border: 0.1rem solid #fff;
+    border-radius: 50%;
+    font: inherit;
+
+    opacity: 0;
+    animation: dropDown 1.5s ease-out 2s forwards;
+
+    cursor: pointer;
+  }
+
+  /* ハンバーガーメニューのバー */
+  .bar {
+    position: absolute;
+    transition: 0.3s;
+    left: 0.5rem;
+    top: 2rem;
+
+    height: 0.2rem;
+    width: 1.9rem;
+    background: white;
+  }
+
+  .bar:nth-child(1) {
+    top: 0.6rem;
+  }
+  .bar:nth-child(2) {
+    top: 1.3rem;
+  }
+  .bar:nth-child(3) {
+    top: 2rem;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ ハンバーガーメニュークリック時の動作       │
+   └─────────────────────────────────────────┘ */
+
+  /* ハンバーガーメニューがおされたら、「×」にする */
+  .hamburger_menu.open .bar:nth-child(1) {
+    transform: rotate(45deg);
+    top: 2rem;
+  }
+  .hamburger_menu.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger_menu.open .bar:nth-child(3) {
+    transform: rotate(-45deg);
+    top: 2rem;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ コンセプト                              │
+   │ - 全写真 position: absolute             │
+   │ - 中央テキストは通常フロー              │
+   └─────────────────────────────────────────┘ */
+
+  .concept_area {
+    height: 92rem;
+    width: 100%;
+    position: relative;
+    margin-bottom: var(--section-gap);
+
+    background-color: #5a5247;
+
+    overflow: hidden; /* ← これがないとカーテンがはみ出して見える */
+  }
+
+  /* 装飾写真 共通 */
+  .concept_common {
+    position: absolute;
+    overflow: hidden;
+  }
+
+  /* 装飾写真 個別 */
+  .concept_img:nth-child(1) {
+    top: 20rem;
+    left: 3rem;
+    width: 10rem;
+  }
+
+  /* 装飾写真 個別 */
+  .concept_img:nth-child(2) {
+    top: 0;
+    right: 0;
+    width: 20rem;
+    height: 32rem;
+  }
+
+  .concept_img:nth-child(2)::after {
+    display: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* 黒の30%透明 */
+  }
+
+  .concept_img:nth-child(3) {
+    bottom: 20rem;
+    width: 7rem;
+  }
+
+  .concept_img:nth-child(4) {
+    bottom: 2rem;
+    left: 4rem;
+    width: 20rem;
+  }
+
+  .concept_img:nth-child(5) {
+    bottom: 0rem;
+    right: 0;
+    width: 13rem;
+  }
+
+  .concept_img img {
+    filter: brightness(0.7);
+  }
+
+  .layer {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============================================
+   Diagonal Reveal: 左上から右下へのマスクアニメーション
+   ============================================ */
+  @keyframes diagonalReveal {
+    from {
+      -webkit-mask-size: 0% 0%;
+      mask-size: 0% 0%;
+    }
+    to {
+      -webkit-mask-size: 250% 250%;
+      mask-size: 250% 250%;
+    }
+  }
+
+  .diagonal-reveal {
+    -webkit-mask-image: linear-gradient(135deg, black 50%, rgba(0, 0, 0, 0.3) 65%, transparent 80%);
+    -webkit-mask-size: 0% 0%;
+    -webkit-mask-position: 0% 0%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: linear-gradient(135deg, black 50%, rgba(0, 0, 0, 0.3) 65%, transparent 80%);
+    mask-size: 0% 0%;
+    mask-position: 0% 0%;
+    mask-repeat: no-repeat;
+  }
+
+  .diagonal-reveal.is-visible {
+    animation: diagonalReveal 3.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* コンセプト */
+  .concept_label {
+    padding-top: 13rem;
+    width: 100%;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease-out;
+    text-align: center;
+  }
+
+  /* コンセプトの下に縦線をいれる */
+  .concept_label::after {
+    content: "";
+    position: absolute;
+    top: 16rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2rem;
+    width: 0.1rem;
+    background-color: #fff;
+    color: white;
+    z-index: 1;
+  }
+
+  /* タイトル 　時を越えて心地よさが続く家。*/
+  .concept_heading {
+    position: relative;
+    z-index: 2;
+    margin-top: 6rem;
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+  .concept_description:nth-child(9) {
+    margin-top: 8rem;
+  }
+
+  /* 説明文　自分にとって */
+  .concept_description {
+    line-height: 2.8rem;
+    margin-top: 1.5rem;
+    text-align: center;
+
+    font-size: 1.4rem;
+  }
+
+  /* 家づくりのこだわりリンク */
+  .concept_link {
+    display: block;
+    width: 20rem;
+    margin-top: 8rem;
+    font-size: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    text-align: right;
+    color: white;
+
+    position: relative;
+  }
+
+  .concept_link::after {
+    content: "→";
+    display: block;
+    text-align: center;
+    left: -0.1rem;
+    top: -0.3rem;
+    position: absolute;
+    width: 5rem;
+    height: 2.5rem;
+    border: 0.1rem solid #fff;
+    border-radius: 1rem;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ 施工事例                                │
+   │ - カード形式で横並び                    │
+   │ - 矢印ボタンで横スクロール              │
+   │ - 各カードに画像・タイトル・タグを表示  │
+   └─────────────────────────────────────────┘ */
+
+  /* 施工事例エリア */
+  .case_area {
+    padding: var(--section-gap) 2rem var(--section-gap); /* 基本セクション間は10rem*2=20rem */
+    width: 100%;
+  }
+
+  /* Case ラベル */
+  .section_label {
+    color: #8b6914;
+    margin-bottom: 1rem;
+  }
+
+  /* タイトル+矢印の横並び【flex】 */
+  .case_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+  }
+
+  /* 施工事例 見出し */
+  .section_title {
+    color: #8b6914;
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+  }
+
+  /* 矢印ボタン群 */
+  .case_nav {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.5rem;
+  }
+
+  /* ＜＞ ボタン */
+  .case_nav_button {
+    width: 4.5rem;
+    height: 3rem;
+    border: 0.1rem solid #8b6914;
+    border-radius: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* カード横並びエリア【flex】overflow: hidden */
+  .case_list {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* jsで利用する。ために設定 基本的にHTML上利用しない*/
+  .case_track {
+    gap: 2rem;
+
+    display: flex;
+
+    justify-content: flex-start;
+    transition: transform 0.5s ease-out;
+  }
+
+  /* 1枚のカード【flex 縦】 */
+  .case_item {
+    flex-shrink: 0; /* カードの幅を固定 */
+    padding-bottom: 2rem;
+    width: calc((100% - 3rem) / 3); /* 4枚でgap2remを考慮して計算 */
+    background-color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    color: #8b6914;
+    overflow: hidden; /* ホバー拡大時に画像がはみ出さないよう切り取り */
+  }
+
+  /* カード画像ラッパー（固定サイズ + はみ出し隠し） */
+  .case_img_wrap {
+    margin: 1rem;
+    height: 17rem;
+    overflow: hidden; /* scale時に画像がはみ出さない */
+  }
+
+  /* カード画像 */
+  .case_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-out;
+  }
+
+  .case_img_wrap:hover .case_img {
+    transform: scale(1.05);
+  }
+
+  /* No. 番号 */
+  .case_number {
+    padding-left: 1rem;
+  }
+
+  /* 家の説明文 */
+  .case_description {
+    padding-left: 1rem;
+    text-decoration: none;
+  }
+
+  /* タグ群コンテナ【flex wrap】 */
+  .case_tag_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.3rem 1rem;
+  }
+
+  /* 個別タグ */
+  .case_tag {
+    padding: 0.3rem 1rem;
+    border: 0.1rem solid #8b6914;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* 一覧を見るリンク */
+  .arrow_link {
+    display: block;
+    margin-top: 4rem;
+    text-align: right;
+    position: relative;
+    width: fit-content;
+    margin-left: auto;
+  }
+
+  /* 一覧を見るリンク */
+  .arrow_link::after {
+    content: "→";
+    position: absolute;
+    left: -6rem;
+
+    top: -0.3rem;
+    width: 5rem;
+    height: 2rem;
+
+    border-radius: 40%;
+    border: 0.1rem solid #8b6914;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ お知らせ・ブログ                                │
+   └─────────────────────────────────────────┘ */
+  .news_blog_area {
+    padding: var(--section-gap) var(--padding-side);
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  /* お知らせカラム */
+  .news_column {
+    padding: 8rem 3rem 8rem 3rem;
+    border-right: 0.1rem solid #d4c9b8;
+    border-top: 0.1rem solid #d4c9b8;
+    border-bottom: 0.1rem solid #d4c9b8;
+  }
+
+  /* 記事1ブロック【flex 横2列: サムネイルリンク + テキスト側】 */
+  .news_item,
+  .blog_item {
+    display: flex;
+    gap: 1.5rem;
+    border-bottom: 0.1rem solid #d4c9b8;
+    border-top: 0.1rem solid #d4c9b8;
+  }
+
+  /* └ サムネイルリンク（左） */
+  .news_link,
+  .blog_link {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  /* └ └ サムネイル画像 */
+  .news_img,
+  .blog_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* └ テキスト側（右） */
+  .news_body,
+  .blog_body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* └ └ カテゴリ+日付【flex 横2列】 */
+  .news_meta,
+  .blog_meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* カテゴリバッジ */
+  .news_category,
+  .blog_category {
+    display: inline-block;
+    padding-right: 0.8rem;
+    border-right: 0.2rem solid #8b6914;
+    font-size: 1.2rem;
+    color: #5a5247;
+  }
+
+  /* 日付 */
+  .news_date,
+  .blog_date {
+    font-size: 1.2rem;
+    color: #999;
+  }
+
+  /* └ └ 詳細文 */
+  .news_text,
+  .blog_text {
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
+    color: #5a5247;
+    line-height: 1.6;
+  }
+
+  /* ブログカラム */
+  .blog_column {
+    padding: 8rem 0 8rem 3rem;
+    border-top: 0.1rem solid #d4c9b8;
+    border-bottom: 0.1rem solid #d4c9b8;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ 私たちについて                          │
+   │ - 2カラムで横並び                       │
+   │ - 大型背景画像付きのカードボタン        │
+   │ - クリックで各ページに飛ぶ              │
+   └─────────────────────────────────────────┘ */
+
+  /* 私たちについて【flex 横2列: 私たちについて + 販売中の物件】 */
+  .office_area {
+    padding: 0 var(--padding-side) var(--section-gap) var(--padding-side);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  /* └ カード（左・右） */
+  .office_item {
+    position: relative;
+    width: 50%;
+    height: 20rem;
+  }
+
+  /* └ └ カード画像 */
+  .office_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* └ └ ラベル・タイトル・矢印（position: absolute） */
+  .office_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+
+    color: white;
+  }
+
+  /* ラベル */
+  .office_label {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  /* タイトル */
+  .office_title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  /* 矢印 */
+  .office_arrow {
+    position: absolute;
+    bottom: -6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5.5rem;
+    height: 3.5rem;
+    border: 0.1rem solid #fff;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ お問い合わせ                            │
+   │ - フォームリンクと電話番号を2つ並べる   │
+   │ - 営業時間・定休日も表示                │
+   └─────────────────────────────────────────┘ */
+
+  /* お問い合わせエリア【grid 2列】 */
+  .inquiry_area {
+    padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+    display: grid;
+
+    background-color: #d6d2ce;
+    height: 60rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* └ テキスト側（左） */
+  .inquiry_text {
+  }
+
+  /* └ └ 説明文 */
+  .inquiry_description {
+    font-size: 1.8rem;
+    color: black;
+  }
+
+  /* └ フォーム側（右） */
+  .inquiry_form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    justify-content: space-between;
+  }
+
+  /* └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 */
+  .inquiry_row {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    height: 15rem;
+    align-items: center;
+    background-color: #fcf5eb;
+  }
+
+  /* 行ラベル */
+  .inquiry_row_label {
+    height: 40%;
+    width: 30%;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    justify-content: center;
+
+    border-right: 0.1rem solid #8b6914;
+  }
+
+  /* お問い合わせボタン */
+  .inquiry_button {
+    border-radius: 40px;
+    width: 25rem;
+
+    height: 6rem;
+    background-color: #bd7833;
+    color: white;
+    margin-right: auto;
+    position: relative;
+  }
+
+  .inquiry_button::after {
+    content: "→";
+    position: absolute;
+    right: 0.8rem;
+    top: 2.2rem;
+
+    border: 0.1rem solid white;
+    width: 2.8rem;
+    height: 1.5rem;
+    border-radius: 40%;
+    color: white;
+  }
+
+  .inquiry_form_link {
+    display: inline-block;
+    width: 3rem;
+    margin-left: 3rem;
+    text-align: center;
+    color: white;
+
+    border-radius: 40%;
+    border: 0.1px solid #ffffff;
+  }
+
+  /* 電話情報 */
+  .inquiry_phone_info {
+    color: black;
+    width: 70%;
+  }
+
+  /* 電話番号 */
+  .inquiry_phone_number {
+    width: 70%;
+    padding-left: 2rem;
+    font-size: 2.4rem;
+    color: #da6d00;
+    margin-right: auto;
+  }
+
+  /* 受付時間 */
+  .inquiry_hours {
+    width: 70%;
+    padding-left: 2rem;
+    font-size: 0.9rem;
+    color: #da6d00;
+    margin-right: auto;
+  }
+
+  .inquiry_row_arrow {
+    padding-left: 6rem;
+    height: 20%;
+    color: black;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4rem;
+    font-size: 0.9rem;
+  }
+
+  /* リンク行 */
+  .inquiry_arrow_link {
+    width: 30%;
+    margin-top: 0;
+    color: black;
+    position: relative;
+  }
+  .inquiry_arrow_link2 {
+    width: 70%;
+    margin-right: auto;
+    color: black;
+    position: relative;
+  }
+
+  /* 一覧を見るリンク */
+  .inquiry_arrow_link2::after,
+  .inquiry_arrow_link::after {
+    content: "→";
+    position: absolute;
+    left: -4rem;
+
+    top: -0.3rem;
+    width: 3rem;
+    height: 1.3rem;
+
+    margin-top: 0.3rem;
+    border-radius: 40%;
+    border: 0.1rem solid #8b6914;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ┌─────────────────────────────────────────┐
+   │ フッター                                │
+   └─────────────────────────────────────────┘ */
+
+  /* フッター全体【flex 横4列: 会社情報 + ナビ列1 + ナビ列2 + ナビ列3】 */
+  .footer_area {
+    padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+
+    background-color: #f5efe6;
+
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  /* └ 会社情報（左） */
+  .footer_company {
+    width: 50%;
+  }
+  .column1 {
+    order: 5; /* 会社情報を先頭に表示 */
+    width: 100%;
+  }
+
+  /* └ └ ロゴ画像 */
+  .footer_logo_img {
+    width: 25rem;
+    height: 5rem;
+  }
+
+  /* └ └ 住所 */
+  .footer_address {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: underline;
+  }
+
+  /* └ └ 電話番号 */
+  .footer_tel {
+    font-size: 1.2rem;
+    color: black;
+  }
+
+  /* └ └ SNSリンク【flex 横2列: アイコン + 名前】 */
+  .footer_sns_link {
+    margin-top: 2rem;
+    display: flex;
+  }
+
+  /* SNSアイコン */
+  .footer_sns_img {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  /* └ └ バナーリンク */
+  .footer_banner_link {
+    display: block;
+    margin-top: 4rem;
+  }
+
+  /* └ └ バナー画像 */
+  .footer_banner_img {
+    width: 13rem;
+  }
+
+  /* └ ナビゲーション列 */
+  .footer_nav_column {
+    width: 33%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .column2 {
+    order: 1; /* ナビ列1を2番目に表示 */
+  }
+  .column3 {
+    order: 2; /* ナビ列2を3番目に表示 */
+  }
+  .column4 {
+    order: 3; /* ナビ列3を4番目に表示 */
+  }
+  .column5 {
+    order: 4; /* ナビ列4を5番目に表示 */
+    display: none; /* 4列目はスマホでは非表示 */
+  }
+
+  /* ナビリンク */
+  .footer_nav_link {
+    color: black;
+    font-size: 1.4rem;
+  }
+
+  /* サブナビリンク */
+  .footer_sub_link {
+    color: black;
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+
+  /* コピーライト */
+  .copyright {
+    padding: 2rem 0 4rem 0;
+    width: auto;
+    height: 5rem;
+    font-size: 1rem;
+    color: black;
+    text-align: center;
+  }
+
+  .footer_arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 4rem;
+    height: 5rem;
+
+    font-size: 1.5rem;
+
+    border: 0.1rem solid #8b6914;
+    border-radius: 45%;
+    color: #da6d00;
+
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .footer_arrow_icon {
+    display: block;
+  }
+
+  .footer_arrow:hover .footer_arrow_icon {
+    animation: arrow-reveal 0.5s ease forwards;
+  }
+
+  @keyframes arrow-reveal {
+    0% {
+      clip-path: inset(0 0 0 0);
+    }
+    1% {
+      clip-path: inset(100% 0 0 0);
+    }
+    100% {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}

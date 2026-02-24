@@ -27,7 +27,7 @@ img {
 
 @media screen and (max-width: 699.98px) {
   html {
-    font-size: calc(10 / 375 * 100vw);
+    font-size: clamp(10px, (10 / 375 * 100vw), 12px);
     /* 画面幅375pxで10px*/
   }
 
