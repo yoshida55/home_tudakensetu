@@ -12,7 +12,7 @@ html {
 
 :root {
   /* 基準値: 1200px基準 */
-  --padding-side: 4rem; /* サイドパディング */
+  --padding-side: 5rem; /* サイドパディング */
   --padding-base: 4rem; /* 基本パディング */
   --section-gap: 10rem; /* セクション上下余白 */
 }
@@ -252,6 +252,13 @@ html {
 }
 
 /* ┌─────────────────────────────────────────┐
+   │ ハンバーガーメニュー押下時の別メニュー画面  │
+   └─────────────────────────────────────────┘ */
+  
+
+
+
+/* ┌─────────────────────────────────────────┐
    │ コンセプト                              │
    │ - 全写真 position: absolute             │
    │ - 中央テキストは通常フロー              │
@@ -433,7 +440,7 @@ html {
 
 /* 施工事例エリア */
 .case_area {
-  padding: var(--section-gap) 2rem var(--section-gap); /* 基本セクション間は10rem*2=20rem */
+  padding: var(--section-gap) var(--padding-side) var(--section-gap) var(--padding-side); /* 基本セクション間は10rem*2=20rem */
   width: 100%;
 }
 
@@ -749,7 +756,7 @@ html {
 
 /* お問い合わせエリア【grid 2列】 */
 .inquiry_area {
-  padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+  padding: var(--section-gap) var(--padding-side) var(--padding-side) var(--padding-side);
   display: grid;
 
   background-color: #d6d2ce;
@@ -850,7 +857,7 @@ html {
   padding-left: 2rem;
   font-size: 2.7rem;
   color: #da6d00;
-  margin-right: auto;
+  margin-right: 0;
 }
 
 /* 受付時間 */
@@ -859,7 +866,7 @@ html {
   padding-left: 2rem;
   font-size: 1.2rem;
   color: #da6d00;
-  margin-right: auto;
+  margin-right: 0;
 }
 
 .inquiry_row_arrow {
@@ -914,7 +921,7 @@ html {
 
 /* フッター全体【flex 横4列: 会社情報 + ナビ列1 + ナビ列2 + ナビ列3】 */
 .footer_area {
-  padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+  padding: var(--section-gap) var(--padding-side) var(--padding-side) var(--padding-side);
 
   background-color: #f5efe6;
 
@@ -1537,7 +1544,7 @@ html {
 
   /* 施工事例エリア */
   .case_area {
-    padding: var(--section-gap) 2rem var(--section-gap); /* 基本セクション間は10rem*2=20rem */
+    padding: var(--section-gap) var(--padding-side) var(--section-gap); /* 基本セクション間は10rem*2=20rem */
     width: 100%;
   }
 
@@ -1697,7 +1704,7 @@ html {
 
   /* お知らせカラム */
   .news_column {
-    padding: 8rem 3rem 8rem 3rem;
+    padding: 8rem 0rem;
     border-right: 0.1rem solid #d4c9b8;
     border-top: 0.1rem solid #d4c9b8;
     border-bottom: 0.1rem solid #d4c9b8;
@@ -1772,7 +1779,7 @@ html {
 
   /* ブログカラム */
   .blog_column {
-    padding: 8rem 0 8rem 3rem;
+    padding: 8rem 0 8rem 0rem;
     border-top: 0.1rem solid #d4c9b8;
     border-bottom: 0.1rem solid #d4c9b8;
   }
@@ -1854,7 +1861,7 @@ html {
 
   /* お問い合わせエリア【grid 2列】 */
   .inquiry_area {
-    padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+    padding: var(--section-gap) var(--padding-side) var(--padding-side) var(--padding-side);
     display: grid;
 
     background-color: #d6d2ce;
@@ -1869,7 +1876,7 @@ html {
 
   /* └ └ 説明文 */
   .inquiry_description {
-    font-size: 1.8rem;
+    font-size: 1rem;
     color: black;
   }
 
@@ -1887,17 +1894,19 @@ html {
     height: 40%;
     width: 100%;
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    align-content: flex-start;
+    gap: 1rem;
     justify-content: space-between;
     height: 15rem;
-    align-items: center;
     background-color: #fcf5eb;
+    border: 0.5rem solid red;
   }
 
   /* 行ラベル */
   .inquiry_row_label {
     height: 40%;
-    width: 30%;
+    width: 100%;
     color: black;
     display: flex;
     align-items: center;
@@ -1905,6 +1914,7 @@ html {
     justify-content: center;
 
     border-right: 0.1rem solid #8b6914;
+    border: 0.5rem solid red;
   }
 
   /* お問い合わせボタン */
@@ -1915,15 +1925,17 @@ html {
     height: 6rem;
     background-color: #bd7833;
     color: white;
-    margin-right: auto;
+    margin-right: 0;
+    text-align: left;
     position: relative;
+    border: 0.5rem solid red;
   }
 
   .inquiry_button::after {
     content: "→";
     position: absolute;
     right: 0.8rem;
-    top: 2.2rem;
+    top: 1.8rem;
 
     border: 0.1rem solid white;
     width: 2.8rem;
@@ -1948,24 +1960,28 @@ html {
     color: black;
     width: 70%;
     min-width: 0;
+    border: 0.5rem solid blue;
   }
 
   /* 電話番号 */
   .inquiry_phone_number {
-    width: 70%;
-    padding-left: 2rem;
+    width: 100%;
+    padding-left: 0rem;
     font-size: 2.4rem;
     color: #da6d00;
-    margin-right: auto;
+    text-align: center;
+    margin-right: 0;
+    border: 0.5rem solid red;
   }
 
   /* 受付時間 */
   .inquiry_hours {
-    width: 70%;
-    padding-left: 2rem;
-    font-size: 0.9rem;
+    width: 100%;
+    padding-left: 0rem;
+    font-size: 0.8rem;
     color: #da6d00;
-    margin-right: auto;
+    text-align: center;
+    margin-right: 0;
   }
 
   .inquiry_row_arrow {
@@ -1989,7 +2005,7 @@ html {
   }
   .inquiry_arrow_link2 {
     width: 70%;
-    margin-right: auto;
+    margin-right: 0;
     color: black;
     position: relative;
   }
@@ -2014,13 +2030,17 @@ html {
     justify-content: center;
   }
 
+  .webform_br {
+    display: none;
+  }
+
   /* ┌─────────────────────────────────────────┐
    │ フッター                                │
    └─────────────────────────────────────────┘ */
 
   /* フッター全体【flex 横4列: 会社情報 + ナビ列1 + ナビ列2 + ナビ列3】 */
   .footer_area {
-    padding: var(--section-gap) var(--section-gap) var(--padding-side) var(--section-gap);
+    padding: var(--section-gap) var(--padding-side) var(--section-gap) var(--padding-side);
 
     background-color: #f5efe6;
 
@@ -2032,29 +2052,30 @@ html {
   /* └ 会社情報（左） */
   .footer_company {
     width: 50%;
+    border: 0.5rem solid red;
   }
   .column1 {
     order: 5; /* 会社情報を先頭に表示 */
-    width: 100%;
+    width: 50%;
   }
 
   /* └ └ ロゴ画像 */
   .footer_logo_img {
-    width: 25rem;
-    height: 5rem;
+    width: 20rem;
+    height: 4rem;
   }
 
   /* └ └ 住所 */
   .footer_address {
     margin-top: 2rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: black;
     text-decoration: underline;
   }
 
   /* └ └ 電話番号 */
   .footer_tel {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: black;
   }
 
@@ -2066,8 +2087,10 @@ html {
 
   /* SNSアイコン */
   .footer_sns_img {
-    height: 1.2rem;
-    width: 1.2rem;
+    margin-top: 0.3rem;
+    margin-right: 0.5rem;
+    height: 1rem;
+    width: 1rem;
   }
 
   /* └ └ バナーリンク */
@@ -2083,12 +2106,14 @@ html {
 
   /* └ ナビゲーション列 */
   .footer_nav_column {
-    width: 33%;
+    width: 27%;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
+
+    border: 0.5rem solid red;
   }
 
   .column2 {
@@ -2108,7 +2133,7 @@ html {
   /* ナビリンク */
   .footer_nav_link {
     color: black;
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 
   /* サブナビリンク */
@@ -2120,16 +2145,16 @@ html {
 
   /* コピーライト */
   .copyright {
-    padding: 2rem 0 4rem 0;
+    padding: 2rem var(--padding-side) 4rem var(--padding-side);
     width: auto;
     height: 5rem;
     font-size: 1rem;
     color: black;
-    text-align: center;
+    text-align: left;
   }
 
   .footer_arrow {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 

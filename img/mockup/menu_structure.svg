@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" font-family="sans-serif">
+  <!-- 背景 -->
+  <rect width="1000" height="750" fill="#f5f0eb" rx="8"/>
+
+  <!-- タイトル -->
+  <text x="500" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">ハンバーガーメニュー 構成図</text>
+
+  <!-- ===== 全体枠 .menu (fixed) ===== -->
+  <rect x="30" y="55" width="940" height="680" fill="none" stroke="#c44" stroke-width="3" stroke-dasharray="8,4" rx="6"/>
+  <rect x="35" y="48" width="320" height="24" fill="#f5f0eb"/>
+  <text x="40" y="65" font-size="14" font-weight="bold" fill="#c44">.menu（position: fixed / display: flex → 横並び）</text>
+
+  <!-- ===== 左：画像エリア .menu_img ===== -->
+  <rect x="50" y="85" width="300" height="630" fill="#8B7355" rx="4"/>
+  <rect x="55" y="78" width="130" height="22" fill="#f5f0eb"/>
+  <text x="60" y="94" font-size="13" font-weight="bold" fill="#8B7355">.menu_img</text>
+  <text x="200" y="350" text-anchor="middle" font-size="16" fill="#fff">背景画像</text>
+  <text x="200" y="375" text-anchor="middle" font-size="12" fill="#ddd">（width: 35%程度）</text>
+
+  <!-- ===== 右：コンテンツ .menu_body ===== -->
+  <rect x="370" y="85" width="580" height="630" fill="#fff" rx="4" stroke="#999" stroke-width="1"/>
+  <rect x="375" y="78" width="360" height="22" fill="#f5f0eb"/>
+  <text x="380" y="94" font-size="13" font-weight="bold" fill="#555">.menu_body（flexなし＝縦に自然に積まれる）</text>
+
+  <!-- 閉じるボタン -->
+  <circle cx="920" cy="115" r="18" fill="none" stroke="#888" stroke-width="1.5"/>
+  <text x="920" y="120" text-anchor="middle" font-size="14" fill="#888">X</text>
+  <text x="880" y="150" text-anchor="end" font-size="11" fill="#888">.menu_close</text>
+
+  <!-- ===== ナビエリア .menu_nav (flex → 横2列) ===== -->
+  <rect x="400" y="170" width="520" height="310" fill="none" stroke="#2874A6" stroke-width="2" stroke-dasharray="6,3" rx="4"/>
+  <rect x="405" y="163" width="340" height="22" fill="#fff"/>
+  <text x="410" y="179" font-size="13" font-weight="bold" fill="#2874A6">.menu_nav（display: flex → 横に2列並べる）</text>
+
+  <!-- 左列 -->
+  <rect x="420" y="200" width="230" height="260" fill="#EBF5FB" rx="4" stroke="#AED6F1" stroke-width="1"/>
+  <text x="425" y="218" font-size="12" font-weight="bold" fill="#2874A6">.menu_nav_list（左列）</text>
+  <text x="435" y="245" font-size="13" fill="#333">私たちについて</text>
+  <text x="435" y="275" font-size="13" font-weight="bold" fill="#333">家づくりのこだわり</text>
+
+  <!-- サブリンク -->
+  <rect x="445" y="290" width="190" height="155" fill="#D6EAF8" rx="3" stroke="#AED6F1" stroke-width="1"/>
+  <text x="450" y="306" font-size="11" fill="#2874A6">.menu_nav_sub</text>
+  <text x="460" y="328" font-size="12" fill="#555">超高気密＋超高断熱</text>
+  <text x="460" y="350" font-size="12" fill="#555">パッシブ設計＋全館空調</text>
+  <text x="460" y="372" font-size="12" fill="#555">高耐震＋耐久性</text>
+  <text x="460" y="394" font-size="12" fill="#555">フルオーダーメイド</text>
+  <text x="460" y="416" font-size="12" fill="#555">手の届く価格</text>
+  <text x="460" y="438" font-size="11" fill="#999">（ulの中にul）</text>
+
+  <!-- 右列 -->
+  <rect x="670" y="200" width="230" height="260" fill="#EBF5FB" rx="4" stroke="#AED6F1" stroke-width="1"/>
+  <text x="675" y="218" font-size="12" font-weight="bold" fill="#2874A6">.menu_nav_list（右列）</text>
+  <text x="685" y="250" font-size="13" fill="#333">施工事例</text>
+  <text x="685" y="280" font-size="13" fill="#333">モデルハウス</text>
+  <text x="685" y="310" font-size="13" fill="#333">土地・分譲情報</text>
+  <text x="685" y="340" font-size="13" fill="#333">会社案内</text>
+  <text x="685" y="370" font-size="13" fill="#333">お知らせ</text>
+  <text x="685" y="400" font-size="13" fill="#333">ブログ</text>
+
+  <!-- flex矢印（ナビ左右） -->
+  <line x1="655" y1="330" x2="665" y2="330" stroke="#2874A6" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="660" y="350" text-anchor="middle" font-size="10" fill="#2874A6">flex</text>
+
+  <!-- ===== お問い合わせエリア .menu_inquiry ===== -->
+  <rect x="400" y="500" width="520" height="195" fill="none" stroke="#B7950B" stroke-width="2" stroke-dasharray="6,3" rx="4"/>
+  <rect x="405" y="493" width="180" height="22" fill="#fff"/>
+  <text x="410" y="509" font-size="13" font-weight="bold" fill="#B7950B">.menu_inquiry</text>
+
+  <!-- WEB行 -->
+  <rect x="420" y="525" width="480" height="70" fill="#FEF9E7" rx="3" stroke="#F9E79F" stroke-width="1"/>
+  <text x="425" y="543" font-size="11" font-weight="bold" fill="#B7950B">.menu_inquiry_row（display: flex → 横並び）</text>
+  <rect x="435" y="553" width="130" height="30" fill="#fff" rx="2" stroke="#ddd"/>
+  <text x="500" y="573" text-anchor="middle" font-size="11" fill="#555">WEBからの お問い合わせ</text>
+  <rect x="580" y="553" width="300" height="30" fill="#C17F1A" rx="15"/>
+  <text x="730" y="573" text-anchor="middle" font-size="11" fill="#fff">お問い合わせフォームはこちら →</text>
+
+  <!-- 電話行 -->
+  <rect x="420" y="610" width="480" height="70" fill="#FEF9E7" rx="3" stroke="#F9E79F" stroke-width="1"/>
+  <text x="425" y="628" font-size="11" font-weight="bold" fill="#B7950B">.menu_inquiry_row（display: flex → 横並び）</text>
+  <rect x="435" y="638" width="130" height="30" fill="#fff" rx="2" stroke="#ddd"/>
+  <text x="500" y="658" text-anchor="middle" font-size="11" fill="#555">お電話からの お問い合わせ</text>
+  <text x="620" y="655" font-size="16" fill="#C17F1A">0964-27-5457</text>
+  <text x="620" y="673" font-size="10" fill="#888">受付時間:9:00～17:30｜定休日:水曜日</text>
+
+  <!-- ===== 凡例 ===== -->
+  <!-- flex矢印の定義 -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#2874A6"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#c44"/>
+    </marker>
+  </defs>
+
+  <!-- 全体のflex矢印 -->
+  <line x1="345" y1="400" x2="365" y2="400" stroke="#c44" stroke-width="3" marker-end="url(#arrowRed)"/>
+  <text x="355" y="420" text-anchor="middle" font-size="11" font-weight="bold" fill="#c44">flex</text>
+</svg>
