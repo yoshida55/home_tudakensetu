@@ -22,7 +22,7 @@
 
       <div class="header_inner">
         <div class="header_logo">
-          <a href="index.html" class="header_logo_link"><img src="img/common/logo.png" alt="溝田建築設計株式会社" class="header_logo_img" /></a>
+          <a href="#" class="header_logo_link"><img src="img/common/logo.png" alt="溝田建築設計株式会社" class="header_logo_img" /></a>
         </div>
 
         <!-- グローバルナビゲーション -->
@@ -62,7 +62,7 @@
      =============================================== -->
 
     <!-- メニュー全体【flex 横2列: 画像 + コンテンツ】 -->
-    <div id="menu_area" class="open">
+    <div class="menu_area" class="open">
       <!-- └ 画像（左） -->
       <div alt="メニュー画像" class="menu_img"></div>
 
@@ -70,40 +70,53 @@
       <div class="menu_nav">
         <!-- 左ナビ【flex 縦】 -->
         <div class="menu_nav_list">
-          <a href="#">私たちについて</a>
-          <a href="#">家づくりのこだわり</a>
+          <a class="menu_color" href="#">私たちについて</a>
+          <a class="menu_color" href="#">家づくりのこだわり</a>
           <!-- サブメニュー【flex 縦】 -->
           <div class="menu_nav_sub">
-            <a href="#">超高気密＋超高断熱</a>
-            <a href="#">パッシブ設計＋全館空調</a>
-            <a href="#">高耐震＋耐久性</a>
-            <a href="#">フルオーダーメイド</a>
-            <a href="#">手の届く価格</a>
+            <a class="menu_color" href="#">超高気密＋超高断熱</a>
+            <a class="menu_color" href="#">パッシブ設計＋全館空調</a>
+            <a class="menu_color" href="#">高耐震＋耐久性</a>
+            <a class="menu_color" href="#">フルオーダーメイド</a>
+            <a class="menu_color" href="#">手の届く価格</a>
           </div>
         </div>
         <!-- 右ナビ【flex 縦】 -->
         <div class="menu_nav_list">
-          <a href="#">施工事例</a>
-          <a href="#">モデルハウス</a>
-          <a href="#">土地・分譲情報</a>
-          <a href="#">会社案内</a>
-          <a href="#">お知らせ</a>
-          <a href="#">ブログ</a>
+          <a class="menu_color" href="#">施工事例</a>
+          <a class="menu_color" href="#">モデルハウス</a>
+          <a class="menu_color" href="#">土地・分譲情報</a>
+          <a class="menu_color" href="#">会社案内</a>
+          <a class="menu_color" href="#">お知らせ</a>
+          <a class="menu_color" href="#">ブログ</a>
         </div>
         <!-- お問い合わせ【flex 縦2行: WEB行 + 電話行】 -->
         <div class="menu_inquiry">
           <!-- 問い合わせ行【flex 横2列: ラベル + コンテンツ】 -->
           <div class="menu_inquiry_row">
-            <p class="menu_inquiry_label">WEBからのお問い合わせ</p>
-            <a href="#" class="menu_inquiry_button">お問い合わせフォームはこちら</a>
+            <!-- 問い合わせラベル -->
+            <p class="menu_inquiry_label">
+              WEBからの
+              <br />
+              お問い合わせ
+            </p>
+            <!-- WEBお問い合わせボタン -->
+            <button type="button" class="menu_inquiry_button">お問い合わせフォームはこちら</button>
           </div>
           <!-- 問い合わせ行【flex 横2列: ラベル + コンテンツ】 -->
           <div class="menu_inquiry_row">
-            <p class="menu_inquiry_label">お電話からのお問い合わせ</p>
+            <!-- 問い合わせラベル -->
+            <p class="menu_inquiry_label">
+              お電話からの
+              <br class="no_br" />
+              お問い合わせ
+            </p>
             <!-- 電話情報【flex 縦2行: 電話番号 + 受付時間】 -->
             <div class="menu_inquiry_tel">
-              <a href="tel:0964-27-5457" class="menu_inquiry_number">0964-27-5457</a>
-              <p class="menu_inquiry_time">受付時間:9:00～17:30｜定休日:水曜日</p>
+              <!-- 電話番号 -->
+              <p class="menu_inquiry_number">0964-27-5457</p>
+              <!-- 受付時間 -->
+              <p class="menu_inquiry_time">受付時間：9:00〜17:30 | 定休日：水曜日</p>
             </div>
           </div>
         </div>

@@ -8,10 +8,9 @@ const menuArea = document.querySelector(".menu_area");
 // ハンバーガーメニューをクリックした場合
 const hamburgerMenu = document.querySelector(".hamburger_menu");
 
-menuArea.classList.toggle("open");
-
 hamburgerMenu.addEventListener("click", () => {
   hamburgerMenu.classList.toggle("open");
+  menuArea.classList.toggle("open");
 });
 
 // ↑へボタンが押された場合、トップ画面に戻る
