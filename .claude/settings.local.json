@@ -16,7 +16,8 @@
       "Bash(powershell -Command \"Test-Path ''D:\\\\50_knowledge\\\\01_memo.md''\")",
       "Bash(powershell -Command:*)",
       "WebFetch(domain:omodakaya.jp)",
-      "Bash(git diff-tree:*)"
+      "Bash(git diff-tree:*)",
+      "Bash(\"D:\\\\50_knowledge\\\\01_memo.md\":*)"
     ]
   }
 }

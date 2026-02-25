@@ -3,15 +3,16 @@ const track = document.querySelector(".case_track");
 const items = document.querySelectorAll(".case_item");
 const btnPrev = document.querySelectorAll(".case_nav_button")[0]; // ＜
 const btnNext = document.querySelectorAll(".case_nav_button")[1]; // ＞
-
+const menuArea = document.querySelector(".menu_area");
 
 // ハンバーガーメニューをクリックした場合
 const hamburgerMenu = document.querySelector(".hamburger_menu");
+
+menuArea.classList.toggle("open");
+
 hamburgerMenu.addEventListener("click", () => {
   hamburgerMenu.classList.toggle("open");
 });
-
-
 
 // ↑へボタンが押された場合、トップ画面に戻る
 const footer_arrow = document.querySelector(".footer_arrow");

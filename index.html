@@ -57,14 +57,58 @@
         </p>
       </div>
     </header>
-
     <!-- ===============================================
-     ハンバーがメニュー押下時の、
+     ハンバーガーメニュー押下時の別メニュー画面
      =============================================== -->
-    <!-- メニュー画面 -->
-    <!-- flex 3列（スライドショー + ナビ + お問い合わせ） -->
-    <!-- 左に固定バー中央にflexで右上にフレックスでナビ、右下にお問い合わせフォーム -->
 
+    <!-- メニュー全体【flex 横2列: 画像 + コンテンツ】 -->
+    <div id="menu_area" class="open">
+      <!-- └ 画像（左） -->
+      <div alt="メニュー画像" class="menu_img"></div>
+
+      <!-- └ ナビ＋お問い合わせ【flex wrap: 左ナビ + 右ナビ + お問い合わせ】 -->
+      <div class="menu_nav">
+        <!-- 左ナビ【flex 縦】 -->
+        <div class="menu_nav_list">
+          <a href="#">私たちについて</a>
+          <a href="#">家づくりのこだわり</a>
+          <!-- サブメニュー【flex 縦】 -->
+          <div class="menu_nav_sub">
+            <a href="#">超高気密＋超高断熱</a>
+            <a href="#">パッシブ設計＋全館空調</a>
+            <a href="#">高耐震＋耐久性</a>
+            <a href="#">フルオーダーメイド</a>
+            <a href="#">手の届く価格</a>
+          </div>
+        </div>
+        <!-- 右ナビ【flex 縦】 -->
+        <div class="menu_nav_list">
+          <a href="#">施工事例</a>
+          <a href="#">モデルハウス</a>
+          <a href="#">土地・分譲情報</a>
+          <a href="#">会社案内</a>
+          <a href="#">お知らせ</a>
+          <a href="#">ブログ</a>
+        </div>
+        <!-- お問い合わせ【flex 縦2行: WEB行 + 電話行】 -->
+        <div class="menu_inquiry">
+          <!-- 問い合わせ行【flex 横2列: ラベル + コンテンツ】 -->
+          <div class="menu_inquiry_row">
+            <p class="menu_inquiry_label">WEBからのお問い合わせ</p>
+            <a href="#" class="menu_inquiry_button">お問い合わせフォームはこちら</a>
+          </div>
+          <!-- 問い合わせ行【flex 横2列: ラベル + コンテンツ】 -->
+          <div class="menu_inquiry_row">
+            <p class="menu_inquiry_label">お電話からのお問い合わせ</p>
+            <!-- 電話情報【flex 縦2行: 電話番号 + 受付時間】 -->
+            <div class="menu_inquiry_tel">
+              <a href="tel:0964-27-5457" class="menu_inquiry_number">0964-27-5457</a>
+              <p class="menu_inquiry_time">受付時間:9:00～17:30｜定休日:水曜日</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- ===============================================
      コンセプト
      =============================================== -->
@@ -95,78 +139,31 @@
         <br class="sp_only" />
         手の届く価格で。
       </h2>
-      <p class="concept_description layer">自分にとって快適な"ちょうどいい家"を、<br />手軽に手に入れて欲しいと、<br />溝田建築設計では考えています。</p>
-      <p class="concept_description layer">私たちは家の完成後50年経過した建物の状態を大切にしています。<br />最高レベルの断熱性能に、自然エネルギーを活かした設計で、<br />省エネなのに、冬は暖かく、夏は涼しい。<br />家族にも、環境にも心地のいい家です。</p>
-      <p class="concept_description layer">さらに、費用を抑える工夫も忘れません。<br />難しいご要望にも、それを上回る提案をすることが<br />私たちの信条です。</p>
+      <p class="concept_description layer">
+        自分にとって快適な"ちょうどいい家"を、
+        <br />
+        手軽に手に入れて欲しいと、
+        <br />
+        溝田建築設計では考えています。
+      </p>
+      <p class="concept_description layer">
+        私たちは家の完成後50年経過した建物の状態を大切にしています。
+        <br />
+        最高レベルの断熱性能に、自然エネルギーを活かした設計で、
+        <br />
+        省エネなのに、冬は暖かく、夏は涼しい。
+        <br />
+        家族にも、環境にも心地のいい家です。
+      </p>
+      <p class="concept_description layer">
+        さらに、費用を抑える工夫も忘れません。
+        <br />
+        難しいご要望にも、それを上回る提案をすることが
+        <br />
+        私たちの信条です。
+      </p>
       <a href="#" class="concept_link layer">家づくりのこだわり</a>
     </section>
-
-    <!-- ===============================================
-     ハンバーガーメニュー押下時の別メニュー画面
-     =============================================== -->
-
-    <!-- メニュー全体【flex 2列：画像（左）｜コンテンツ（右）】 -->
-    <div class="menu_area">
-
-      <!-- └ 画像（左）  ※flex 1列目 -->
-      <div class="menu_img">
-        <div class="menu_slide"></div>
-        <div class="menu_slide"></div>
-        <div class="menu_slide"></div>
-      </div>
-
-      <!-- └ コンテンツ（右）  ※flex 2列目 / 中は縦積み -->
-      <div class="menu_body">
-
-        <!-- └ └ 閉じるボタン  ※縦積み 1段目 -->
-        <button class="menu_close">X</button>
-
-        <!-- └ └ ナビ【flex 2列：左ナビ｜右ナビ】  ※縦積み 2段目 -->
-        <nav class="menu_nav">
-          <!-- └ └ └ 左ナビ  ※flex 1列目 -->
-          <ul class="menu_nav_list">
-            <li><a href="#">私たちについて</a></li>
-            <li><a href="#">家づくりのこだわり</a>
-              <ul class="menu_nav_sub">
-                <li><a href="#">超高気密＋超高断熱</a></li>
-                <li><a href="#">パッシブ設計＋全館空調</a></li>
-                <li><a href="#">高耐震＋耐久性</a></li>
-                <li><a href="#">フルオーダーメイド</a></li>
-                <li><a href="#">手の届く価格</a></li>
-              </ul>
-            </li>
-          </ul>
-          <!-- └ └ └ 右ナビ  ※flex 2列目 -->
-          <ul class="menu_nav_list">
-            <li><a href="#">施工事例</a></li>
-            <li><a href="#">モデルハウス</a></li>
-            <li><a href="#">土地・分譲情報</a></li>
-            <li><a href="#">会社案内</a></li>
-            <li><a href="#">お知らせ</a></li>
-            <li><a href="#">ブログ</a></li>
-          </ul>
-        </nav>
-
-        <!-- └ └ お問い合わせ（縦積み 2行）  ※縦積み 3段目 -->
-        <div class="menu_inquiry">
-          <!-- └ └ └ WEB行【flex 2列：ラベル｜ボタン】 -->
-          <div class="menu_inquiry_row">
-            <p class="menu_inquiry_label">WEBからのお問い合わせ</p>
-            <a href="#" class="menu_inquiry_button">お問い合わせフォームはこちら</a>
-          </div>
-          <!-- └ └ └ 電話行【flex 2列：ラベル｜電話情報】 -->
-          <div class="menu_inquiry_row">
-            <p class="menu_inquiry_label">お電話からのお問い合わせ</p>
-            <!-- └ └ └ └ 電話番号＋受付時間（縦積み） -->
-            <div class="menu_inquiry_tel">
-              <a href="tel:0964-27-5457" class="menu_inquiry_number">0964-27-5457</a>
-              <p class="menu_inquiry_time">受付時間:9:00～17:30｜定休日:水曜日</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
 
     <!-- ===============================================
      施工事例
@@ -449,7 +446,11 @@
         <p class="section_label">Contact</p>
         <h2 class="section_title">お問い合わせ</h2>
         <!-- └ └ 説明文 -->
-        <p class="inquiry_description">お問い合わせはフォーム、または、<br class="webform_br" />お電話より、お気軽にご連絡ください。</p>
+        <p class="inquiry_description">
+          お問い合わせはフォーム、または、
+          <br class="webform_br" />
+          お電話より、お気軽にご連絡ください。
+        </p>
       </div>
 
       <!-- └ フォーム側（右） -->
@@ -457,14 +458,22 @@
         <!-- └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 -->
         <div class="inquiry_row">
           <!-- 行ラベル -->
-          <p class="inquiry_row_label">WEBからの<br />お問い合わせ</p>
+          <p class="inquiry_row_label">
+            WEBからの
+            <br />
+            お問い合わせ
+          </p>
           <!-- お問い合わせボタン -->
           <button type="button" class="inquiry_button">お問い合わせフォームはこちら</button>
         </div>
         <!-- └ └ 問い合わせ行【flex 横2列: ラベル + 操作】 -->
         <div class="inquiry_row">
           <!-- 行ラベル -->
-          <p class="inquiry_row_label">お電話からの<br class="no_br" />お問い合わせ</p>
+          <p class="inquiry_row_label">
+            お電話からの
+            <br class="no_br" />
+            お問い合わせ
+          </p>
           <!-- 電話情報 -->
           <div class="inquiry_phone_info">
             <!-- 電話番号 -->
