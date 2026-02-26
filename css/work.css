@@ -6,6 +6,7 @@ html {
   color: #fff;
   font-family: "Noto Serif JP", "Yu Mincho", serif;
   background-color: #f2ece4;
+  font-size: clamp(10px, calc(10 / 1280 * 100vw), 16px) !important;
 }
 
 /* 会社・お問い合わせ・ハンバーの縦幅 */
