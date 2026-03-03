@@ -7,9 +7,7 @@ html {
   /* 画面幅1280pxで10px*/
   /* font-size: clamp(10px, (10 / 1280 * 100vw), 16px); */
 }
-:root {
-}
-/* 
+/*
 Regular 400
 Medium 500
 SemiBold 600
@@ -24,23 +22,11 @@ img {
 .sp_only {
   display: none;
 }
-/* <!-- メインビジュアルここから --> */
-.ar_main_img {
-  height: 37rem;
-  object-fit: cover;
-}
-/* <!-- メインビジュアルここまで --> */
 @media screen and (max-width: 767px) {
   html {
     font-size: clamp(10px, calc(10 / 767 * 100vw), 12px);
     /* 画面幅375pxで10px*/
   }
-  /* <!-- メインビジュアルここから --> */
-  .ar_main_img {
-    margin-top: 8rem;
-    height: 15rem;
-  }
-  /* <!-- メインビジュアルここまで --> */
   .sp_only {
     display: block;
   }

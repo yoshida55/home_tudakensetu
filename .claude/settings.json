@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/sensh/.claude/skills/review-css/**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\sensh\\.claude\\skills\\review-css"
+    ]
+  }
+}

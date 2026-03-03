@@ -46,7 +46,7 @@
         </button>
 
         <h1 class="header_title">わたしたちに<br />ちょうどいい家</h1>
-        <p class="header_description">数十年先も続く、<br class="sp-only" />家族にも環境にも心地いい住まい。</p>
+        <p class="header_description">数十年先も続く、<br class="sp_only" />家族にも環境にも心地いい住まい。</p>
       </div>
     </header>
     <!-- ===============================================
@@ -54,9 +54,9 @@
      =============================================== -->
 
     <!-- メニュー全体【flex 横2列: 画像 + コンテンツ】 -->
-    <div class="menu_area" class="open">
+    <div class="menu_area">
       <!-- └ 画像（左） -->
-      <div alt="メニュー画像" class="menu_img"></div>
+      <div class="menu_img"></div>
 
       <!-- └ ナビ＋お問い合わせ【flex wrap: 左ナビ + 右ナビ + お問い合わせ】 -->
       <div class="menu_nav">
@@ -145,8 +145,8 @@
       <div class="case_header">
         <h2 class="section_title">施工事例</h2>
         <div class="case_nav">
-          <a href="#" class="case_nav_button">＜</a>
-          <a href="#" class="case_nav_button">＞</a>
+          <button type="button" class="case_nav_button">＜</button>
+          <button type="button" class="case_nav_button">＞</button>
         </div>
       </div>
       <!-- 4枚の画像が横に並ぶ。スクロールで次の４枚が表示される。【４列　flex】自動で動かないスライダー -->
@@ -174,7 +174,7 @@
           <div class="case_item">
             <!-- 画像 -->
             <div class="case_img_wrap">
-              <img src="img/works/IMG_8104.jpeg" alt="施工事例写真1" class="case_img" />
+              <img src="img/works/IMG_8104.jpeg" alt="施工事例写真2" class="case_img" />
             </div>
             <!-- NO -->
             <div class="case_number">NO.015</div>
@@ -191,7 +191,7 @@
           <div class="case_item">
             <!-- 画像 -->
             <div class="case_img_wrap">
-              <img src="img/works/IMG_8422.jpeg" alt="施工事例写真1" class="case_img" />
+              <img src="img/works/IMG_8422.jpeg" alt="施工事例写真3" class="case_img" />
             </div>
             <!-- NO -->
             <div class="case_number">NO.016</div>
@@ -208,7 +208,7 @@
           <div class="case_item">
             <!-- 画像 -->
             <div class="case_img_wrap">
-              <img src="img/works/IMG_9070.jpeg" alt="施工事例写真1" class="case_img" />
+              <img src="img/works/IMG_9070.jpeg" alt="施工事例写真4" class="case_img" />
             </div>
             <!-- NO -->
             <div class="case_number">NO.017</div>
@@ -497,9 +497,9 @@
         <a href="#" class="footer_nav_link">お知らせ</a>
         <a href="#" class="footer_nav_link">ブログ</a>
       </div>
-      <div class="footer_arrow column5">
+      <button type="button" class="footer_arrow column5" aria-label="ページ上部へ戻る">
         <span class="footer_arrow_icon">↑</span>
-      </div>
+      </button>
     </footer>
 
     <div class="copyright">© Mizota Architectural Design Co., Ltd.</div>
