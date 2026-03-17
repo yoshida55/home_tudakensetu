@@ -852,13 +852,14 @@ html {
 }
 
 /* └ └ 詳細文 */
-.news_text,
+.news_te
 .blog_text {
   margin-top: 0.8rem;
   font-size: 1.6rem;
   color: #5a5247;
   line-height: 1.6;
 }
+
 
 /* ブログカラム */
 .blog_column {
